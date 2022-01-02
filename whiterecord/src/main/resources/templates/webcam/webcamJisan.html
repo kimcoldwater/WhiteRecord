@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="includes/header :: head('웹캠')">
+   
+  </head>
+
+<script type="text/javascript">
+
+	$(document).ready(function() {
+				$("#jisanCam1").on("click",function() {
+					console.log("클릭");
+					$("#webcamView")
+					.append(
+								"<div align='center'> "
+							+ "<video id='myvideo1' class='vjs-default-skin'  controls preload='auto' >"
+							+ "<source src='https://stream.camtour.net/hls/jisan1.m3u8' type='application/x-mpegURL'>"
+						  	+ "</video> </div> "
+
+					);
+										})
+					})
+  
+					
+  </script>
+  <body>
+
+	<div id="colorlib-page">
+		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+		<aside th:replace="includes/sidebar :: sidebar('웹캠')">
+		</aside> <!-- END COLORLIB-ASIDE -->
+		
+		
+		<div id="colorlib-main">
+			<section class="ftco-section contact-section">
+	      <div class="container">
+	        <div class="row d-flex mb-5 contact-info">
+	          <div class="col-md-12 mb-4 ">
+	            <h2 class="h4 font-weight-bold">지산리조트</h2>
+	            <br/>
+	            <div class="row">
+	         	<div class="col-md-5 mb-4">
+	            <img src="elen/picture/지산웹캠맵.png"  width="100%" height="340" >
+	            </div>
+	              <div class="col-md-7 mb-4 ">
+	            <img src="elen/picture/지산스키장 슬로프맵.jpg"  width="100%" height="340">
+	    
+	            </div>
+	            </div>
+	            
+	          </div>
+	          <div class="w-100"></div>
+
+	          <div class="col-md-2">
+	            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">1.레몬/오렌지</button>
+		            
+	          </div>
+	          <div class="col-md-2 ml-2" style="text-align:center;">
+	             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2"> &nbsp; 2.뉴오렌지</button>
+	          </div>
+	          <div class="col-md-2 mr-3">
+	            <p><a href="#" class="btn btn btn-primary p-3 px-xl-4 py-xl-3">3.5/6번 슬로프</a></p>
+	          </div>
+	          <div class="col-md-2">
+	            <p><a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">4.블루탑승장</a></p>
+	          </div>
+	          <div class="col-md-2">
+	            <p><a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">5.실버탑승장</a></p>
+	          </div>
+	        </div>
+		
+		
+		<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="max-width: 75%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div align="center" id="webcamView">
+	  <video-js id="myvideo1" class="vjs-default-skin "  controls muted preload="auto" >
+		<source src="https://stream.camtour.net/hls/jisan1.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  
+	  
+	 </div> 
+      <!-- 영상 -->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+//모달창 시간제한 setTimeout(function() {$('#exampleModal').modal('hide');}, 10000);
+</script>
+
+
+<!--  -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="max-width: 75%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div align="center" id="webcamView">
+	  <video-js id="myvideo2" class="vjs-default-skin "  controls muted preload="auto"  >
+		<source src="https://stream.camtour.net/hls/jisan2.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  
+	  
+	 </div> 
+      <!-- 영상 -->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->		
+		
+		
+		
+		<div class="col-md-11">
+
+	
+
+	 		  
+	 		  <script>
+	 		 
+	 		  
+	 		  
+		var player = videojs('myvideo1',{liveui:true},{autoplay: false});
+		var player2 = videojs('myvideo2',{liveui:true},{autoplay: false});
+		/* 정지 시 모달창 띄우기
+ 		player.on('pause', function() {
+
+	 		  // Modals are temporary by default. They dispose themselves when they are
+	 		  // closed; so, we can create a new one each time the player is paused and
+	 		  // not worry about leaving extra nodes hanging around.
+	 		  var modal = player.createModal('This is a modal!');
+
+	 		  // When the modal closes, resume playback.
+	 		  modal.on('modalclose', function() {
+	 		    player.play();
+	 		  });
+	 		}); */
+	 player.ready(function() {
+	  setTimeout(function() {
+		player.autoplay('muted');
+		player.fluid(true);
+		
+	  }, 100);
+	});
+	 
+	 player2.ready(function() {
+		  setTimeout(function() {
+			player2.autoplay('muted');
+			player2.fluid(true);
+			
+		  }, 100);
+		});
+	 
+		var video = $("video").get(2);
+		video.load();
+		video.play();
+		if (video.paused) {
+		  location.reload(true);
+		}
+	  </script>
+	 
+
+		</div>
+	      </div>
+	    </section>
+			
+  <footer th:replace="includes/footer :: footer('메인')">
+     
+    </footer>
+		</div><!-- END COLORLIB-MAIN -->
+	</div><!-- END COLORLIB-PAGE -->
+
+	
+  <!-- loader -->
+	<div th:include="includes/loader"></div>
+
+    
+  </body>
+</html>
