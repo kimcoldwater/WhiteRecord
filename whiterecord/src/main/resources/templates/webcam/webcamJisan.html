@@ -46,33 +46,20 @@
 	    
 	            </div>
 	            </div>
-	            
+	            <div>
+	            		<table class="table table-borderless col-md-10 mb-4 ">
+		<tr>
+		<td> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">1. 레몬/오렌지</button></td>
+		<td> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2">2. 뉴오렌지</button></td>
+		<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal3">3. 5/6번 슬로프</button></td>
+		<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal4">4. 블루탑승장</button></td>
+		<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal5">5. 실버탑승장</button></td>
+		</tr>
+		</table>
+		</div>
 	          </div>
 	          <div class="w-100"></div>
 
-	          <div class="col-md-2">
-	            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">1.레몬/오렌지</button>
-		            
-	          </div>
-	          <div class="col-md-2 ml-2" style="text-align:center;">
-	             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2"> &nbsp; 2.뉴오렌지</button>
-	          </div>
-	          <div class="col-md-2 mr-3">
-	            <p><a href="#" class="btn btn btn-primary p-3 px-xl-4 py-xl-3">3.5/6번 슬로프</a></p>
-	          </div>
-	          <div class="col-md-2">
-	            <p><a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">4.블루탑승장</a></p>
-	          </div>
-	          <div class="col-md-2">
-	            <p><a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">5.실버탑승장</a></p>
-	          </div>
-	        </div>
-		
-		
-		<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -136,6 +123,94 @@
   </div>
 </div>
 <!--  -->		
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="max-width: 75%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div align="center" id="webcamView">
+	  <video-js id="myvideo3" class="vjs-default-skin "  controls muted preload="auto"  >
+		<source src="https://stream.camtour.net/hls/jisan3.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  
+	  
+	 </div> 
+      <!-- 영상 -->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->	
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="max-width: 75%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div align="center" id="webcamView">
+	  <video-js id="myvideo4" class="vjs-default-skin "  controls muted preload="auto"  >
+		<source src="https://stream.camtour.net/hls/jisan4.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  
+	  
+	 </div> 
+      <!-- 영상 -->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->	
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="max-width: 75%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div align="center" id="webcamView">
+	  <video-js id="myvideo5" class="vjs-default-skin "  controls muted preload="auto"  >
+		<source src="https://stream.camtour.net/hls/jisan5.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  
+	  
+	 </div> 
+      <!-- 영상 -->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->	
+
 		
 		
 		
@@ -148,8 +223,7 @@
 	 		 
 	 		  
 	 		  
-		var player = videojs('myvideo1',{liveui:true},{autoplay: false});
-		var player2 = videojs('myvideo2',{liveui:true},{autoplay: false});
+
 		/* 정지 시 모달창 띄우기
  		player.on('pause', function() {
 
@@ -163,6 +237,12 @@
 	 		    player.play();
 	 		  });
 	 		}); */
+			var player = videojs('myvideo1',{liveui:true},{autoplay: false});
+			var player2 = videojs('myvideo2',{liveui:true},{autoplay: false});
+			var player3 = videojs('myvideo3',{liveui:true},{autoplay: false});
+			var player4 = videojs('myvideo4',{liveui:true},{autoplay: false});
+			var player5 = videojs('myvideo5',{liveui:true},{autoplay: false});
+	
 	 player.ready(function() {
 	  setTimeout(function() {
 		player.autoplay('muted');
@@ -179,7 +259,31 @@
 		  }, 100);
 		});
 	 
-		var video = $("video").get(2);
+	 player3.ready(function() {
+		  setTimeout(function() {
+			player3.autoplay('muted');
+			player3.fluid(true);
+			
+		  }, 100);
+		});
+	 
+	 player4.ready(function() {
+		  setTimeout(function() {
+			player4.autoplay('muted');
+			player4.fluid(true);
+			
+		  }, 100);
+		});
+	 
+	 player5.ready(function() {
+		  setTimeout(function() {
+			player5.autoplay('muted');
+			player5.fluid(true);
+			
+		  }, 100);
+		});
+	 
+		var video = $("video").get(5);
 		video.load();
 		video.play();
 		if (video.paused) {
