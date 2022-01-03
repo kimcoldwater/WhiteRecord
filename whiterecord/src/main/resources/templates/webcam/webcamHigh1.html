@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="includes/header :: head('웹캠')">
+   
+  </head>
+    
+    	  <script src="https://cdn.jsdelivr.net/npm/@videojs/http-streaming@2.12.0/dist/videojs-http-streaming.js"></script>
+	  <link href="https://vjs.zencdn.net/7.15.4/video-js.css" rel="stylesheet" />
+
+	  <script src="https://vjs.zencdn.net/7.15.4/video.min.js"></script>
+
+  <body>
+
+	<div id="colorlib-page">
+		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+		<aside th:replace="includes/sidebar :: sidebar('웹캠')">
+		</aside> <!-- END COLORLIB-ASIDE -->
+		
+		
+		<div id="colorlib-main">
+			<section class="ftco-section contact-section">
+	      <div class="container">
+	        <div class="row d-flex mb-5 contact-danger">
+	          <div class="col-md-12 mb-4 ">
+	            <h2 class="h4 font-weight-bold">용평리조트</h2>
+	            <br/>
+	            <div class="row">
+	              <div class="col-md-12 mb-4 ">
+	            <img src="elen/picture/high1Map.PNG"  width="70%" height="500">
+	    
+	            </div>
+	            </div>
+	      
+	    <table class="table table-borderless col-md-8 mb-4 ">
+		<tr style="font-size:15px;">
+		<td> <button type="button" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#exampleModal">01.제우스 2번</button></td>
+		<td> <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal2">02.헤라 2번</button></td>
+		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal3">03.하이원 탑</button></td>
+		<td><button type="button" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#exampleModal4">04.헤라 1번</button></td>
+
+		</tr>
+		<tr style="font-size:15px;">
+		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal5">05.마운틴허브 베이스</button></td>
+		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal6">06.아테나 2번</button></td>
+		<td> <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal7">07.마운틴 베이스</button></td>
+		<td> <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal8">08.아테나 2번 하단</button></td>		
+		</tr>
+		<tr style="font-size:15px;">
+
+		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal9">09.빅토리아 상단</button></td>
+		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal10">10.제우스 2번 중단</button></td>
+		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal11">11.밸리 허브 베이스</button></td>
+		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal12">12.빅토리아 1번</button></td>
+		</tr>
+		<tr style="font-size:15px;">
+
+		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal13">13.제우스 3번</button></td>
+		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal14">14.제우스 2번 중단</button></td>
+		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal15">15.아폴로 4번 중단</button></td>
+		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal16">16.아폴로 베이스</button></td>
+		</tr>
+		<tr style="font-size:15px;">
+		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal17">17.제우스 3번 하단</button></td>
+		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal18">18.밸리 베이스</button></td>
+
+		</tr>
+
+		</table>
+		
+	          </div>
+	          <div class="w-100"></div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="max-width: 70%;">
+    <div class="modal-content">
+      <div class="modal-header" >
+        <h5 class="modal-title" id="exampleModalLabel" >01 제우스 2번 슬로프 입구</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div align="center" id="webcamView">
+	  <video-js id="myvideo1" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+		<source src="http://211.50.118.30:1935/live/ch1.stream/playlist.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  
+	  
+	 </div> 
+      <!-- 영상 -->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<script>
+//모달창 시간제한 setTimeout(function() {$('#exampleModal').modal('hide');}, 10000);
+</script>
+
+
+<!--  -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="max-width: 70%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">02 헤라 2번 슬로프 입구</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div align="center" id="webcamView">
+	  <video-js id="myvideo2" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+		<source src="http://211.50.118.30:1935/live/ch2.stream/playlist.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  
+	  
+	 </div> 
+      <!-- 영상 -->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->		
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="max-width: 70%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">03 하이원 탑</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div align="center" id="webcamView">
+	  <video-js id="myvideo3" class="vjs-default-skin " data-setup='{"fluid": true}' controls muted preload="auto"  >
+		<source src="http://211.50.118.30:1935/live/ch3.stream/playlist.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  
+	  
+	 </div> 
+      <!-- 영상 -->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->	
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="max-width: 70%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">04 아테나 1번 슬로프</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div align="center" id="webcamView">
+	  <video-js id="myvideo4" class="vjs-default-skin " data-setup='{"fluid": true}' controls muted preload="auto"  >
+		<source src="http://211.50.118.30:1935/live/ch4.stream/playlist.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  
+	  
+	 </div> 
+      <!-- 영상 -->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->	
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="max-width: 70%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">05 마운틴 허브 베이스</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div align="center" id="webcamView">
+	  <video-js id="myvideo5" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+		<source src="http://211.50.118.30:1935/live/ch5.stream/playlist.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  
+	  
+	 </div> 
+      <!-- 영상 -->
+            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->	
+    
+    
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal6" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="max-width: 70%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">06 아테나 2번 슬로프</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div align="center" id="webcamView">
+	  <video-js id="myvideo6" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+		<source src="http://211.50.118.30:1935/live/ch6.stream/playlist.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  
+	  
+	 </div> 
+      <!-- 영상 -->
+            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->	
+
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal7" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="max-width: 70%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">07 마운틴 베이스</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div align="center" id="webcamView">
+	  <video-js id="myvideo7" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+		<source src="http://211.50.118.30:1935/live/ch7.stream/playlist.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  
+	  
+	 </div> 
+      <!-- 영상 -->
+            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->	
+
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal8" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="max-width: 70%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">08 아테나 2번 슬로프 하단 </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div align="center" id="webcamView">
+	  <video-js id="myvideo8" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+		<source src="http://211.50.118.30:1935/live/ch8.stream/playlist.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  
+	  
+	 </div> 
+      <!-- 영상 -->
+            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->	
+
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal9" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="max-width: 70%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">09 빅토리아 상단</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div align="center" id="webcamView">
+	  <video-js id="myvideo9" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+		<source src="http://211.50.118.30:1935/live/ch9.stream/playlist.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  
+	  
+	 </div> 
+      <!-- 영상 -->
+            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->	
+
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal10" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="max-width: 70%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">10 제우스 2번 중단</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div align="center" id="webcamView">
+	  <video-js id="myvideo10" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+		<source src="http://211.50.118.30:1935/live/ch10.stream/playlist.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  
+	  
+	 </div> 
+      <!-- 영상 -->
+            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->	
+
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal11" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="max-width: 70%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">11 밸리 허브 베이스</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div align="center" id="webcamView">
+	  <video-js id="myvideo11" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+		<source src="http://211.50.118.30:1935/live/ch11.stream/playlist.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  
+	  
+	 </div> 
+      <!-- 영상 -->
+            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->	
+
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal12" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="max-width: 70%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">12 빅토리아 1번 슬로프</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div align="center" id="webcamView">
+	  <video-js id="myvideo12" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+		<source src="http://211.50.118.30:1935/live/ch12.stream/playlist.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  
+	  
+	 </div> 
+      <!-- 영상 -->
+            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->	
+
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal13" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="max-width: 70%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">13 제우스 3번 슬로프</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div align="center" id="webcamView">
+	  <video-js id="myvideo13" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+		<source src="http://211.50.118.30:1935/live/ch13.stream/playlist.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  
+	  
+	 </div> 
+      <!-- 영상 -->
+            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->	
+
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal14" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="max-width: 70%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">14 제우스 3번 중단부</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div align="center" id="webcamView">
+	  <video-js id="myvideo14" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+		<source src="http://211.50.118.30:1935/live/ch14.stream/playlist.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  
+	  
+	 </div> 
+      <!-- 영상 -->
+            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->	
+
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal15" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="max-width: 70%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">15 아폴로 4번 중단부</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div align="center" id="webcamView">
+	  <video-js id="myvideo15" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+		<source src="http://211.50.118.30:1935/live/ch15.stream/playlist.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  
+	  
+	 </div> 
+      <!-- 영상 -->
+            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->	
+
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal16" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="max-width: 70%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">16 아폴로 베이스</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div align="center" id="webcamView">
+	  <video-js id="myvideo16" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+		<source src="http://211.50.118.30:1935/live/ch16.stream/playlist.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  
+	  
+	 </div> 
+      <!-- 영상 -->
+            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->	
+
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal17" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="max-width: 70%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">17 제우스 3번 하단</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div align="center" id="webcamView">
+	  <video-js id="myvideo17" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+		<source src="http://211.50.118.30:1935/live/ch17.stream/playlist.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  
+	  
+	 </div> 
+      <!-- 영상 -->
+            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->	
+
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal18" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="max-width: 70%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">18 밸리 베이스</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div align="center" id="webcamView">
+	  <video-js id="myvideo18" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+		<source src="http://211.50.118.30:1935/live/ch18.stream/playlist.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  
+	  
+	 </div> 
+      <!-- 영상 -->
+            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->	
+
+		
+		
+		
+		<div class="col-md-11">
+
+	
+
+	 		  
+	 		  <script>
+	 		 
+	 		  
+	 		  
+
+		/* 정지 시 모달창 띄우기
+ 		player.on('pause', function() {
+
+	 		  // Modals are temporary by default. They dispose themselves when they are
+	 		  // closed; so, we can create a new one each time the player is paused and
+	 		  // not worry about leaving extra nodes hanging around.
+	 		  var modal = player.createModal('This is a modal!');
+
+	 		  // When the modal closes, resume playback.
+	 		  modal.on('modalclose', function() {
+	 		    player.play();
+	 		  });
+	 		}); */
+			var player = videojs('myvideo1',{liveui:true},{autoplay: false});
+			var player2 = videojs('myvideo2',{liveui:true},{autoplay: false});
+			var player3 = videojs('myvideo3',{liveui:true},{autoplay: false});
+			var player4 = videojs('myvideo4',{liveui:true},{autoplay: false});
+			var player5 = videojs('myvideo5',{liveui:true},{autoplay: false});
+			var player6 = videojs('myvideo6',{liveui:true},{autoplay: false});
+			var player7 = videojs('myvideo7',{liveui:true},{autoplay: false});
+			var player8 = videojs('myvideo8',{liveui:true},{autoplay: false});
+			var player9 = videojs('myvideo9',{liveui:true},{autoplay: false});
+			var player10 = videojs('myvideo10',{liveui:true},{autoplay: false});
+			var player11 = videojs('myvideo11',{liveui:true},{autoplay: false});
+			var player12 = videojs('myvideo12',{liveui:true},{autoplay: false});
+			var player13 = videojs('myvideo13',{liveui:true},{autoplay: false});
+			var player14 = videojs('myvideo14',{liveui:true},{autoplay: false});
+			var player15 = videojs('myvideo15',{liveui:true},{autoplay: false});
+			var player16 = videojs('myvideo16',{liveui:true},{autoplay: false});
+			var player17 = videojs('myvideo17',{liveui:true},{autoplay: false});
+			var player18 = videojs('myvideo18',{liveui:true},{autoplay: false});
+	
+	 player.ready(function() {
+	  setTimeout(function() {
+		player.autoplay('muted');
+		player.fluid(true);
+		
+	  }, 100);
+	});
+	 
+	 player2.ready(function() {
+		  setTimeout(function() {
+			player2.autoplay('muted');
+			player2.fluid(true);
+			
+		  }, 100);
+		});
+	 
+	 player3.ready(function() {
+		  setTimeout(function() {
+			player3.autoplay('muted');
+			player3.fluid(true);
+			
+		  }, 100);
+		});
+	 
+	 player4.ready(function() {
+		  setTimeout(function() {
+			player4.autoplay('muted');
+			player4.fluid(true);
+			
+		  }, 100);
+		});
+	 
+	 player5.ready(function() {
+		  setTimeout(function() {
+			player5.autoplay('muted');
+			player5.fluid(true);
+			
+		  }, 100);
+		});
+	 
+
+	  </script>
+	 
+
+		</div>
+	      </div>
+	    </section>
+			
+  <footer th:replace="includes/footer :: footer('메인')">
+     
+    </footer>
+		</div><!-- END COLORLIB-MAIN -->
+	</div><!-- END COLORLIB-PAGE -->
+
+	
+  <!-- loader -->
+	<div th:include="includes/loader"></div>
+
+    
+  </body>
+</html>
