@@ -62,6 +62,31 @@ public class WebcamController {
 		return "webcam/webcamElysian";
 	}
 	
+	@GetMapping("/webcamVivaldi")
+	public String webcamVivaldi() throws Exception {
+
+		return "webcam/webcamVivaldi";
+	}
+
+	@GetMapping("/webcamOakvalley")
+	public String webcamOakvalley() throws Exception {
+
+		return "webcam/webcamOakvalley";
+	}	
+	
+	@GetMapping("/webcamMuju")
+	public String webcamMuju() throws Exception {
+
+		return "webcam/webcamMuju";
+	}		
+
+	@GetMapping("/webcamEden")
+	public String webcamEden() throws Exception {
+
+		return "webcam/webcamEden";
+	}		
+	
+	
 	
 	
 }

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="includes/header :: head('웹캠')">
+   
+  </head>
+    
+    	  <script src="https://cdn.jsdelivr.net/npm/@videojs/http-streaming@2.12.0/dist/videojs-http-streaming.js"></script>
+	  <link href="https://vjs.zencdn.net/7.15.4/video-js.css" rel="stylesheet" />
+
+	  <script src="https://vjs.zencdn.net/7.15.4/video.min.js"></script>
+<script type="text/javascript">
+
+	$(document).ready(function() {
+				$("#jisanCam1").on("click",function() {
+					console.log("클릭");
+					$("#webcamView")
+					.append(
+								"<div align='center'> "
+							+ "<video id='myvideo1' class='vjs-default-skin'  controls preload='auto' >"
+							+ "<source src='https://stream.camtour.net/hls/jisan1.m3u8' type='application/x-mpegURL'>"
+						  	+ "</video> </div> "
+
+					);
+										})
+					})
+  
+					
+  </script>
+  <body>
+
+	<div id="colorlib-page">
+		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+		<aside th:replace="includes/sidebar :: sidebar('웹캠')">
+		</aside> <!-- END COLORLIB-ASIDE -->
+		
+		
+		<div id="colorlib-main">
+			<section class="ftco-section contact-section">
+	      <div class="container">
+	        <div class="row d-flex mb-5 contact-danger">
+	          <div class="col-md-12 mb-4 ">
+	            <h2 class="h4 font-weight-bold">에덴밸리 리조트</h2>
+	            <br/>
+	            <div class="row">
+	         	<div class="col-md-12 mb-4">
+	            <img src="elen/picture/edenMap.PNG"  width="60%" height="500" >
+	            </div>
+	 
+	            </div>
+	            <div>
+	            		<table class="table table-borderless col-md-10 mb-4 ">
+		<tr style="font-size:30px;">
+		<td> <button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal">슬로프 광장</button></td>
+		<td> <button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal2">베이직 슬로프</button></td>
+		<td><button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal3">우라누스 슬로프</button></td>
+		<td><button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal4">루지트랙(1)</button></td>
+		<td><button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal5">루지트랙(2)</button></td>
+		</tr>
+		</table>
+		</div>
+	          </div>
+	          <div class="w-100"></div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="max-width: 70%;">
+    <div class="modal-content">
+      <div class="modal-header" >
+        <h5 class="modal-title" id="exampleModalLabel" >슬로프 광장</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div align="center" id="webcamView">
+	  <video-js id="myvideo1" class="vjs-default-skin " data-setup='{"fluid": true}' controls muted preload="auto" >
+		<source src="https://sn.rtsp.me/-DBZDEY3UwXl8Oi-yOW3zQ/1641369731/hls/iHZ3ytS5.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  
+	  
+	 </div> 
+      <!-- 영상 -->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+//모달창 시간제한 setTimeout(function() {$('#exampleModal').modal('hide');}, 10000);
+</script>
+
+
+<!--  -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="max-width: 70%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">베이직 슬로프</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div align="center" id="webcamView">
+	  <video-js id="myvideo2" class="vjs-default-skin " data-setup='{"fluid": true}' controls muted preload="auto"  >
+		<source src="https://frn.rtsp.me/BP5crZTK4vuuBfUE_nrjrA/1641369807/hls/rSQit6fr.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  
+	  
+	 </div> 
+      <!-- 영상 -->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->		
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="max-width: 70%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">우라누스 슬로프</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div align="center" id="webcamView">
+	  <video-js id="myvideo3" class="vjs-default-skin " data-setup='{"fluid": true}' controls muted preload="auto"  >
+		<source src="https://sn.rtsp.me/-lKHsLNDkEVJ0oazMW9OzA/1641369825/hls/h8EBG6Gk.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  
+	  
+	 </div> 
+      <!-- 영상 -->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->	
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="max-width: 70%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">루지트랙 (1)</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div align="center" id="webcamView">
+	  <video-js id="myvideo4" class="vjs-default-skin " data-setup='{"fluid": true}' controls muted preload="auto"  >
+		<source src="https://sn.rtsp.me/u9Yu4t3iBgu8m0Fs4hjUFA/1641369853/hls/TtEtEAfF.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  
+	  
+	 </div> 
+      <!-- 영상 -->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->	
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="max-width: 70%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">루지트랙(2)</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div align="center" id="webcamView">
+	  <video-js id="myvideo5" class="vjs-default-skin " data-setup='{"fluid": true}' controls muted preload="auto"  >
+		<source src="https://sn.rtsp.me/MaNMCBrlBGlX75GZnPrAIA/1641369875/hls/TtEtEAfF.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  
+	  
+	 </div> 
+      <!-- 영상 -->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->	
+
+		
+		
+		
+		<div class="col-md-11">
+
+	
+
+	 		  
+	 		  <script>
+	 		 
+	 		  
+	 		  
+
+		/* 정지 시 모달창 띄우기
+ 		player.on('pause', function() {
+
+	 		  // Modals are temporary by default. They dispose themselves when they are
+	 		  // closed; so, we can create a new one each time the player is paused and
+	 		  // not worry about leaving extra nodes hanging around.
+	 		  var modal = player.createModal('This is a modal!');
+
+	 		  // When the modal closes, resume playback.
+	 		  modal.on('modalclose', function() {
+	 		    player.play();
+	 		  });
+	 		}); */
+			var player = videojs('myvideo1',{liveui:true},{autoplay: false});
+			var player2 = videojs('myvideo2',{liveui:true},{autoplay: false});
+			var player3 = videojs('myvideo3',{liveui:true},{autoplay: false});
+			var player4 = videojs('myvideo4',{liveui:true},{autoplay: false});
+			var player5 = videojs('myvideo5',{liveui:true},{autoplay: false});
+	
+	 player.ready(function() {
+	  setTimeout(function() {
+		player.autoplay('muted');
+		player.fluid(true);
+		
+	  }, 100);
+	});
+	 
+	 player2.ready(function() {
+		  setTimeout(function() {
+			player2.autoplay('muted');
+			player2.fluid(true);
+			
+		  }, 100);
+		});
+	 
+	 player3.ready(function() {
+		  setTimeout(function() {
+			player3.autoplay('muted');
+			player3.fluid(true);
+			
+		  }, 100);
+		});
+	 
+	 player4.ready(function() {
+		  setTimeout(function() {
+			player4.autoplay('muted');
+			player4.fluid(true);
+			
+		  }, 100);
+		});
+	 
+	 player5.ready(function() {
+		  setTimeout(function() {
+			player5.autoplay('muted');
+			player5.fluid(true);
+			
+		  }, 100);
+		});
+	 
+		var video = $("video").get(5);
+		video.load();
+		video.play();
+		if (video.paused) {
+		  location.reload(true);
+		}
+	  </script>
+	 
+
+		</div>
+	      </div>
+	    </section>
+			
+  <footer th:replace="includes/footer :: footer('메인')">
+     
+    </footer>
+		</div><!-- END COLORLIB-MAIN -->
+	</div><!-- END COLORLIB-PAGE -->
+
+	
+  <!-- loader -->
+	<div th:include="includes/loader"></div>
+
+    
+  </body>
+</html>
