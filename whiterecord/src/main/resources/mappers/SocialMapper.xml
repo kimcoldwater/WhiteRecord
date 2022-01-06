@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cs.projects.whiterecord.Mapper.SocialMapper">
+<select id="findAll" resultType="cs.projects.whiterecord.model.Social">
+select * from social
+
+</select>
+
+<select id="socialContent" resultType="cs.projects.whiterecord.model.Social"
+parameterType="cs.projects.whiterecord.util.Criteria">
+select * from ( 
+select sno , resort, title, content, mno, id ,area, categori, viewcnt,complete, regdate,offerdate,enddate,bookmarkcnt, ROW_NUMBER() OVER(order by complete, sno desc) AS SNUM
+from social
+where 1=1
+	<if test="categori != '' ">AND CATEGORI = #{categori}</if>
+	<if test="searchType == 't'.toString()">AND title LIKE '%' || #{keyword} || '%'</if>
+	<if test="searchType == 'id'.toString()">AND id LIKE '%' || #{keyword} || '%'</if>
+	<if test="searchType == 'tc'.toString()">AND (TITLE LIKE '%' || #{keyword} || '%') or (CONTENT LIKE '%' || #{keyword} || '%')</if>
+	<if test="resort != '' ">AND resort = #{resort}</if>
+)
+where SNUM between #{rowStart} AND #{rowEnd}
+order by complete , sno desc 
+</select>
+
+
+</mapper>

@@ -6,8 +6,8 @@
 			<nav id="colorlib-main-menu" role="navigation">
 				<ul>
 					<li><a href="index.html">Home</a></li>
-					<li class="colorlib-active"><a th:href="@{/webcamResort}">Webcam</a></li>
-					<li><a href="travel.html">Travel</a></li>
+					<li th:classappend="${title} == '웹캠' ? 'colorlib-active'"><a th:href="@{/webcam/webcam-resort}">Webcam</a></li>
+					<li th:classappend="${title} == 'social' ? 'colorlib-active'"><a th:href="@{/social/social-view}">Wanted</a></li>
 					<li><a href="fashion.html">Fashion</a></li>
 					<li><a href="about.html">About</a></li>
 					<li><a href="contact.html">Contact</a></li>

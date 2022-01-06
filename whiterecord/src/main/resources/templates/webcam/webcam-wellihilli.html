@@ -8,24 +8,7 @@
 	  <link href="https://vjs.zencdn.net/7.15.4/video-js.css" rel="stylesheet" />
 
 	  <script src="https://vjs.zencdn.net/7.15.4/video.min.js"></script>
-<script type="text/javascript">
 
-	$(document).ready(function() {
-				$("#jisanCam1").on("click",function() {
-					console.log("클릭");
-					$("#webcamView")
-					.append(
-								"<div align='center'> "
-							+ "<video id='myvideo1' class='vjs-default-skin'  controls preload='auto' >"
-							+ "<source src='https://stream.camtour.net/hls/jisan1.m3u8' type='application/x-mpegURL'>"
-						  	+ "</video> </div> "
-
-					);
-										})
-					})
-  
-					
-  </script>
   <body>
 
 	<div id="colorlib-page">
@@ -39,22 +22,23 @@
 	      <div class="container">
 	        <div class="row d-flex mb-5 contact-danger">
 	          <div class="col-md-12 mb-4 ">
-	            <h2 class="h4 font-weight-bold">에덴밸리 리조트</h2>
+	            <h2 class="h4 font-weight-bold">웰리힐리파크</h2>
+	            <hr/>
 	            <br/>
 	            <div class="row">
-	         	<div class="col-md-12 mb-4">
-	            <img src="elen/picture/edenMap.PNG"  width="60%" height="500" >
+	              <div class="col-md-12 mb-4 ">
+	            <img src="/elen/picture/wellihilliMap.png"  width="100%" height="500">
+	    
 	            </div>
-	 
 	            </div>
 	            <div>
 	            		<table class="table table-borderless col-md-10 mb-4 ">
 		<tr style="font-size:30px;">
-		<td> <button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal">슬로프 광장</button></td>
-		<td> <button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal2">베이직 슬로프</button></td>
-		<td><button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal3">우라누스 슬로프</button></td>
-		<td><button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal4">루지트랙(1)</button></td>
-		<td><button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal5">루지트랙(2)</button></td>
+		<td> <button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal">01. A1/A3 슬로프</button></td>
+		<td> <button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal2">02. D1/야외광장</button></td>
+		<td><button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal3">03. D1/B2 슬로프</button></td>
+		<td><button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal4">04. 정상광장</button></td>
+		<td><button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal5">05. D+/패밀리 리프트</button></td>
 		</tr>
 		</table>
 		</div>
@@ -67,15 +51,15 @@
   <div class="modal-dialog modal-lg" style="max-width: 70%;">
     <div class="modal-content">
       <div class="modal-header" >
-        <h5 class="modal-title" id="exampleModalLabel" >슬로프 광장</h5>
+        <h5 class="modal-title" id="exampleModalLabel" >01. A1/A3 슬로프</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
       	<div align="center" id="webcamView">
-	  <video-js id="myvideo1" class="vjs-default-skin " data-setup='{"fluid": true}' controls muted preload="auto" >
-		<source src="https://sn.rtsp.me/-DBZDEY3UwXl8Oi-yOW3zQ/1641369731/hls/iHZ3ytS5.m3u8" type="application/x-mpegURL">
+	  <video-js id="myvideo1" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+		<source src="https://live.wellihillipark.com/wellihillipark/_definst_/cam02.stream/playlist.m3u8" type="application/x-mpegURL">
 	  </video-js>
 	  
 	  
@@ -101,15 +85,15 @@
   <div class="modal-dialog modal-lg" style="max-width: 70%;">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">베이직 슬로프</h5>
+        <h5 class="modal-title" id="exampleModalLabel">02. D1/야외광장</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
       	<div align="center" id="webcamView">
-	  <video-js id="myvideo2" class="vjs-default-skin " data-setup='{"fluid": true}' controls muted preload="auto"  >
-		<source src="https://frn.rtsp.me/BP5crZTK4vuuBfUE_nrjrA/1641369807/hls/rSQit6fr.m3u8" type="application/x-mpegURL">
+	  <video-js id="myvideo2" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+		<source src="https://live.wellihillipark.com/wellihillipark/_definst_/cam03.stream/playlist.m3u8" type="application/x-mpegURL">
 	  </video-js>
 	  
 	  
@@ -130,7 +114,7 @@
   <div class="modal-dialog modal-lg" style="max-width: 70%;">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">우라누스 슬로프</h5>
+        <h5 class="modal-title" id="exampleModalLabel">03. D1/B2 슬로프</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -138,7 +122,7 @@
       <div class="modal-body">
       	<div align="center" id="webcamView">
 	  <video-js id="myvideo3" class="vjs-default-skin " data-setup='{"fluid": true}' controls muted preload="auto"  >
-		<source src="https://sn.rtsp.me/-lKHsLNDkEVJ0oazMW9OzA/1641369825/hls/h8EBG6Gk.m3u8" type="application/x-mpegURL">
+		<source src="https://live.wellihillipark.com/wellihillipark/_definst_/cam04.stream/playlist.m3u8" type="application/x-mpegURL">
 	  </video-js>
 	  
 	  
@@ -159,7 +143,7 @@
   <div class="modal-dialog modal-lg" style="max-width: 70%;">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">루지트랙 (1)</h5>
+        <h5 class="modal-title" id="exampleModalLabel">04. 정상광장</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -167,7 +151,7 @@
       <div class="modal-body">
       	<div align="center" id="webcamView">
 	  <video-js id="myvideo4" class="vjs-default-skin " data-setup='{"fluid": true}' controls muted preload="auto"  >
-		<source src="https://sn.rtsp.me/u9Yu4t3iBgu8m0Fs4hjUFA/1641369853/hls/TtEtEAfF.m3u8" type="application/x-mpegURL">
+		<source src="https://live.wellihillipark.com/wellihillipark/_definst_/cam05.stream/playlist.m3u8" type="application/x-mpegURL">
 	  </video-js>
 	  
 	  
@@ -188,22 +172,21 @@
   <div class="modal-dialog modal-lg" style="max-width: 70%;">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">루지트랙(2)</h5>
+        <h5 class="modal-title" id="exampleModalLabel">05. D+/패밀리 리프트</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
       	<div align="center" id="webcamView">
-	  <video-js id="myvideo5" class="vjs-default-skin " data-setup='{"fluid": true}' controls muted preload="auto"  >
-		<source src="https://sn.rtsp.me/MaNMCBrlBGlX75GZnPrAIA/1641369875/hls/TtEtEAfF.m3u8" type="application/x-mpegURL">
+	  <video-js id="myvideo5" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+		<source src="https://live.wellihillipark.com/wellihillipark/_definst_/cam06.stream/playlist.m3u8" type="application/x-mpegURL">
 	  </video-js>
 	  
 	  
 	 </div> 
       <!-- 영상 -->
-
-      </div>
+            </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
@@ -211,7 +194,8 @@
   </div>
 </div>
 <!--  -->	
-
+    
+ 
 		
 		
 		
@@ -284,7 +268,7 @@
 		  }, 100);
 		});
 	 
-		var video = $("video").get(5);
+		var video = $("video").get(6);
 		video.load();
 		video.play();
 		if (video.paused) {

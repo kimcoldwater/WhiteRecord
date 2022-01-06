@@ -4,86 +4,88 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
+@RequestMapping("webcam")
 public class WebcamController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(WebcamController.class);
 
 
 	
-	@GetMapping("/webcamResort")
+	@GetMapping("/webcam-resort")
 	public String webcamResort() throws Exception {
 
-		return "webcam/webcamResort";
+		return "webcam/webcam-resort";
 	}
 	
-	@GetMapping("/webcamJisan")
+	@GetMapping("/webcam-jisan")
 	public String webcamJisan() throws Exception {
 
-		return "webcam/webcamJisan";
+		return "webcam/webcam-jisan";
 	}
 	
-	@GetMapping("/webcamPhoenix")
+	@GetMapping("/webcam-phoenix")
 	public String webcamPhoenix() throws Exception {
 
-		return "webcam/webcamPhoenix";
+		return "webcam/webcam-phoenix";
 	}
 	
-	@GetMapping("/webcamYongpyong")
+	@GetMapping("/webcam-yongpyong")
 	public String webcamYongpyong() throws Exception {
 
-		return "webcam/webcamYongpyong";
+		return "webcam/webcam-yongpyong";
 	}
 	
 	
-	@GetMapping("/webcamWellihilli")
+	@GetMapping("/webcam-wellihilli")
 	public String webcamWellihilli() throws Exception {
 
-		return "webcam/webcamWellihilli";
+		return "webcam/webcam-wellihilli";
 	}
 	
-	@GetMapping("/webcamKonjiam")
+	@GetMapping("/webcam-konjiam")
 	public String webcamKonjiam() throws Exception {
 
-		return "webcam/webcamKonjiam";
+		return "webcam/webcam-konjiam";
 	}
 	
-	@GetMapping("/webcamHigh1")
+	@GetMapping("/webcam-high1")
 	public String webcamHigh1() throws Exception {
 
-		return "webcam/webcamHigh1";
+		return "webcam/webcam-high1";
 	}
 
-	@GetMapping("/webcamElysian")
+	@GetMapping("/webcam-elysian")
 	public String webcamElysian() throws Exception {
 
-		return "webcam/webcamElysian";
+		return "webcam/webcam-elysian";
 	}
 	
-	@GetMapping("/webcamVivaldi")
+	@GetMapping("/webcam-vivaldi")
 	public String webcamVivaldi() throws Exception {
 
-		return "webcam/webcamVivaldi";
+		return "webcam/webcam-vivaldi";
 	}
 
-	@GetMapping("/webcamOakvalley")
+	@GetMapping("/webcam-oakvalley")
 	public String webcamOakvalley() throws Exception {
 
-		return "webcam/webcamOakvalley";
+		return "webcam/webcam-oakvalley";
 	}	
 	
-	@GetMapping("/webcamMuju")
+	@GetMapping("/webcam-muju")
 	public String webcamMuju() throws Exception {
 
-		return "webcam/webcamMuju";
+		return "webcam/webcam-muju";
 	}		
 
-	@GetMapping("/webcamEden")
+	@GetMapping("/webcam-eden")
 	public String webcamEden() throws Exception {
 
-		return "webcam/webcamEden";
+		return "webcam/webcam-eden";
 	}		
 	
 	
