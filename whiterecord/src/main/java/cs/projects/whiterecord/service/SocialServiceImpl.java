@@ -26,4 +26,9 @@ public class SocialServiceImpl implements SocialService{
 	public List<Social> findAll() throws Exception{
 	return socialMapper.findAll();
 	}
+	
+	public int socialCount(Criteria cri) throws Exception{
+		return socialMapper.socialCount(cri);
+	}
+
 }

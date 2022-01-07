@@ -14,4 +14,6 @@ public interface SocialMapper {
 		public List<Social> findAll();
 		
 		public List<Social> socialContent(Criteria cri);
+		
+		public int socialCount(Criteria cri);
 }

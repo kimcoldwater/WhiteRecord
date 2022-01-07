@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import cs.projects.whiterecord.model.Social;
 import cs.projects.whiterecord.service.SocialService;
 import cs.projects.whiterecord.util.Criteria;
+import cs.projects.whiterecord.util.PageMaker;
 
 @RestController
 @RequestMapping("social")
@@ -37,6 +38,10 @@ public class SocialController {
 	public Map<String,Object> socialContent(Criteria cri) throws Exception{
 		Map<String,Object> result = new HashMap<String,Object>();
 		List<Social> socialList = socialService.SocialConetent(cri);
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(socialService.socialCount(cri));
+		result.put("pageMaker", pageMaker);
 		result.put("socialList", socialList);
 		return result;
 	}

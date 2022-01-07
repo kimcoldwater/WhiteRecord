@@ -17,10 +17,23 @@ where 1=1
 	<if test="searchType == 'id'.toString()">AND id LIKE '%' || #{keyword} || '%'</if>
 	<if test="searchType == 'tc'.toString()">AND (TITLE LIKE '%' || #{keyword} || '%') or (CONTENT LIKE '%' || #{keyword} || '%')</if>
 	<if test="resort != '' ">AND resort = #{resort}</if>
+	<if test="offerdate != null">AND OFFERDATE = TO_DATE(#{offerdate}, 'YYYYMMDD')</if>
 )
 where SNUM between #{rowStart} AND #{rowEnd}
 order by complete , sno desc 
 </select>
 
+<select id="socialCount" resultType="int" parameterType="cs.projects.whiterecord.util.Criteria">
+SELECT COUNT(*) FROM (SELECT * FROM social 
+where 1=1
+	<if test="categori != '' ">AND CATEGORI = #{categori}</if>
+	<if test="searchType == 't'.toString()">AND title LIKE '%' || #{keyword} || '%'</if>
+	<if test="searchType == 'id'.toString()">AND id LIKE '%' || #{keyword} || '%'</if>
+	<if test="searchType == 'tc'.toString()">AND (TITLE LIKE '%' || #{keyword} || '%') or (CONTENT LIKE '%' || #{keyword} || '%')</if>
+	<if test="resort != '' ">AND resort = #{resort}</if>
+	<if test="offerdate != null">AND OFFERDATE = TO_DATE(#{offerdate}, 'YYYYMMDD')</if>
+
+) WHERE <![CDATA[ SNO > 0 ]]> 
+</select>
 
 </mapper>

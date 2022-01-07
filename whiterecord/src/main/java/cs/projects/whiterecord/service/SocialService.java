@@ -13,4 +13,7 @@ public interface SocialService {
 	
 	public List<Social> findAll() throws Exception;
 	
+	public int socialCount(Criteria cri) throws Exception;
+
+	
 }

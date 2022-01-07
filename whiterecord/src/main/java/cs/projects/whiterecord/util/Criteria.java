@@ -1,5 +1,7 @@
 package cs.projects.whiterecord.util;
 
+import java.util.Date;
+
 public class Criteria {
 	private int page;
 	private int perPageNum;
@@ -10,10 +12,21 @@ public class Criteria {
 	private String resort = "";
 	private String searchType = "";
 	private String keyword = "";
+	private Date offerdate = null;
+	
+	
 	
 	
 	
 
+
+	public Date getOfferdate() {
+		return offerdate;
+	}
+
+	public void setOfferdate(Date offerdate) {
+		this.offerdate = offerdate;
+	}
 
 	public String getResort() {
 		return resort;

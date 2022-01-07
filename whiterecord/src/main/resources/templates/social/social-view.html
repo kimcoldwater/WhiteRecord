@@ -3,7 +3,13 @@
   <head th:replace="includes/header :: head('소셜')">
    
   </head>
+
  <script>
+	let resort = "";
+	let categori = "";
+	let searchType = "";
+	let keyword = "";
+	let page = 1;
     $(document).ready(function(){
   	    //   data : {},
   	    
@@ -11,24 +17,25 @@
     	socialContent();
     });
     
-    function socialContent(page){
-    	console.log("들어옴");
+    function socialContent(){
     	
  	   $.ajax({
 	        url : '/social/social-content',
 	        type : 'get',
-	        data : {"page": page , "resort":"지산"},
+	        data : {"page":page, "resort": resort , "categori":categori , "searchType": searchType, "keyword":keyword},
 	        success : function(result){
 	        	console.log("아직스 들어옴");
 	            let a ='';
+	            let pageBtn = '';
 	          	var socialList = result.socialList;
+	          	var pageMaker = result.pageMaker;
 	            if(result<1){
 	            	a +='<h2>데이터가 없습니다</h2> ';}
 	            
 	            $.each(socialList, function(key, value){ 
 	            	
 	         			                
-	            	a += '<div class="col-md-3 card mr-5 ml-2 mt-5 border-success">';
+	            	a += '<div class="col-md-3 card mr-5 ml-1 mt-5 border-success">';
     				a += '<div class="text text-2 pt-2 mt-3">';
     				a += '<span class="category  d-block "><a href="#">'+value.categori+' </a><p style="font-size:15px;">'+value.resort+' / '+value.offerdate+'</p></span>';
     				a += '<hr/>';
@@ -53,10 +60,33 @@
 	               
 	            });
 	            
+	            for(var i = pageMaker.startPage; i < pageMaker.endPage ; i++){
+	            	
+	            	pageBtn += '    	<a>'+i+'</a>';
+	            }
+	            
 	            $("#content").html(a);
+	            $("#a").html(pageBtn);
 	        }
 	    });
     }
+    
+    
+   
+
+    $(function() {
+  
+      
+        $("#Date").datepicker();
+    });
+    
+   function socialInput(){
+		resort = document.getElementById("resort").options[document.getElementById("resort").selectedIndex].value;
+		categori = document.getElementById("categori").options[document.getElementById("categori").selectedIndex].value;
+		searchType = document.getElementById("searchType").options[document.getElementById("searchType").selectedIndex].value;
+		keyword = document.getElementById("keyword").value;
+		 socialContent();
+   }
     
   </script>   
   <body>
@@ -70,25 +100,59 @@
 			<section class="ftco-section">
 	    	<div class="container">
 	    		<div class="row">
+	    	
 	    			<div class="col-lg-12">
 	    				    <form>
-	    		<div class="col-md-10  card row">
+	    		<div class="col-md-11  card row ">
 	    		
 	    		
-
-	    		<div class="col-md-2 dropdown mt-2 mb-2">
-	<select class="custom-select">
-  <option selected>전체</option>
-  <option value="1">출격부</option>
-  <option value="2">카풀제공</option>
-  <option value="3">카풀요청</option>
-  <option value="4">동호회/시즌방/단톡</option>
+	<ul class="nav mt-2 mb-2 ">
+	<li class="nav-item mr-2 mt-2 mb-2">	
+	<select class="custom-select" id="categori" onchange="socialInput();">
+  <option selected value="">카테고리All</option>
+  <option value="출격부">출격부</option>
+  <option value="카풀제공">카풀제공</option>
+  <option value="카풀요청">카풀요청</option>
+  <option value="동호회">동호회/시즌방/단톡</option>
+	</select></li>
+	
+	<li class="nav-item mr-2 mt-2 mb-2">
+	<select class="custom-select" id="resort" onchange="socialInput();">
+  <option selected value="">스키장All</option>
+  <option value="휘닉스">휘닉스</option>
+  <option value="용평">용평</option>
+  <option value="비발디">비발디</option>
+  <option value="지산">지산</option>
+  <option value="곤지암">곤지암</option>
+  <option value="웰리힐리">웰리힐리</option>
+  <option value="하이원">하이원</option>
+  <option value="베어스">베어스</option>
+  <option value="엘리시안">엘리시안</option>
+  <option value="오크밸리">오크밸리</option>
+  <option value="무주">무주</option>
+  <option value="알펜시아">알펜시아</option>
+  <option value="에덴밸리">에덴밸리</option>
+  <option value="오투">오투</option>
 	</select>
+	</li>
+	<li class="nav-item mb-2 mr-2">
+             <input class="form-control" type="date" id="offerdate" >
+	</li>
+	<li class="nav-item mb-2 ">
 
-	
-	
-		</div>
-		
+<div class="input-group">
+  <select class="form-select" id="searchType" aria-label="Example select with button addon" >
+    <option selected value="">검색타입</option>
+    <option value="t">제목</option>
+    <option value="tc">제목/내용</option>
+    <option value="id">아이디</option>
+  </select>
+	<input type="text" class="form-control" id="keyword" onkeyup="socialInput();" placeholder="타입 지정 후 검색어 입력">
+</div>
+	</li>
+
+	</ul>
+
 	    			
 	    		
 	    		
@@ -103,7 +167,7 @@
 			    		</div>
 			    	</div>
 			    	
-	          
+	      <div id="a"></div>
 	          
 	    		</div>
 	    	</div>
