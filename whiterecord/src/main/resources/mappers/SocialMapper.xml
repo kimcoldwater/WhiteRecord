@@ -9,7 +9,7 @@ select * from social
 <select id="socialContent" resultType="cs.projects.whiterecord.model.Social"
 parameterType="cs.projects.whiterecord.util.Criteria">
 select * from ( 
-select sno , resort, title, content, mno, id ,area, categori, viewcnt,complete, regdate,offerdate,enddate,bookmarkcnt, ROW_NUMBER() OVER(order by complete, sno desc) AS SNUM
+select sno , resort, title, content,contact, mno, id ,area, categori, viewcnt,complete, regdate,offerdate,enddate,bookmarkcnt, ROW_NUMBER() OVER(order by complete, sno desc) AS SNUM
 from social
 where 1=1
 	<if test="categori != '' ">AND CATEGORI = #{categori}</if>
@@ -17,7 +17,8 @@ where 1=1
 	<if test="searchType == 'id'.toString()">AND id LIKE '%' || #{keyword} || '%'</if>
 	<if test="searchType == 'tc'.toString()">AND (TITLE LIKE '%' || #{keyword} || '%') or (CONTENT LIKE '%' || #{keyword} || '%')</if>
 	<if test="resort != '' ">AND resort = #{resort}</if>
-	<if test="offerdate != null">AND OFFERDATE = TO_DATE(#{offerdate}, 'YYYYMMDD')</if>
+	<if test="offerdate != null">AND OFFERDATE = TO_char(#{offerdate}, 'YYMMDD')</if>
+	<if test="completeCheck == false">AND complete='N'</if>
 )
 where SNUM between #{rowStart} AND #{rowEnd}
 order by complete , sno desc 
@@ -31,8 +32,8 @@ where 1=1
 	<if test="searchType == 'id'.toString()">AND id LIKE '%' || #{keyword} || '%'</if>
 	<if test="searchType == 'tc'.toString()">AND (TITLE LIKE '%' || #{keyword} || '%') or (CONTENT LIKE '%' || #{keyword} || '%')</if>
 	<if test="resort != '' ">AND resort = #{resort}</if>
-	<if test="offerdate != null">AND OFFERDATE = TO_DATE(#{offerdate}, 'YYYYMMDD')</if>
-
+	<if test="offerdate != null">AND OFFERDATE = TO_char(#{offerdate}, 'YYMMDD')</if>
+	<if test="completeCheck == false">AND complete='N'</if>
 ) WHERE <![CDATA[ SNO > 0 ]]> 
 </select>
 

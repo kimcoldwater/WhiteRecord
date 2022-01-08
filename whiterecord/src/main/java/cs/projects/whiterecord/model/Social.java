@@ -38,8 +38,8 @@ public class Social {
     @DateTimeFormat(pattern = "yy-MM-dd hh:mm")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yy-MM-dd hh:mm", timezone = "Asia/Seoul")
 	private Date regdate;
-    @DateTimeFormat(pattern = "MM-dd")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM-dd", timezone = "Asia/Seoul")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yy-MM-dd", timezone = "Asia/Seoul")
 	private Date offerdate;
 	private Date enddate;
 	private int bookmarkcnt;

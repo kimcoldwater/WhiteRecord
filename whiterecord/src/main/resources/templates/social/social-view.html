@@ -10,6 +10,8 @@
 	let searchType = "";
 	let keyword = "";
 	let page = 1;
+	let offerdate = null;
+	let completeCheck = false;
     $(document).ready(function(){
   	    //   data : {},
   	    
@@ -18,56 +20,143 @@
     });
     
     function socialContent(){
+    	console.log(offerdate);
     	
  	   $.ajax({
 	        url : '/social/social-content',
 	        type : 'get',
-	        data : {"page":page, "resort": resort , "categori":categori , "searchType": searchType, "keyword":keyword},
+	        data : {"page":page, "resort": resort , "categori":categori , "searchType": searchType, "keyword":keyword, "offerdate":offerdate , "completeCheck":completeCheck},
 	        success : function(result){
 	        	console.log("아직스 들어옴");
 	            let a ='';
+	            //모달
+	            let modal = "";
+	            let modalNum = 1;
 	            let pageBtn = '';
 	          	var socialList = result.socialList;
 	          	var pageMaker = result.pageMaker;
-	            if(result<1){
+	            if(result.socialList<1){
 	            	a +='<h2>데이터가 없습니다</h2> ';}
 	            
 	            $.each(socialList, function(key, value){ 
-	            	
-	         			                
-	            	a += '<div class="col-md-3 card mr-5 ml-1 mt-5 border-success">';
+	            	let complete = value.complete ; 
+	            	let contact = "******";
+		
+	            
+	         		if(complete == 'N'){	                
+	            	a += '<div class="col-md-3 card mr-5 ml-1 mt-5 border-success" data-toggle="modal" data-target="#ModalNum'+modalNum+'"> ';
+	            	contact = value.contact;
+	         		}else{
+		            a += '<div class="col-md-3 card mr-5 ml-1 mt-5 border-primary">';	
+	         		}
     				a += '<div class="text text-2 pt-2 mt-3">';
-    				a += '<span class="category  d-block "><a href="#">'+value.categori+' </a><p style="font-size:15px;">'+value.resort+' / '+value.offerdate+'</p></span>';
+    				a += '<span class="category  d-block "><a href="#">'+value.categori+' ||'+value.sno+'  </a><p style="font-size:15px;">'+value.resort+' / '+value.offerdate+'</p></span>';
     				a += '<hr/>';
-    				a += '<h3 class="mb-4" style="font-size:20px"><a href="#">'+value.title+' </a></h3>';
+    				a += '<h3 class="mb-4" style="font-size:20px" ><a href="#" data-toggle="modal" data-target="#ModalNum'+modalNum+'">'+value.title+' </a></h3>';
     				a += '<p class="mb-4">'+value.content+'</p>';
 	                a += '<div class="author mb-4 d-flex align-items-center">';
-	                a += '<a href="#" class="img" style="background-image: url(/elen/images/person_2.jpg);"></a>';
+	                a += '<a href="#"  class="img" style="background-image: url(/elen/images/person_2.jpg);"></a>';
 	                a += '<div class="ml-3 info" >';
 	                a += '<span>Written by</span>';
 	                a += '<h3><a href="#">'+value.id+'</a> <p style="font-size:13px;">'+value.regdate+'</p></h3>';
 	                a += '</div></div> <div class="meta-wrap align-items-center">';
 	                a += '<div class="half order-md-last">';
-	                a += '<p class="meta">';
+	                a += '<p class="meta">'
 	                a +=  '<span><i class="icon-heart"></i>'+value.bookmarkcnt+'</span>';
 	                a +=  '<span><i class="icon-eye"></i>'+value.viewcnt+'</span>';
 	                a +=  '<span><i class="icon-comment"></i>0</span>';
 	                a += '</p></div>';
-	                a += '<div class="half">';
-	                a += '<p><a href="#" class="btn py-2">Continue Reading <span class="ion-ios-arrow-forward"></span></a></p>';
-	                a += '</div></div></div></div>';
+	             
+	                a += '</div></div></div>';
 	         
+	                
+	                modal += '<div class="modal fade" id="ModalNum'+modalNum+'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">' 
+	     	           + '<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">'
+	     	           + '  <div class="modal-content">'
+	     	              
+	     	           +  '   <div class="modal-body"> '
+	     	           +   '   <button type="button" class="close" data-dismiss="modal" aria-label="Close">'
+	     	           +   '      <span aria-hidden="true">&times;</span>'
+	     	           +    '   </button>'
+	     	           +     ' 	<div class="col-md-12">'
+	     	          +	    '						<div class="blog-entry ">'
+	     	          +	    '							<div class="text pt-2 mt-3">'
+	     	          	+	'			          	<span class="category mb-1 d-block"><a href="#" style="font-size:15px;">'+value.categori+'</a> <p style="font-size:18px;">'+value.resort+' / '+value.offerdate+'</p></span>'
+	     	          +		'		              <h3 class="mb-4"><a href="#">'+value.title+' / '+value.sno+'</a></h3>'
+	     	          	+	'		              <p class="mb-4" style="color:black;" >'+value.content+'</p>'
+	     	          
+	     	          	+	'		              <hr> <p class="mb-4" style="color:black; font-size:18px;">연락처  <br/>'+contact+' </p>'	     	         
+  		
+	     	          	
+	     	          	+	'		              <div class="author mb-4 d-flex align-items-center" style="text-align:right;">'
+	     	          	+	'		            		<a href="#" class="img" style="background-image: url(/elen/images/person_1.jpg);"></a>'
+	     	          	+	'		            		<div class="ml-3 info">'
+	     	          	+	'		            			<span>Written by</span>'
+	     	          	+	'		            			<h3 ><a href="#">'+value.id+'</a>, <span style="font-size:12px;">'+value.regdate+'</span></h3>'
+	     	          	+	'		            		</div>'
+	     	          	+	'		            	</div>'
+	     	          	+	'		              <div class="meta-wrap d-md-flex align-items-center">'
+	     	          	+	'		              	<div class="half ">'
+	     	          	+	'			              	<p class="meta">'
+	     	          	+	'			              		<span><i class="icon-heart"></i>'+value.bookmarkcnt+'</span>'
+	     	          		+'			              		<span><i class="icon-eye"></i>'+value.viewcnt+'</span>'
+	     	          				              		
+	     	          	+		'		              	</p>'
+	     	          	+		'	              	</div></div></div></div></div>'
+	     	          			
+
+	     	            +  '</div>  <div class="modal-footer">'
+	     	            +  '    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>'
+	     	            +   ' </div></div></div></div>';
+	     	              modalNum++ ;
 	               
 	            });
 	            
-	            for(var i = pageMaker.startPage; i < pageMaker.endPage ; i++){
-	            	
-	            	pageBtn += '    	<a>'+i+'</a>';
-	            }
-	            
 	            $("#content").html(a);
-	            $("#a").html(pageBtn);
+	        	$("#modal").html(modal);
+	            //페이징 for문, 단! startPage는 0이 아닌 1에서 시작하므로 endPage에 +1을 해준다.
+	            
+	      
+
+	            
+	            if(pageMaker.prev){
+	            pageBtn += '<li class="mr-1"><a href="#" onclick="socialMovePrev(-1);">&lt;</a></li>'
+	            }        
+	            for(var i = pageMaker.startPage; i < pageMaker.endPage+1 ; i++){
+
+	 
+	    	     if(page == i){
+	    	    	 pageBtn +=	 '<li class="active mr-1"><a  href="#" onclick="socialMovePage('+i+');">'+i+'</a></li>'; 
+	    	     }else{
+	    	    	 pageBtn +=	 '<li class="mr-1"><a href="#" onclick="socialMovePage('+i+');">'+i+'</a></li>';
+	    	     }       
+	            }
+	            if(pageMaker.next){	    
+	            pageBtn += '<li><a  href="#" onclick="socialMovePrev(+1);">&gt;</a></li>'
+	        	}
+	           
+         
+	            
+	            $("#pagination").html(pageBtn);
+	            
+    
+	            
+	            
+	            
 	        }
+	        /* 로딩바
+	        , beforeSend: function() {
+	        	
+	             var spinner = "";
+	             spinner += '<div class="d-flex justify-content-center"><div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div></div>';
+	             $("#spinner").html(spinner);
+	       }
+	       , complete: function() {
+	                     $("#spinner").hide();
+	       }  */
+
+
+
 	    });
     }
     
@@ -85,9 +174,25 @@
 		categori = document.getElementById("categori").options[document.getElementById("categori").selectedIndex].value;
 		searchType = document.getElementById("searchType").options[document.getElementById("searchType").selectedIndex].value;
 		keyword = document.getElementById("keyword").value;
+		offerdate = document.getElementById("offerdate").value;
+		page = 1;
 		 socialContent();
    }
     
+   function socialMovePage(pageNum){
+	   page = pageNum;
+	   socialContent();
+   }
+   
+   function socialMovePrev(pageNum){
+	   page = page + pageNum;
+	   socialContent();
+   }
+   
+   function socialComplete(tf){
+	   completeCheck = tf;
+	   socialContent();
+   }
   </script>   
   <body>
 
@@ -107,16 +212,22 @@
 	    		
 	    		
 	<ul class="nav mt-2 mb-2 ">
-	<li class="nav-item mr-2 mt-2 mb-2">	
+	<li class="nav-item mr-3 mt-2 mb-2">	
 	<select class="custom-select" id="categori" onchange="socialInput();">
   <option selected value="">카테고리All</option>
   <option value="출격부">출격부</option>
   <option value="카풀제공">카풀제공</option>
   <option value="카풀요청">카풀요청</option>
   <option value="동호회">동호회/시즌방/단톡</option>
+  <option value="숙소제공">숙소제공</option>
+  <option value="숙소요청">숙소요청</option>
+  <option value="강습제공">강습제공</option>
+  <option value="강습요청">강습요청</option>
+  <option value="쉐어모집">쉐어모집</option>
+  <option value="기타">기타</option>
 	</select></li>
 	
-	<li class="nav-item mr-2 mt-2 mb-2">
+	<li class="nav-item mr-3 mt-2 mb-2">
 	<select class="custom-select" id="resort" onchange="socialInput();">
   <option selected value="">스키장All</option>
   <option value="휘닉스">휘닉스</option>
@@ -135,10 +246,10 @@
   <option value="오투">오투</option>
 	</select>
 	</li>
-	<li class="nav-item mb-2 mr-2">
-             <input class="form-control" type="date" id="offerdate" >
+	<li class="nav-item mb-2 mr-3">
+             <input class="form-control" type="date" id="offerdate" onchange="socialInput();">
 	</li>
-	<li class="nav-item mb-2 ">
+	<li class="nav-item mb-2 mr-3">
 
 <div class="input-group">
   <select class="form-select" id="searchType" aria-label="Example select with button addon" >
@@ -150,6 +261,17 @@
 	<input type="text" class="form-control" id="keyword" onkeyup="socialInput();" placeholder="타입 지정 후 검색어 입력">
 </div>
 	</li>
+	<li class="nav-item mb-2 mt-2 mr-3">
+
+	<div class="btn-group btn-group-toggle" data-toggle="buttons">
+  <label class="btn btn-info active">
+    <input type="radio"  onchange="socialComplete(false)" checked> 기본
+  </label>
+  <label class="btn btn-info">
+    <input type="radio" onchange="socialComplete(true);"> 마감글포함
+  </label>
+</div>
+	</li>
 
 	</ul>
 
@@ -158,20 +280,44 @@
 	    		
 	    			</div>
 	    			</form>
-	    			<div class="col-md-12">
-	    	
+	    			<div class="col-md-12" >
+	    				
 	    				<div class="row blog-entry ftco-animate"  id="content" >
 	    				
 	    						
 	    			</div>
+	    			
+	    		
+	    			 <div class="row mt-5">
+			          <div class="col">
+			            <div class="block-27">
+							<ul  id="pagination">
+							
+							</ul>
+			            </div>
+			          </div>
+			        </div>
+	    	
 			    		</div>
-			    	</div>
 
-	          
+			    	</div>
+		
 	    		</div>
 	    	</div>
 	    </section>
-			
+				    <!--  -->	
+				
+				<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div id="modal">
+ 
+</div>
+				
+	          <!--  -->
   <footer th:replace="includes/footer :: footer('메인')">
      
     </footer>

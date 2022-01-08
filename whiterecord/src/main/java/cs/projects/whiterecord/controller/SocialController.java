@@ -36,6 +36,7 @@ public class SocialController {
 	
 	@GetMapping("/social-content")
 	public Map<String,Object> socialContent(Criteria cri) throws Exception{
+		logger.info("cri.offerdate"+cri.getOfferdate());
 		Map<String,Object> result = new HashMap<String,Object>();
 		List<Social> socialList = socialService.SocialConetent(cri);
 		PageMaker pageMaker = new PageMaker();

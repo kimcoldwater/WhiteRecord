@@ -2,6 +2,8 @@ package cs.projects.whiterecord.util;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Criteria {
 	private int page;
 	private int perPageNum;
@@ -12,13 +14,23 @@ public class Criteria {
 	private String resort = "";
 	private String searchType = "";
 	private String keyword = "";
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date offerdate = null;
+	private boolean completeCheck = false;
 	
 	
 	
 	
 	
 
+
+	public boolean isCompleteCheck() {
+		return completeCheck;
+	}
+
+	public void setCompleteCheck(boolean completeCheck) {
+		this.completeCheck = completeCheck;
+	}
 
 	public Date getOfferdate() {
 		return offerdate;
@@ -83,7 +95,7 @@ public class Criteria {
 	
 	public void setPerPageNum(int perPageNum) {
 		if (perPageNum <= 0 || perPageNum > 100) {
-			this.perPageNum = 10;
+			this.perPageNum = 9;
 			return;
 		}
 		this.perPageNum = perPageNum;
