@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
+import org.hibernate.annotations.DynamicInsert;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -17,6 +18,7 @@ import lombok.Data;
 
 @Data
 @Entity
+@DynamicInsert
 public class Social {
 	
 	@Id
@@ -33,14 +35,19 @@ public class Social {
 	private String area;
 	private String contact;
 	private String categori;
+
 	private int viewcnt;
+
 	private String complete;
+
     @DateTimeFormat(pattern = "yy-MM-dd hh:mm")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yy-MM-dd hh:mm", timezone = "Asia/Seoul")
 	private Date regdate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yy-MM-dd", timezone = "Asia/Seoul")
 	private Date offerdate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yy-MM-dd", timezone = "Asia/Seoul")
 	private Date enddate;
 	private int bookmarkcnt;
 	

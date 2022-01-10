@@ -30,5 +30,9 @@ public class SocialServiceImpl implements SocialService{
 	public int socialCount(Criteria cri) throws Exception{
 		return socialMapper.socialCount(cri);
 	}
+	
+	public Social socialWrite(Social social)throws Exception{
+		return socialRepository.save(social);	
+		}
 
 }

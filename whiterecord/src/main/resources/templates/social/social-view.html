@@ -11,6 +11,7 @@
 	let keyword = "";
 	let page = 1;
 	let offerdate = null;
+	let offerdateEnd = null;
 	let completeCheck = false;
     $(document).ready(function(){
   	    //   data : {},
@@ -20,12 +21,11 @@
     });
     
     function socialContent(){
-    	console.log(offerdate);
     	
  	   $.ajax({
 	        url : '/social/social-content',
 	        type : 'get',
-	        data : {"page":page, "resort": resort , "categori":categori , "searchType": searchType, "keyword":keyword, "offerdate":offerdate , "completeCheck":completeCheck},
+	        data : {"page":page, "resort": resort , "categori":categori , "searchType": searchType, "keyword":keyword, "offerdate":offerdate ,"offerdateEnd":offerdateEnd , "completeCheck":completeCheck},
 	        success : function(result){
 	        	console.log("아직스 들어옴");
 	            let a ='';
@@ -50,7 +50,12 @@
 		            a += '<div class="col-md-3 card mr-5 ml-1 mt-5 border-primary">';	
 	         		}
     				a += '<div class="text text-2 pt-2 mt-3">';
-    				a += '<span class="category  d-block "><a href="#">'+value.categori+' ||'+value.sno+'  </a><p style="font-size:15px;">'+value.resort+' / '+value.offerdate+'</p></span>';
+    				a += '<span class="category  d-block "><a href="#">'+value.categori+' ||'+value.sno+'  </a><p style="font-size:15px;color:black;">'+value.resort+'<br>';
+    				if(value.offerdate == null){
+    				a += 'close '+value.enddate+'</p></span>';
+    				}else{
+        			a += 'offer '+value.offerdate+'</p></span>';			
+    				}
     				a += '<hr/>';
     				a += '<h3 class="mb-4" style="font-size:20px" ><a href="#" data-toggle="modal" data-target="#ModalNum'+modalNum+'">'+value.title+' </a></h3>';
     				a += '<p class="mb-4">'+value.content+'</p>';
@@ -175,6 +180,22 @@
 		searchType = document.getElementById("searchType").options[document.getElementById("searchType").selectedIndex].value;
 		keyword = document.getElementById("keyword").value;
 		offerdate = document.getElementById("offerdate").value;
+		offerdateEnd = document.getElementById("offerdateEnd").value;
+		if(categori == '동호회' || categori == '강습제공' || categori == '강습요청' || categori == '쉐어모집' || categori == '기타'){
+			$('#offerdate').val("");
+			$('#offerdate').hide();
+			$('#offerdateEnd').val("");
+			$('#offerdateEnd').hide();
+			$('#daten').hide();
+			offerdate = null;
+			offerdateEnd = null;
+			console.log(offerdate);
+		}else{
+			$('#offerdate').show();
+			$('#offerdateEnd').show();
+			$('#daten').show();
+
+		}
 		page = 1;
 		 socialContent();
    }
@@ -212,8 +233,8 @@
 	    		
 	    		
 	<ul class="nav mt-2 mb-2 ">
-	<li class="nav-item mr-3 mt-2 mb-2">	
-	<select class="custom-select" id="categori" onchange="socialInput();">
+	<li class="nav-item mr-3  mb-2">	
+	<select class="form-control" id="categori" onchange="socialInput();">
   <option selected value="">카테고리All</option>
   <option value="출격부">출격부</option>
   <option value="카풀제공">카풀제공</option>
@@ -227,8 +248,8 @@
   <option value="기타">기타</option>
 	</select></li>
 	
-	<li class="nav-item mr-3 mt-2 mb-2">
-	<select class="custom-select" id="resort" onchange="socialInput();">
+	<li class="nav-item mr-3  mb-2">
+	<select class="form-control" id="resort" onchange="socialInput();">
   <option selected value="">스키장All</option>
   <option value="휘닉스">휘닉스</option>
   <option value="용평">용평</option>
@@ -246,20 +267,9 @@
   <option value="오투">오투</option>
 	</select>
 	</li>
-	<li class="nav-item mb-2 mr-3">
-             <input class="form-control" type="date" id="offerdate" onchange="socialInput();">
-	</li>
-	<li class="nav-item mb-2 mr-3">
-
-<div class="input-group">
-  <select class="form-select" id="searchType" aria-label="Example select with button addon" >
-    <option selected value="">검색타입</option>
-    <option value="t">제목</option>
-    <option value="tc">제목/내용</option>
-    <option value="id">아이디</option>
-  </select>
-	<input type="text" class="form-control" id="keyword" onkeyup="socialInput();" placeholder="타입 지정 후 검색어 입력">
-</div>
+	<li class="nav-item mb-2 mr-3"><div class="input-group" >
+            <input class="form-control" type="date" id="offerdate" onchange="socialInput();" > <h2 id="daten">&nbsp;~&nbsp;</h2>
+           <input class="form-control" type="date" id="offerdateEnd" onchange="socialInput();" ></div>
 	</li>
 	<li class="nav-item mb-2 mt-2 mr-3">
 
@@ -272,6 +282,20 @@
   </label>
 </div>
 	</li>
+	
+	<li class="nav-item mb-2 mr-3">
+
+<div class="input-group">
+  <select class="form-select" id="searchType" aria-label="Example select with button addon" >
+    <option selected value="">검색타입</option>
+    <option value="t">제목</option>
+    <option value="tc">제목/내용</option>
+    <option value="id">아이디</option>
+  </select>
+	<input type="text" class="form-control" id="keyword" onkeyup="socialInput();" placeholder="타입 지정 후 검색어 입력">
+</div>
+	</li>
+	
 
 	</ul>
 
@@ -307,10 +331,7 @@
 	    </section>
 				    <!--  -->	
 				
-				<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button>
+
 
 <!-- Modal -->
 <div id="modal">

@@ -16,13 +16,23 @@ public class Criteria {
 	private String keyword = "";
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date offerdate = null;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date offerdateEnd = null;
 	private boolean completeCheck = false;
 	
 	
 	
 	
 	
+	
 
+	public Date getOfferdateEnd() {
+		return offerdateEnd;
+	}
+
+	public void setOfferdateEnd(Date offerdateEnd) {
+		this.offerdateEnd = offerdateEnd;
+	}
 
 	public boolean isCompleteCheck() {
 		return completeCheck;

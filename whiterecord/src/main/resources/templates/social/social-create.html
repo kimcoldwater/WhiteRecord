@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="includes/header :: head('웹캠')">
+   
+  </head>
+  <style>
+ .ck-editor__editable
+ {
+    min-height: 300px !important;
+ }
+</style>
+<script
+	src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	let date = new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString();
+	console.log(dateEnd);
+	document.getElementById('offerdate').setAttribute("min",date);
+	
+
+});
+
+function socialCreate(){
+	let resort = document.getElementById("resort").options[document.getElementById("resort").selectedIndex].value;
+	let categori = document.getElementById("categori").options[document.getElementById("categori").selectedIndex].value;
+	let offerdate = document.getElementById("offerdate").value;
+	let title = document.getElementById("title").value;
+	let contact = document.getElementById("contact").value;
+	let content = document.getElementById("content").value;
+		
+
+	   $.ajax({
+	        url : '/social/social-create',
+	        type : 'post',   
+	       	data : {"resort": resort , "categori":categori , "offerdate":offerdate , "title":title,"contact":contact,"content":content},
+	        success : function(result){
+	        	
+	        toastr.options.preventDuplicates = true;
+	    	toastr.success(result);
+
+	        },
+	        error : function(result){
+		        toastr.options.preventDuplicates = true;
+		    	toastr.success("실패");
+	        }
+	        
+	   })
+	
+	
+}
+
+function createBtn(){
+	
+	
+
+	if ($("#categori").val() == null || $("#categori").val() == "") {
+		toastr.options.preventDuplicates = true;
+		toastr.warning("카테고리를 선택해주세요");
+		$("#categori").focus();
+
+		return false;
+	}
+	
+	if ($("#resort").val() == null || $("#resort").val() == "") {
+		toastr.options.preventDuplicates = true;
+		toastr.warning("스키장을 선택해주세요");
+		$("#resort").focus();
+
+		return false;
+	}
+	
+	if ($("#offerdate").val() == null || $("#offerdate").val() == "") {
+		toastr.options.preventDuplicates = true;
+		toastr.warning("날짜를 설정해주세요");
+		$("#offerdate").focus();
+
+		return false;
+	}
+	
+	if ($("#title").val() == null || $("#title").val() == "") {
+		toastr.options.preventDuplicates = true;
+		toastr.warning("제목을 입력해주세요");
+		$("#title").focus();
+
+		return false;
+	}
+	
+	if ($("#contact").val() == null || $("#contact").val() == "") {
+		toastr.options.preventDuplicates = true;
+		toastr.warning("연락처를 입력해주세요");
+		$("#contact").focus();
+
+		return false;
+	}	
+	
+	if ($("#content").val() == null || $("#content").val() == "") {
+		toastr.options.preventDuplicates = true;
+		toastr.warning("내용을 입력해주세요");
+		$("#content").focus();
+
+		return false;
+	}
+	
+	socialCreate();
+	
+	}
+	
+	function categoriChange(){
+		
+		let categori = document.getElementById("categori").options[document.getElementById("categori").selectedIndex].value;
+		
+		if(categori == '동호회' || categori == '강습제공' || categori == '강습요청' || categori == '쉐어모집'|| categori == '기타'){
+		$('#enddate').html("마감 날짜 설정");
+		
+			
+		}else{
+		$('#enddate').html("구인 날짜 설정");	
+		}
+	}
+
+  </script>
+  <body>
+
+	<div id="colorlib-page">
+		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+		<aside th:replace="includes/sidebar :: sidebar('social')">
+		</aside> <!-- END COLORLIB-ASIDE -->
+		
+		
+		<div id="colorlib-main">
+				<section class="ftco-section contact-section">
+	      <div class="container">
+	        <div class="row d-flex mb-5 contact-info">
+	          <div class="col-md-12 mb-4">
+	            <h2 class="h4 font-weight-bold">Wanted Write</h2>
+	          </div>
+	          <div class="w-100"></div>
+	          <div class="col-md-3">
+	            <p><span>Address:</span> 198 West 21th Street, Suite 721 New York NY 10016</p>
+	          </div>
+	          <div class="col-md-3">
+	            <p><span>Phone:</span> <a href="tel://1234567920">+ 1235 2355 98</a></p>
+	          </div>
+	          <div class="col-md-3">
+	            <p><span>Email:</span> <a href="mailto:info@yoursite.com">info@yoursite.com</a></p>
+	          </div>
+	          <div class="col-md-3">
+	            <p><span>Website</span> <a href="#">yoursite.com</a></p>
+	          </div>
+	        </div>
+	        <div class="row block-9">
+	          <div class="col-md-8 order-md-last pr-md-5">
+	            <form action="#">
+	              <div class="form-group">
+	              
+	              <select class="custom-select" id="categori" onchange="categoriChange();">
+  <option selected value="">카테고리All</option>
+  <option value="출격부">출격부</option>
+  <option value="카풀제공">카풀제공</option>
+  <option value="카풀요청">카풀요청</option>
+  <option value="동호회">동호회/시즌방/단톡</option>
+  <option value="숙소제공">숙소제공</option>
+  <option value="숙소요청">숙소요청</option>
+  <option value="강습제공">강습제공</option>
+  <option value="강습요청">강습요청</option>
+  <option value="쉐어모집">쉐어모집</option>
+  <option value="기타">기타</option>
+	</select>
+	              </div>
+	              
+	              <div class="form-group">
+<select class="custom-select" id="resort">
+  <option selected value="">스키장All</option>
+  <option value="휘닉스">휘닉스</option>
+  <option value="용평">용평</option>
+  <option value="비발디">비발디</option>
+  <option value="지산">지산</option>
+  <option value="곤지암">곤지암</option>
+  <option value="웰리힐리">웰리힐리</option>
+  <option value="하이원">하이원</option>
+  <option value="베어스">베어스</option>
+  <option value="엘리시안">엘리시안</option>
+  <option value="오크밸리">오크밸리</option>
+  <option value="무주">무주</option>
+  <option value="알펜시아">알펜시아</option>
+  <option value="에덴밸리">에덴밸리</option>
+  <option value="오투">오투</option>
+	</select>	           
+	  </div>
+	              <div class="form-group">
+	              <h5 id="enddate">구인 날짜 설정</h5>
+	                <input type="date" class="form-control" placeholder="기준날짜" id="offerdate" min="2022-01-10" max="2022-01-15">
+	              </div>
+            <div class="form-group">
+	                <input type="text" class="form-control" placeholder="제목을 입력하세요" id="title">
+	              </div>
+ 
+              <div class="form-group">
+	                <input type="text" class="form-control" placeholder="연락처를 입력하세요  // 설정날짜기준 블라인드" id="contact">
+	              </div>
+	              
+	              
+	              	              	              
+							<div class="form-group">
+										
+						<textarea class="form-control input-lg"placeholder="내용을 입력하세요" id="content"></textarea>
+
+									</div>
+
+									<script>
+   									 ClassicEditor
+       								.create( document.querySelector( '#content' ) ,{
+       									ckfinder: {
+       										uploadUrl: '/social/uploadImg',
+       									}
+       								})
+       								
+       								.catch( error => {
+           								console.error( error );
+     										   } );
+   								
+										</script>	   
+										     
+
+     
+	              <div class="form-group">
+	                <button class="btn btn-primary" onclick="createBtn();">작성</button>
+	              </div>
+	            </form>
+	          
+	          </div>
+
+	        
+	        </div>
+	      </div>
+	    </section>
+			
+  <footer th:replace="includes/footer :: footer('메인')">
+     
+    </footer>
+		</div><!-- END COLORLIB-MAIN -->
+	</div><!-- END COLORLIB-PAGE -->
+
+	
+  <!-- loader -->
+	<div th:include="includes/loader"></div>
+
+    
+  </body>
+</html>

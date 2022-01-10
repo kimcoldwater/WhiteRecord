@@ -15,5 +15,6 @@ public interface SocialService {
 	
 	public int socialCount(Criteria cri) throws Exception;
 
+	public Social socialWrite(Social social)throws Exception;
 	
 }

@@ -17,7 +17,7 @@ where 1=1
 	<if test="searchType == 'id'.toString()">AND id LIKE '%' || #{keyword} || '%'</if>
 	<if test="searchType == 'tc'.toString()">AND (TITLE LIKE '%' || #{keyword} || '%') or (CONTENT LIKE '%' || #{keyword} || '%')</if>
 	<if test="resort != '' ">AND resort = #{resort}</if>
-	<if test="offerdate != null">AND OFFERDATE = TO_char(#{offerdate}, 'YYMMDD')</if>
+	<if test="offerdate != null and offerdateEnd != null" >AND OFFERDATE between TO_char(#{offerdate}, 'YYYYMMDD') AND TO_CHAR(#{offerdateEnd}, 'YYYYMMDD')</if>
 	<if test="completeCheck == false">AND complete='N'</if>
 )
 where SNUM between #{rowStart} AND #{rowEnd}
@@ -32,7 +32,7 @@ where 1=1
 	<if test="searchType == 'id'.toString()">AND id LIKE '%' || #{keyword} || '%'</if>
 	<if test="searchType == 'tc'.toString()">AND (TITLE LIKE '%' || #{keyword} || '%') or (CONTENT LIKE '%' || #{keyword} || '%')</if>
 	<if test="resort != '' ">AND resort = #{resort}</if>
-	<if test="offerdate != null">AND OFFERDATE = TO_char(#{offerdate}, 'YYMMDD')</if>
+	<if test="offerdate != null and offerdateEnd != null" >AND OFFERDATE between TO_char(#{offerdate}, 'YYYYMMDD') AND TO_CHAR(#{offerdateEnd}, 'YYYYMMDD')</if>
 	<if test="completeCheck == false">AND complete='N'</if>
 ) WHERE <![CDATA[ SNO > 0 ]]> 
 </select>
