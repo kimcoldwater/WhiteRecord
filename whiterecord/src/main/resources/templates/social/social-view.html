@@ -3,7 +3,14 @@
   <head th:replace="includes/header :: head('소셜')">
    
   </head>
+<style>
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+ 
 
+</style>
  <script>
 	let resort = "";
 	let categori = "";
@@ -13,11 +20,16 @@
 	let offerdate = null;
 	let offerdateEnd = null;
 	let completeCheck = false;
+	
+	
     $(document).ready(function(){
   	    //   data : {},
-  	    
-    
+  	    let result = document.getElementById("result").value;
     	socialContent();
+  	    if(result != "" ){
+	        toastr.options.preventDuplicates = true;
+	    	toastr.success(result);
+  	    }
     });
     
     function socialContent(){
@@ -44,10 +56,10 @@
 		
 	            
 	         		if(complete == 'N'){	                
-	            	a += '<div class="col-md-3 card mr-5 ml-1 mt-5 border-success" data-toggle="modal" data-target="#ModalNum'+modalNum+'"> ';
+	            	a += '<div class="col-md-3 card mr-5 ml-1 mt-5 border-success"  data-toggle="modal" data-target="#ModalNum'+modalNum+'"> ';
 	            	contact = value.contact;
 	         		}else{
-		            a += '<div class="col-md-3 card mr-5 ml-1 mt-5 border-primary">';	
+		            a += '<div class="col-md-3 card mr-5 ml-1 mt-5 border-primary" data-toggle="modal" data-target="#ModalNum'+modalNum+'">';	
 	         		}
     				a += '<div class="text text-2 pt-2 mt-3">';
     				a += '<span class="category  d-block "><a href="#">'+value.categori+' ||'+value.sno+'  </a><p style="font-size:15px;color:black;">'+value.resort+'<br>';
@@ -58,7 +70,7 @@
     				}
     				a += '<hr/>';
     				a += '<h3 class="mb-4" style="font-size:20px" ><a href="#" data-toggle="modal" data-target="#ModalNum'+modalNum+'">'+value.title+' </a></h3>';
-    				a += '<p class="mb-4">'+value.content+'</p>';
+    				a += '<div class=" text-truncate d-inline-block" style="height:200px; max-width:150px;" ><p class="mb-4">'+value.content+'</p></div>';
 	                a += '<div class="author mb-4 d-flex align-items-center">';
 	                a += '<a href="#"  class="img" style="background-image: url(/elen/images/person_2.jpg);"></a>';
 	                a += '<div class="ml-3 info" >';
@@ -75,7 +87,7 @@
 	                a += '</div></div></div>';
 	         
 	                
-	                modal += '<div class="modal fade" id="ModalNum'+modalNum+'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">' 
+	                modal += '<div class="modal fade" id="ModalNum'+modalNum+'"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">' 
 	     	           + '<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">'
 	     	           + '  <div class="modal-content">'
 	     	              
@@ -111,6 +123,8 @@
 	     	          			
 
 	     	            +  '</div>  <div class="modal-footer">'
+	     	            +  '    <button type="button" class="btn btn-danger float-left" onclick="socialDelete('+value.sno+')">삭제</button>'
+	     	            +  '    <button type="button" class="btn btn-success float-left" onclick="socialUpdate('+value.sno+')">수정</button>'
 	     	            +  '    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>'
 	     	            +   ' </div></div></div></div>';
 	     	              modalNum++ ;
@@ -125,19 +139,19 @@
 
 	            
 	            if(pageMaker.prev){
-	            pageBtn += '<li class="mr-1"><a href="#" onclick="socialMovePrev(-1);">&lt;</a></li>'
+	            pageBtn += '<li class="mr-1"><a href="javascript:;" onclick="socialMovePrev(-1);">&lt;</a></li>'
 	            }        
 	            for(var i = pageMaker.startPage; i < pageMaker.endPage+1 ; i++){
 
 	 
 	    	     if(page == i){
-	    	    	 pageBtn +=	 '<li class="active mr-1"><a  href="#" onclick="socialMovePage('+i+');">'+i+'</a></li>'; 
+	    	    	 pageBtn +=	 '<li class="active mr-1"><a  href="javascript:;" onclick="socialMovePage('+i+');">'+i+'</a></li>'; 
 	    	     }else{
-	    	    	 pageBtn +=	 '<li class="mr-1"><a href="#" onclick="socialMovePage('+i+');">'+i+'</a></li>';
+	    	    	 pageBtn +=	 '<li class="mr-1"><a href="javascript:;" onclick="socialMovePage('+i+');">'+i+'</a></li>';
 	    	     }       
 	            }
 	            if(pageMaker.next){	    
-	            pageBtn += '<li><a  href="#" onclick="socialMovePrev(+1);">&gt;</a></li>'
+	            pageBtn += '<li><a  href="javascript:;" onclick="socialMovePrev(+1);">&gt;</a></li>'
 	        	}
 	           
          
@@ -174,6 +188,41 @@
         $("#Date").datepicker();
     });
     
+   function socialDelete(sno){
+
+	   if(confirm("삭제하시겠습니까?") == false){
+		   return false;
+	   }
+		   
+	   
+
+	   $.ajax({
+	        url : '/social/social-view',
+	        type : 'delete',   
+	       	data : {"sno":sno},
+	        success : function(result){
+	        	
+	        toastr.options.preventDuplicates = true;
+	    	toastr.success(result);
+	    	location.reload();
+
+	        },
+	        error : function(result){
+		        toastr.options.preventDuplicates = true;
+		    	toastr.success("글삭제 실패");
+	        }
+	        
+	   })
+	   
+   }
+   
+   function socialUpdate(sno){
+
+	   if(confirm("수정하겠습니까?") == true){
+	   location.href = '/social/social-update?sno='+sno
+	   }
+   }
+    
    function socialInput(){
 		resort = document.getElementById("resort").options[document.getElementById("resort").selectedIndex].value;
 		categori = document.getElementById("categori").options[document.getElementById("categori").selectedIndex].value;
@@ -203,6 +252,7 @@
    function socialMovePage(pageNum){
 	   page = pageNum;
 	   socialContent();
+	   $('html').scrollTop(0);
    }
    
    function socialMovePrev(pageNum){
@@ -216,7 +266,7 @@
    }
   </script>   
   <body>
-
+<input type="hidden" id="result" th:value="${result}">
 	<div id="colorlib-page">
 		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
 			<aside th:replace="includes/sidebar :: sidebar('social')">
@@ -304,6 +354,7 @@
 	    		
 	    			</div>
 	    			</form>
+	    		
 	    			<div class="col-md-12" >
 	    				
 	    				<div class="row blog-entry ftco-animate"  id="content" >
@@ -312,14 +363,15 @@
 	    			</div>
 	    			
 	    		
-	    			 <div class="row mt-5">
+	    		<div class="row mt-5">
 			          <div class="col">
 			            <div class="block-27">
-							<ul  id="pagination">
-							
-							</ul>
+							<ul  id="pagination"> </ul>
 			            </div>
 			          </div>
+			        </div>
+			        <div class="mt-2">
+			        <button class="btn btn-primary" onclick="location.href='/social/social-create'">글작성 </button>
 			        </div>
 	    	
 			    		</div>
