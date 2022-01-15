@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="includes/header :: head('웹캠')">
+   
+  </head>
+  <style>
+ .ck-editor__editable
+ {
+    min-height: 300px !important;
+ }
+</style>
+<script
+	src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js"></script>
+<script type="text/javascript">
+
+
+
+$(document).ready(function(){
+
+	
+});
+
+function findId(){
+	let email = document.getElementById("findIdEmail").value;
+	console.log("아이다찾기 들옴??")
+	 $.ajax({
+	        url : '/member/findId',
+	        type : 'get',   
+	       	data : {"email": email },
+	        success : function(result){
+	        	
+	        	let idList = result.idList;
+				if(idList.length == 0){
+			        toastr.options.preventDuplicates = true;
+			    	toastr.warning("이메일에 해당하는 계정이 없습니다");
+			    	return false;
+				}
+	        	$.each(idList, function(key, value){
+	        		a='';
+	        		a += '<h3>아이디 : '+value.id+'</h3>'; 
+	        	})
+	        	
+	        	$("#findIdBox").html(a);
+
+	        },
+		error : function(
+				request,
+				status, error) {
+			alert("code:"
+					+ request.status
+					+ "\n"
+					+ "message:"
+					+ request.responseText
+					+ "\n"
+					+ "error:"
+					+ error);
+			
+	        toastr.options.preventDuplicates = true;
+	    	toastr.success("아이디찾기에러");
+
+		}
+	        
+	   })
+}
+
+function findPw(){
+	let email = document.getElementById("findPwEmail").value;
+	let id = document.getElementById("findPwId").value;
+	
+	 $.ajax({
+	        url : '/member/findPw',
+	        type : 'post',   
+	       	data : {"email": email , "id":id},
+	        success : function(result){
+	        	
+	        	
+				if(result == ""){
+			        toastr.options.preventDuplicates = true;
+			    	toastr.warning("해당하는 계정이 없습니다");
+			    	return false;
+				}
+	        		a='';
+	        		a += '<h3> 임시비밀번호 : '+result+'</h3>'; 
+
+	        	$("#findPwBox").html(a);
+
+	        },
+		error : function(
+				request,
+				status, error) {
+			alert("code:"
+					+ request.status
+					+ "\n"
+					+ "message:"
+					+ request.responseText
+					+ "\n"
+					+ "error:"
+					+ error);
+			
+	        toastr.options.preventDuplicates = true;
+	    	toastr.success("비밀번호찾기에러");
+
+		}
+	        
+	   })
+}
+
+
+function login(){
+	
+	let id = document.getElementById("id").value;
+	let pw = document.getElementById("pw").value;
+	
+	   $.ajax({
+	        url : '/member/login',
+	        type : 'post',   
+	       	data : {"id": id , "pw":pw },
+	        success : function(result){
+	        	
+	        toastr.options.preventDuplicates = true;
+	    	toastr.success(result);
+	    	location.href="/social/social-view";
+	        },
+		error : function(
+				request,
+				status, error) {
+			alert("code:"
+					+ request.status
+					+ "\n"
+					+ "message:"
+					+ request.responseText
+					+ "\n"
+					+ "error:"
+					+ error);
+			
+	        toastr.options.preventDuplicates = true;
+	    	toastr.success("로그인에러");
+
+		}
+	        
+	   })
+}
+
+
+function loginBtn(){
+	
+	if ($("#id").val() == null || $("#id").val() == "") {
+		toastr.options.preventDuplicates = true;
+		toastr.warning("아이디를 입력해주세요");
+		$("#id").focus();
+
+		return false;
+	}
+
+	if ($("#pw").val() == null || $("#pw").val() == "") {
+		toastr.options.preventDuplicates = true;
+		toastr.warning("비밀번호를 입력해주세요");
+		$("#pw").focus();
+
+		return false;
+	}
+
+	
+	login();
+
+	}
+	
+	
+
+  </script>
+  <body>
+
+	<div id="colorlib-page">
+		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+		<aside th:replace="includes/sidebar :: sidebar('social')">
+		</aside> <!-- END COLORLIB-ASIDE -->
+		
+		
+		<div id="colorlib-main">
+			<div class="hero-wrap js-fullheight" style="background-image: url(/elen/images/bg_1.jpg);" data-stellar-background-ratio="0.5">
+				<div class="overlay"></div>
+				<div class="js-fullheight d-flex justify-content-center align-items-center">
+				
+					<div class="col-md-8 text text-center  d-flex align-items-center justify-content-center  ">
+							
+						<div class="desc">
+													<h1 class="mb-4 ">Welcome To Login</h1>
+						
+		
+             				  <div class="form-group">
+							<input type="text" class="form-control text-center" placeholder="아이디를 입력하세요" id="id">
+	            			  </div>	
+             				  <div class="form-group">
+							<input type="password" class="form-control text-center" placeholder="비밀번호를 입력하세요" id="pw">
+	            			  </div>							            			
+             				  <div class="form-group">
+							<button type="button" class="btn btn-outline-danger btn-lg" onclick="loginBtn();">로그인</button>								
+	            			  </div>	  
+	            			  							<ul class="ftco-social mt-3">
+                <li class="ftco-animate"><a href="#" onclick="open('/member/naver-login','hi','width=430,height=500,location=no,status=no,scrollbars=yes');"><span class="icon-google"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+              </ul>  
+                <div class="form-group">
+  					<button type="button" class="btn btn-outline-danger" onclick="location.href='/member/join'">회원가입</button>			
+              	
+              	</div>
+                        				  <div class="form-group">
+							<button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#findId">아이디찾기</button>			
+							<button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#findPw">비밀번호찾기</button>			      			 
+	            			  </div>		            			  		            			            			  				            			              			  						
+						</div>
+						
+					</div>
+				</div>
+			</div>
+
+
+			
+  <footer th:replace="includes/footer :: footer('메인')">
+     
+    </footer>
+		</div><!-- END COLORLIB-MAIN -->
+	</div><!-- END COLORLIB-PAGE -->
+
+<!-- Modal -->
+<div class="modal fade" id="findId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">아이디찾기</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         	<div class="form-group" id="findIdBox">
+			<input type="email" class="form-control text-center" placeholder="이메일을 입력하세요" id="findIdEmail">
+	         </div>	
+         	<div class="form-group">
+        <button type="button" class="btn btn-primary float-right" onclick="findId();">찾기</button>
+	            </div>			
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="findPw" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">비밀번호찾기</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         	<div class="form-group" id="findPwBox">
+         				<input type="text" class="form-control text-center" placeholder="아이디를 입력하세요" id="findPwId">
+         				<br/>			
+			<input type="email" class="form-control text-center" placeholder="이메일을 입력하세요" id="findPwEmail">
+	         </div>	
+         	<div class="form-group">
+        <button type="button" class="btn btn-primary float-right" onclick="findPw();">찾기</button>
+	            </div>			
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- loader -->
+	<div th:include="includes/loader"></div>
+
+    
+  </body>
+</html>

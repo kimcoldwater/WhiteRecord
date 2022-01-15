@@ -15,15 +15,55 @@
 			</nav>
 
 			<div class="colorlib-footer">
-				<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-			  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+			<div th:if="${session.member != null}  ">Welcome<span th:text="${session.member.name}"></span>
+				<nav id="colorlib-main-menu" role="navigation">
 				<ul>
-					<li><a href="#"><i class="icon-facebook"></i></a></li>
-					<li><a href="#"><i class="icon-twitter"></i></a></li>
-					<li><a href="#"><i class="icon-instagram"></i></a></li>
-					<li><a href="#"><i class="icon-linkedin"></i></a></li>
+					<li><a href="#" >MyPage</a></li><br>
+					<li><a href="javascript::" onclick="logout();" >Logout</a></li>
 				</ul>
+			</nav>
 			</div>
+			
+			<div th:if="${session.member == null}  ">
+			<nav id="colorlib-main-menu" role="navigation">
+				<ul>
+					<li><a href="/member/login" >Login</a></li>
+				</ul>
+			</nav>
+
+			 </div>
+				<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+
+			</div>
+			<script type="text/javascript">
+			function logout(){
+				 $.ajax({
+				        url : '/member/logout',
+				        type : 'post',   
+				        success : function(result){
+				        location.reload();
+				        },
+					error : function(
+							request,
+							status, error) {
+						alert("code:"
+								+ request.status
+								+ "\n"
+								+ "message:"
+								+ request.responseText
+								+ "\n"
+								+ "error:"
+								+ error);
+						
+				        toastr.options.preventDuplicates = true;
+				    	toastr.success("로그아웃에러");
+
+					}
+				        
+				   })
+			}
+
+			</script>
 		</aside> <!-- END COLORLIB-ASIDE -->
 		
 		</html>

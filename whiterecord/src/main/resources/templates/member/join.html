@@ -33,7 +33,7 @@ function join(){
 	        	
 	        toastr.options.preventDuplicates = true;
 	    	toastr.success(result);
-
+			location.href="/member/login";
 	        },
 		error : function(
 				request,
@@ -169,11 +169,7 @@ function joinBtn(){
              				  <div class="form-group">
 							<button type="button" class="btn btn-info btn-lg" onclick="joinBtn();">가입</button>								
 	            			  </div>	  
-	            			  							<ul class="ftco-social mt-3">
-                <li class="ftco-animate"><a href="#"><span class="icon-google"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-              </ul>          			  				            			              			  						
+		  				            			              			  						
 						</div>
 						
 					</div>

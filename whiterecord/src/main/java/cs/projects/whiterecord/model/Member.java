@@ -35,6 +35,7 @@ public class Member {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yy-MM-dd hh:mm", timezone = "Asia/Seoul")
 	private Date joindate;
 	private String img;
+	private String email;
 
 
 	

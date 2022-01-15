@@ -1,5 +1,12 @@
 package cs.projects.whiterecord.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,4 +52,54 @@ public class MemberController {
 
 			return result;
 		}
+		
+		@GetMapping("/login")
+		public ModelAndView loginView() throws Exception{
+			ModelAndView modelAndView = new ModelAndView();
+			modelAndView.setViewName("/member/login");
+			return modelAndView;
+		}
+		
+		@PostMapping("/login")
+		public String login(Member login,HttpServletRequest request) throws Exception{
+			Member member = memberService.login(login);
+			HttpSession session = request.getSession();
+			if(member != null) {	
+				if(session.getAttribute("member") != null) {
+				session.removeAttribute("member"); 
+			}
+				session.setAttribute("member", member);
+				result="로그인 완료";
+				return result;
+				}else {
+					result="아이디와 비밀번호를 확인해주세요";
+					return result;
+				}
+		}
+		
+		@PostMapping("/logout")
+		public void logout(HttpSession session)throws Exception{
+			session.invalidate();
+		}
+		
+		@GetMapping("/findId")
+		public Map<String,Object> findId(Member member)throws Exception{
+			Map<String,Object> result = new HashMap<String,Object>();
+			List<Member> idList = memberService.findId(member);
+			if(idList == null) {
+				result.put("idList", null);
+				logger.info("null 들옴??");
+				return result;
+			}
+			result.put("idList", idList);
+			return result;
+		}
+	
+		@PostMapping("/findPw")
+		public String findPw(Member member)throws Exception{
+			logger.info("들어옴?"+member.getEmail()+member.getId());
+			String newPw = memberService.findPw(member);
+			return newPw;
+		}
+		
 }
