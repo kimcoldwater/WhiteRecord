@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head th:replace="includes/header :: head('웹캠')">
+  <head th:replace="includes/header :: head('로그인')">
    
   </head>
   <style>
@@ -16,8 +16,12 @@
 
 
 $(document).ready(function(){
+	let result = document.getElementById("result").value;
+	if(result != ''){
+        toastr.options.preventDuplicates = true;
+    	toastr.warning(result);
+	}
 
-	
 });
 
 function findId(){
@@ -169,7 +173,7 @@ function loginBtn(){
 
   </script>
   <body>
-
+	<input type="hidden" th:value="${result}" id="result">
 	<div id="colorlib-page">
 		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
 		<aside th:replace="includes/sidebar :: sidebar('social')">

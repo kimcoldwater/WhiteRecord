@@ -3,13 +3,17 @@ package cs.projects.whiterecord.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cs.projects.whiterecord.Mapper.SocialMapper;
+import cs.projects.whiterecord.model.Member;
 import cs.projects.whiterecord.model.Social;
 import cs.projects.whiterecord.repository.SocialRepository;
 import cs.projects.whiterecord.util.Criteria;
+import cs.projects.whiterecord.vo.SocialVO;
 
 @Service
 public class SocialServiceImpl implements SocialService{
@@ -20,7 +24,7 @@ public class SocialServiceImpl implements SocialService{
 	@Autowired 
 	private SocialMapper socialMapper;
 	
-	public List<Social> SocialConetent(Criteria cri) throws Exception{
+	public List<SocialVO> SocialConetent(Criteria cri) throws Exception{
 		return socialMapper.socialContent(cri);
 	}
 	
@@ -32,17 +36,20 @@ public class SocialServiceImpl implements SocialService{
 		return socialMapper.socialCount(cri);
 	}
 	
-	public Social socialWrite(Social social)throws Exception{
+	public Social socialWrite(Social social,HttpSession session)throws Exception{
 		if(social.getCategori().equals("동호회") || social.getCategori().equals("강습제공") 
 				||social.getCategori().equals("강습요청")||social.getCategori().equals("쉐어모집")||social.getCategori().equals("기타")){
 			social.setEnddate(social.getOfferdate());
 			social.setOfferdate(null);
 		}
 		
-		social.setMno(1); // 나중에 세션값 넣기
-		social.setId("test");
+		Member member = (Member) session.getAttribute("member");
+		Long mno = (Long) member.getMno();
+		social.setMno(mno); // 나중에 세션값 넣기
 		return socialRepository.save(social);	
 		}
+	
+	
 
 	public Optional<Social> socialUpdateContent(Long sno)throws Exception{
 		
@@ -58,7 +65,6 @@ public class SocialServiceImpl implements SocialService{
 		}
 		Long checkSno = social.getSno();
 		Social socialContent = socialRepository.findById(checkSno).get();
-		social.setId(socialContent.getId());
 		social.setComplete(socialContent.getComplete());
 		social.setRegdate(socialContent.getRegdate());
 		social.setMno(socialContent.getMno());

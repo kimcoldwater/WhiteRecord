@@ -6,10 +6,10 @@ select * from social
 
 </select>
 
-<select id="socialContent" resultType="cs.projects.whiterecord.model.Social"
+<select id="socialContent" resultMap="SocialVO"
 parameterType="cs.projects.whiterecord.util.Criteria">
-select * from ( 
-select sno , resort, title, content,contact, mno, id ,area, categori, viewcnt,complete, regdate,offerdate,enddate,bookmarkcnt, ROW_NUMBER() OVER(order by complete, sno desc) AS SNUM
+select  a.sno , a.resort, a.title, a.content,a.contact, a.mno  ,a.area, a.categori, a.viewcnt,a.complete, a.regdate,a.offerdate,a.enddate,a.bookmarkcnt,b.mno,b.id,b.name,b.img from ( 
+select sno , resort, title, content,contact, mno ,area, categori, viewcnt,complete, regdate,offerdate,enddate,bookmarkcnt, ROW_NUMBER() OVER(order by complete, sno desc) AS SNUM
 from social
 where 1=1
 	<if test="categori != '' ">AND CATEGORI = #{categori}</if>
@@ -19,9 +19,9 @@ where 1=1
 	<if test="resort != '' ">AND resort = #{resort}</if>
 	<if test="offerdate != null and offerdateEnd != null" >AND OFFERDATE between TO_char(#{offerdate}, 'YYYYMMDD') AND TO_CHAR(#{offerdateEnd}, 'YYYYMMDD')</if>
 	<if test="completeCheck == false">AND complete='N'</if>
-)
+) a left outer join member b on a.mno = b.mno
 where SNUM between #{rowStart} AND #{rowEnd}
-order by complete , sno desc 
+order by a.complete , a.sno desc 
 </select>
 
 <select id="socialCount" resultType="int" parameterType="cs.projects.whiterecord.util.Criteria">
@@ -36,5 +36,36 @@ where 1=1
 	<if test="completeCheck == false">AND complete='N'</if>
 ) WHERE <![CDATA[ SNO > 0 ]]> 
 </select>
+
+
+<resultMap type="cs.projects.whiterecord.vo.SocialVO" id="SocialVO">
+	<result column="sno" property="sno" />
+	<result column="resort" property="resort" />
+	<result column="title" property="title" />
+	<result column="content" property="content" />
+	<result column="mno" property="mno" />
+	<result column="area" property="area" />
+	<result column="contact" property="contact" />
+	<result column="categori" property="categori" />
+	<result column="viewcnt" property="viewcnt" />
+	<result column="complete" property="complete" />
+	<result column="regdate" property="regdate" />
+	<result column="offerdate" property="offerdate" />
+	<result column="enddate" property="enddate" />
+	<result column="bookmarkcnt" property="bookmarkcnt" />
+	<collection property="memberVO" resultMap="MemberVO"></collection>
+
+
+	</resultMap>
+	
+	<resultMap type="cs.projects.whiterecord.vo.MemberVO" id="MemberVO">
+	<result column="mno" property="mno" />
+	<result column="id" property="id" />
+	<result column="pw" property="pw" />
+	<result column="name" property="name" />
+	<result column="joindate" property="joindate" />
+	<result column="img" property="img" />
+	<result column="email" property="email" />
+	</resultMap>
 
 </mapper>

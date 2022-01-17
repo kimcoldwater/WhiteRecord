@@ -32,8 +32,7 @@ public class Social {
 	private String resort;
 	private String title;
 	private String content;
-	private int mno;
-	private String id;
+	private Long mno;
 	private String area;
 	private String contact;
 	private String categori;
@@ -52,5 +51,4 @@ public class Social {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yy-MM-dd", timezone = "Asia/Seoul")
 	private Date enddate;
 	private int bookmarkcnt;
-	
-}
+	}

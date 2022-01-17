@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import cs.projects.whiterecord.model.Social;
 import cs.projects.whiterecord.util.Criteria;
+import cs.projects.whiterecord.vo.SocialVO;
 
 @Mapper
 public interface SocialMapper {
@@ -13,7 +14,7 @@ public interface SocialMapper {
 	
 		public List<Social> findAll();
 		
-		public List<Social> socialContent(Criteria cri);
+		public List<SocialVO> socialContent(Criteria cri);
 		
 		public int socialCount(Criteria cri);
 }

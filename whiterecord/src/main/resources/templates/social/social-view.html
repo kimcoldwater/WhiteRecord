@@ -11,7 +11,7 @@ img {
  
 
 </style>
- <script>
+ <script type="text/javascript" th:inline="javascript">
 	let resort = "";
 	let categori = "";
 	let searchType = "";
@@ -33,7 +33,8 @@ img {
     });
     
     function socialContent(){
-    	
+     let session = [[ ${session.member} ]]; 
+
  	   $.ajax({
 	        url : '/social/social-content',
 	        type : 'get',
@@ -62,7 +63,7 @@ img {
 		            a += '<div class="col-md-3 card mr-5 ml-1 mt-5 border-primary" data-toggle="modal" data-target="#ModalNum'+modalNum+'">';	
 	         		}
     				a += '<div class="text text-2 pt-2 mt-3">';
-    				a += '<span class="category  d-block "><a href="#">'+value.categori+' ||'+value.sno+'  </a><p style="font-size:15px;color:black;">'+value.resort+'<br>';
+    				a += '<span class="category  d-block "><a href="javascript::">'+value.categori+' ||'+value.sno+'  </a><p style="font-size:15px;color:black;">'+value.resort+'<br>';
     				if(value.offerdate == null){
     				a += 'close '+value.enddate+'</p></span>';
     				}else{
@@ -72,10 +73,10 @@ img {
     				a += '<h3 class="mb-4" style="font-size:20px" ><a href="#" data-toggle="modal" data-target="#ModalNum'+modalNum+'">'+value.title+' </a></h3>';
     				a += '<div class=" text-truncate d-inline-block" style="height:200px; max-width:150px;" ><p class="mb-4">'+value.content+'</p></div>';
 	                a += '<div class="author mb-4 d-flex align-items-center">';
-	                a += '<a href="#"  class="img" style="background-image: url(/elen/images/person_2.jpg);"></a>';
+	                a += '<a href="javascript::"  class="img" style="background-image: url(/elen/images/person_2.jpg);"></a>';
 	                a += '<div class="ml-3 info" >';
 	                a += '<span>Written by</span>';
-	                a += '<h3><a href="#">'+value.id+'</a> <p style="font-size:13px;">'+value.regdate+'</p></h3>';
+	                a += '<h3><a href="javascript::">'+value.memberVO.name+'</a> <p style="font-size:13px;">'+value.regdate+'</p></h3>';
 	                a += '</div></div> <div class="meta-wrap align-items-center">';
 	                a += '<div class="half order-md-last">';
 	                a += '<p class="meta">'
@@ -109,7 +110,7 @@ img {
 	     	          	+	'		            		<a href="#" class="img" style="background-image: url(/elen/images/person_1.jpg);"></a>'
 	     	          	+	'		            		<div class="ml-3 info">'
 	     	          	+	'		            			<span>Written by</span>'
-	     	          	+	'		            			<h3 ><a href="#">'+value.id+'</a>, <span style="font-size:12px;">'+value.regdate+'</span></h3>'
+	     	          	+	'		            			<h3 ><a href="#">'+value.memberVO.name+'</a>, <span style="font-size:12px;">'+value.regdate+'</span></h3>'
 	     	          	+	'		            		</div>'
 	     	          	+	'		            	</div>'
 	     	          	+	'		              <div class="meta-wrap d-md-flex align-items-center">'
@@ -122,10 +123,12 @@ img {
 	     	          	+		'	              	</div></div></div></div></div>'
 	     	          			
 
-	     	            +  '</div>  <div class="modal-footer">'
-	     	            +  '    <button type="button" class="btn btn-danger float-left" onclick="socialDelete('+value.sno+')">삭제</button>'
-	     	            +  '    <button type="button" class="btn btn-success float-left" onclick="socialUpdate('+value.sno+')">수정</button>'
-	     	            +  '    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>'
+	     	            +  '</div>  <div class="modal-footer">';
+	     	            if(session != null && session.mno == value.mno){
+	     	            modal +=  '    <button type="button" class="btn btn-outline-danger float-left" onclick="socialDelete('+value.sno+')">삭제</button>';
+	     	            modal +=  '    <button type="button" class="btn btn-outline-success float-left" onclick="socialUpdate('+value.sno+')">수정</button>';
+	     	            }
+	     	            modal +=  '    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>'
 	     	            +   ' </div></div></div></div>';
 	     	              modalNum++ ;
 	               
@@ -371,7 +374,7 @@ img {
 			          </div>
 			        </div>
 			        <div class="mt-2">
-			        <button class="btn btn-outline-danger" onclick="location.href='/social/social-create'">글작성 </button>
+			        <button class="btn btn-outline-danger btn-lg" onclick="location.href='/social/social-create'">글작성 </button>
 			        </div>
 	    	
 			    		</div>
