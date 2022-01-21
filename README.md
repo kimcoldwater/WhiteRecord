@@ -61,5 +61,5 @@
 
 
 기록
-https://www.notion.so/WhiteRecord-f3671f3a0a63435d9cf475189e81816e
+https://feather-powder-5fe.notion.site/WhiteRecord-f3671f3a0a63435d9cf475189e81816e
  
