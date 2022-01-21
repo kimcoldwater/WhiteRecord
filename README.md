@@ -59,4 +59,7 @@
 
 스키장 구인기능을 만들고 싶었다.
 
+
+기록
+https://www.notion.so/WhiteRecord-f3671f3a0a63435d9cf475189e81816e
  
