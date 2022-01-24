@@ -120,9 +120,11 @@ function login(){
 	        type : 'post',   
 	       	data : {"id": id , "pw":pw },
 	        success : function(result){
-	        	
+	        if(result == '아이디와 비밀번호를 확인해주세요'){
 	        toastr.options.preventDuplicates = true;
-	    	toastr.success(result);
+	    	toastr.warning(result);
+	    	return false;
+	        }
 	    	location.href="/social/social-view";
 	        },
 		error : function(
@@ -176,7 +178,7 @@ function loginBtn(){
 	<input type="hidden" th:value="${result}" id="result">
 	<div id="colorlib-page">
 		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
-		<aside th:replace="includes/sidebar :: sidebar('social')">
+		<aside th:replace="includes/sidebar :: sidebar('login')">
 		</aside> <!-- END COLORLIB-ASIDE -->
 		
 		

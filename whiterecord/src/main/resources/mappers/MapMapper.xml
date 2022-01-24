@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cs.projects.whiterecord.Mapper.MapMapper">
+
+<select id="locationView" parameterType="cs.projects.whiterecord.util.MapCriteria" resultMap="LocationVO">
+select a.lno , a.mno , a.x, a.y , a.lname , a.tel , a.address, a.raddress , a.resort, a.regdate, a.categori , a.foodtype , a.img , a.reviewcnt,a.likecnt,
+b.mno,b.id,b.name,b.img
+from 
+(select lno , mno , x, y , lname , tel , address, raddress , resort, regdate, categori , foodtype , img , reviewcnt,likecnt,
+ROW_NUMBER() OVER(order by lno desc) AS LNUM
+from location
+where 1=1
+<if test="resort != '' ">AND resort = #{resort}</if>
+<if test="categori != '' ">AND CATEGORI = #{categori}</if>
+)a left outer join member b on a.mno = b.mno
+where LNUM between #{rowStart} AND #{rowEnd}
+order by a.lno desc
+</select>
+
+<select id="locationCount" resultType="int" parameterType="cs.projects.whiterecord.util.MapCriteria">
+select count(*) from (select * from location
+where 1=1
+<if test="resort != '' ">AND resort = #{resort}</if>
+<if test="categori != '' ">AND CATEGORI = #{categori}</if>
+)where <![CDATA[ LNO > 0 ]]> 
+</select>
+
+<resultMap type="cs.projects.whiterecord.vo.LocationVO" id="LocationVO">
+	<result column="lno" property="lno" />
+	<result column="mno" property="mno" />
+	<result column="resort" property="resort" />
+	<result column="lname" property="lname" />
+	<result column="tel" property="tel" />
+	<result column="address" property="address" />
+	<result column="raddress" property="raddress" />
+	<result column="categori" property="categori" />
+	<result column="x" property="x" />
+	<result column="y" property="y" />
+	<result column="categori" property="categori" />
+	<result column="regdate" property="regdate" />
+	<result column="reviewcnt" property="reviewcnt" />	
+	<result column="likecnt" property="likecnt" />	
+	<collection property="memberVO" resultMap="MemberVO"></collection>
+
+	</resultMap>
+	
+	<resultMap type="cs.projects.whiterecord.vo.MemberVO" id="MemberVO">
+	<result column="mno" property="mno" />
+	<result column="id" property="id" />
+	<result column="name" property="name" />
+	<result column="img" property="img" />
+	</resultMap>
+</mapper>

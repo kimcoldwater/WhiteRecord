@@ -8,7 +8,7 @@
 					<li><a href="index.html">Home</a></li>
 					<li th:classappend="${title} == '웹캠' ? 'colorlib-active'"><a th:href="@{/webcam/webcam-resort}">Webcam</a></li>
 					<li th:classappend="${title} == 'social' ? 'colorlib-active'"><a th:href="@{/social/social-view}">Wanted</a></li>
-					<li><a href="fashion.html">Fashion</a></li>
+					<li  th:classappend="${title} == 'map' ? 'colorlib-active'"><a th:href="@{/map/taste}">Map</a></li>
 					<li><a href="about.html">About</a></li>
 					<li><a href="contact.html">Contact</a></li>
 				</ul>
@@ -27,7 +27,7 @@
 			<div th:if="${session.member == null}  ">
 			<nav id="colorlib-main-menu" role="navigation">
 				<ul>
-					<li><a  href="/member/login" >Login</a></li>
+					<li  th:classappend="${title} == 'login' ? 'colorlib-active'"><a  href="/member/login" >Login</a></li>
 				</ul>
 			</nav>
 

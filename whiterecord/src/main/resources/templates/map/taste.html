@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head th:replace="includes/header :: head('로그인')">
+  <head th:replace="includes/header :: head('map')">
    
   </head>
   <style>
@@ -10,40 +10,162 @@
  }
 </style>
 <script src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js"></script>
-<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=y92saquclc&callback=initMap"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a93d53786aafd1fb5581b067083c2348"></script>
 	
-<script type="text/javascript">
+<script type="text/javascript" >
 
 
 
 $(document).ready(function(){
 
+	let result = document.getElementById("result").value;
       /*  toastr.options.preventDuplicates = true;
     	toastr.warning(result); */
-	
+	    if(result != "" ){
+	        toastr.options.preventDuplicates = true;
+	    	toastr.success(result);
+  	    }
 
+    	locationView();
 });
 
-var map = null;
+let categori = '맛집';
+let resort = '지산';
+let page = 1;
 
-function initMap() {
-    map = new naver.maps.Map('map', {
-        center: new naver.maps.LatLng(37.3595704, 127.105399),
-        zoom: 12
-    });
-    
-    var marker = new naver.maps.Marker({
-        position: new naver.maps.LatLng(37.3595704, 127.105399),
-        map: map
-    });
-    
+function locationView(){
+
+	   $.ajax({
+	        url : '/map/location-view',
+	        type : 'get',
+	        data : {"page":page, "resort": resort , "categori":categori},
+	        success : function(result){
+	        	console.log("아직스 들어옴");
+	            let a ='';
+	            //모달
+	            let modal = "";
+	            let modalNum = 1;
+	            let pageBtn = '';
+	          	let locaList = result.locaList;
+	          	let pageMaker = result.pageMaker;
+	          	
+	          	markers(locaList);
+	          	
+	            if(locaList<1){
+	            	a +='<h2>데이터가 없습니다</h2> ';}
+	            
+	            $.each(locaList, function(key, value){ 
+							a +='        <div class="block-21 mb-4 d-flex">'
+		                + '<a class="blog-img mr-4" style="background-image: url(/elen/images/image_1.jpg);"></a>'
+		                + '<div class="text">'
+		                + '<h3 class="heading"><a href="#">'+value.lname+'</a></h3>'
+		                + '<div class="meta">'
+		                + '<div><a href="#"><span class="icon icon-phone"></span>'+value.tel+'</a></div>'
+		                + '<div><a href="#"><span class="icon-person"></span>'+value.memberVO.name+'</a></div>'
+		                + '<div><a href="#"><span class="icon-chat"></span> 19</a></div>'
+		                + '<div><a href="#"><span class="icon-chat"></span> 카페, 디저트</a></div>'
+		                + '<div><a href="javascript::" data-toggle="modal" data-target="#ModalNum'+modalNum+'"><span class="icon-chat"></span> 상세보기</a></div>'
+		               	+ '</div></div></div>';
+						
+						
+				             modal += '<div class="modal fade" id="ModalNum'+modalNum+'"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">' 
+			     	           + '<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">'
+			     	           + '  <div class="modal-content">'
+			     	              
+			     	           +  '   <div class="modal-body"> '
+			     	           +   '   <button type="button" class="close" data-dismiss="modal" aria-label="Close">'
+			     	           +   '      <span aria-hidden="true">&times;</span>'
+			     	           +    '   </button>'
+			     	           +     ' 	<div class="col-md-12">'
+			     	          +	    '						<div class="blog-entry ">'
+			     	          +	    '							<div class="text pt-2 mt-3">'
+			     	          	+	'			          	<span class="category mb-1 d-block"><a href="#" style="font-size:15px;">'+value.categori+'</a> <p style="font-size:18px;">'+value.resort+'</p></span>'
+			     	          +		'		              <h3 class="mb-4"><a href="#">'+value.lname+'</a></h3> <hr/>' 
+			     	          	+	'		              <p class="mb-4" style="color:black;"></p>'
+			     	          	+	'		       <a href="#" class="img img-2" style="background-image: url(/elen/images/image_4.jpg);"></a> <br/>'
+			     	          
+			     	          	+	'		           <p class="mb-4" style="color:black; font-size:18px;"><span class="icon icon-phone"></span> '+value.tel+' </p>'	     	         
+			     	          	+	'		           <p class="mb-4 " style="color:black; font-size:18px;">주소  <br>'+value.address+' </p>'	     	         
+			     	          	+	'		           <p class="mb-4" style="color:black; font-size:18px;">도로명주소  <br>'+value.raddress+' </p>'	     	         
+			     	          	+	'		           <p class="mb-4" style="color:black; font-size:18px;"><a class ="btn btn-primary" href="https://map.naver.com/v5/search/'+value.lname+'">네이버 검색으로 이동 </a> </p>'	     	         
+		  		
+			     	          	
+			     	          	+	'		              <div class="author mb-4 d-flex align-items-center" style="text-align:right;">'
+			     	          	+	'		            		<a href="#" class="img" style="background-image: url();"></a>'
+			     	          	+	'		            		<div class="ml-3 info">'
+			     	          	+	'		            			<span>Written by</span>'
+			     	          	+	'		            			<h3 ><a href="#">'+value.memberVO.name+'</a>, <span style="font-size:12px;">'+value.regdate+'</span></h3>'
+			     	          	+	'		            		</div>'
+			     	          	+	'		            	</div>'
+			     	          	+	'		              <div class="meta-wrap d-md-flex align-items-center">'
+			     	          	+	'		              	<div class="half ">'
+			     	          	+	'			              	<p class="meta">'
+			     	          	+	'			              		<span><i class="icon-heart"></i>'+value.likecnt+'</span>'
+			     	          		+'			              		<span><i class="icon-chat"></i>'+value.reviewcnt+'</span>'
+			     	          				              		
+			     	          	+		'		              	</p>'
+			     	          	+		'	              	</div></div></div></div></div>'
+			     	          			
+
+			     	            +  '</div>  <div class="modal-footer">';
+
+			     	            modal +=  '    <button type="button" class="btn btn-outline-danger float-left" onclick="socialDelete()">삭제</button>';
+			     	            modal +=  '    <button type="button" class="btn btn-outline-success float-left" onclick="socialUpdate()">수정</button>';
+			     	            
+			     	            modal +=  '    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>'
+			     	            +   ' </div></div></div></div>';
+			     	              modalNum++ ;
+						
+						
+						
+						
+	            
+	               
+	            });
+	        	$("#modal").html(modal);
+	            $("#locationView").html(a);
+	            //페이징 for문, 단! startPage는 0이 아닌 1에서 시작하므로 endPage에 +1을 해준다.
+	            
+	           
+	            
+   
+	            
+	            
+	            
+	        }
+	        /* 로딩바
+	        , beforeSend: function() {
+	        	
+	             var spinner = "";
+	             spinner += '<div class="d-flex justify-content-center"><div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div></div>';
+	             $("#spinner").html(spinner);
+	       }
+	       , complete: function() {
+	                     $("#spinner").hide();
+	       }  */
+
+
+
+	    });
+   }
+
+
+
+
+function locationInput(){
+	resort = document.getElementById("resort").options[document.getElementById("resort").selectedIndex].value;
+	categori = document.getElementById("categori").options[document.getElementById("categori").selectedIndex].value;
+
+	page = 1;
+	locationView();
 }
+
   </script>
   <body>
 	<input type="hidden" th:value="${result}" id="result">
 	<div id="colorlib-page">
 		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
-		<aside th:replace="includes/sidebar :: sidebar('social')">
+		<aside th:replace="includes/sidebar :: sidebar('map')">
 		</aside> <!-- END COLORLIB-ASIDE -->
 		
 		
@@ -52,52 +174,140 @@ function initMap() {
 	      <div class="container">
 	        <div class="row d-flex mb-5 contact-info">
 	          <div class="col-md-12 mb-4">
-	            <h2 class="h4 font-weight-bold">Contact Information</h2>
+	            <h2 class="h4 font-weight-bold">Map</h2>
 	          </div>
 	          <div class="w-100"></div>
-	          <div class="col-md-3">
-	            <p><span>Address:</span> 198 West 21th Street, Suite 721 New York NY 10016</p>
+	          	          <div class="col-md-3">
+	              <div class="form-group">
+	<select class="form-control" id="categori" onchange="locationInput();">
+  <option selected value="맛집">맛집</option>
+  <option value="렌탈샵">렌탈샵</option>
+
+	</select>	              
+	</div>	          
 	          </div>
 	          <div class="col-md-3">
-	            <p><span>Phone:</span> <a href="tel://1234567920">+ 1235 2355 98</a></p>
+	              <div class="form-group">
+	<select class="form-control" id="resort" onchange="locationInput(); cateChange();">
+  <option value="휘닉스">휘닉스</option>
+  <option value="용평">용평</option>
+  <option value="비발디">비발디</option>
+  <option selected value="지산">지산</option>
+  <option value="곤지암">곤지암</option>
+  <option value="웰리힐리">웰리힐리</option>
+  <option value="하이원">하이원</option>
+  <option value="베어스">베어스</option>
+  <option value="엘리시안">엘리시안</option>
+  <option value="오크밸리">오크밸리</option>
+  <option value="무주">무주</option>
+  <option value="알펜시아">알펜시아</option>
+  <option value="에덴밸리">에덴밸리</option>
+  <option value="오투">오투</option>
+	</select>	              
+	</div>	          
 	          </div>
 	          <div class="col-md-3">
-	            <p><span>Email:</span> <a href="mailto:info@yoursite.com">info@yoursite.com</a></p>
+	            <p><span>//</span> <a href="mailto:info@yoursite.com">//</a></p>
 	          </div>
 	          <div class="col-md-3">
-	            <p><span>Website</span> <a href="#">yoursite.com</a></p>
+	            <p><span>//</span> <a href="#">//</a></p>
 	          </div>
 	        </div>
 	        <div class="row block-9">
 	          <div class="col-md-6 order-md-last pr-md-5">
-	            <form action="#">
-	              <div class="form-group">
-	                <input type="text" class="form-control" placeholder="Your Name">
+	         <div class="sidebar-box ftco-animate" style="height:600px; overflow: auto" id="locationView">
+	              <div class="block-21 mb-4 d-flex">
+	                <a class="blog-img mr-4" style="background-image: url(/elen/images/image_1.jpg);"></a>
+	                <div class="text">
+	                  <h3 class="heading"><a href="#">버거킹 지산리조트점</a></h3>
+	                  <div class="meta">
+	                    <div><a href="#"><span class="icon icon-phone"></span> 010-8647-5045</a></div>
+	                    <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
+	                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+	                    <div><a href="#"><span class="icon-chat"></span> 카페, 디저트</a></div>
+	                    
+	                  </div>
+	                </div>
 	              </div>
-	              <div class="form-group">
-	                <input type="text" class="form-control" placeholder="Your Email">
-	              </div>
-	              <div class="form-group">
-	                <input type="text" class="form-control" placeholder="Subject">
-	              </div>
-	              <div class="form-group">
-	                <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
-	              </div>
-	              <div class="form-group">
-	                <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
-	              </div>
-	            </form>
+	  
+	              
+	            </div>
+
 	          
 	          </div>
 
 	          <div class="col-md-6">
-	       <div id="map" style="width:100%;height:400px;"></div>
+	       <div id="map" style="width:100%;height:600px;"></div>
+	       
+	       <script type="text/javascript">
+	       var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+	       var options = { //지도를 생성할 때 필요한 기본 옵션
+	       	center: new kakao.maps.LatLng(37.215224, 127.350404), //지도의 중심좌표.
+	       	level: 5 //지도의 레벨(확대, 축소 정도)
+	       };
+
+	       var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+    	   var positions = [];
+    	   
+	       function markers(locaList){
+	    	
+	    	   $.each(locaList, function(key, value){
+	    		   var markerInfo = {};
+	    	  markerInfo.title = value.lname;
+	    	  markerInfo.latlng = new kakao.maps.LatLng(value.y, value.x);
+	    	  positions.push(markerInfo);
+	    	});
+	    	   
+	    	   console.log(positions);
+	    	   
+		       var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+		       
+		       for (var i = 0; i < positions.length; i ++) {
+		           
+		           // 마커 이미지의 이미지 크기 입니다
+		           var imageSize = new kakao.maps.Size(24, 35); 
+		           
+		           // 마커 이미지를 생성합니다    
+		           var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+		           console.log("옴?"+positions[i].latlng);
+		           // 마커를 생성합니다
+		           var marker = new kakao.maps.Marker({
+		               map: map, // 마커를 표시할 지도
+		               position: positions[i].latlng, // 마커를 표시할 위치
+		               title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+		               image : markerImage // 마커 이미지 
+		           });
+		       }
+	    	  
+	    	  
+	       }
+
+	       
+	       
+	       
+	       function cateChange(){
+	    		let resort = document.getElementById("resort").options[document.getElementById("resort").selectedIndex].value;
+	    		
+	    	    var moveLatLon = new kakao.maps.LatLng(37.215224, 127.350404);
+	    	    
+	    	    // 지도 중심을 부드럽게 이동시킵니다
+	    	    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+	    	    map.panTo(moveLatLon);     
+	    	}
+	       
+	      // function markers(locaList){}
+	    	   
+	       
+	       </script>
 	          </div>
 	        </div>
 	      </div>
 	    </section>
 
-
+<!-- Modal -->
+<div id="modal">
+ 
+</div>
 			
   <footer th:replace="includes/footer :: footer('메인')">
      
