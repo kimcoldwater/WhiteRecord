@@ -27,6 +27,8 @@ $(document).ready(function(){
   	    }
 
     	locationView();
+    	Review();
+    	
 });
 
 let categori = '맛집';
@@ -55,10 +57,15 @@ function locationView(){
 	            	a +='<h2>데이터가 없습니다</h2> ';}
 	            
 	            $.each(locaList, function(key, value){ 
+	                let x = value.x;
+	                let y = value.y;
+	     
+
+	            	
 							a +='        <div class="block-21 mb-4 d-flex">'
 		                + '<a class="blog-img mr-4" style="background-image: url(/elen/images/image_1.jpg);"></a>'
 		                + '<div class="text">'
-		                + '<h3 class="heading"><a href="#">'+value.lname+'</a></h3>'
+		                + '<h3 class="heading"><a href="javascript::" onclick="panTo('+x+','+y+');">'+value.lname+'</a></h3>'
 		                + '<div class="meta">'
 		                + '<div><a href="#"><span class="icon icon-phone"></span>'+value.tel+'</a></div>'
 		                + '<div><a href="#"><span class="icon-person"></span>'+value.memberVO.name+'</a></div>'
@@ -128,7 +135,25 @@ function locationView(){
 	            
 	           
 	            
-   
+	            if(pageMaker.prev){
+		            pageBtn += '<li class="mr-1 page-item"><a href="javascript:;" class="page-link" onclick="locaMovePrev(-1);">&lt;</a></li>'
+		            }        
+		            for(var i = pageMaker.startPage; i < pageMaker.endPage+1 ; i++){
+
+		 
+		    	     if(page == i){
+		    	    	 pageBtn +=	 '<li class="active mr-1 page-item"><a class="page-link" href="javascript:;" onclick="locaMovePage('+i+');">'+i+'</a></li>'; 
+		    	     }else{
+		    	    	 pageBtn +=	 '<li class="mr-1 page-item"><a href="javascript:;" class="page-link" onclick="locaMovePage('+i+');">'+i+'</a></li>';
+		    	     }       
+		            }
+		            if(pageMaker.next){	    
+		            pageBtn += '<li class="page-item"><a  href="javascript:;" class="page-link" onclick="locaMovePrev(+1);">&gt;</a></li>'
+		        	}
+		           
+	         
+		            
+		            $("#pagination").html(pageBtn);
 	            
 	            
 	            
@@ -147,15 +172,121 @@ function locationView(){
 
 
 	    });
+	   
+
+	   
+	   
+	   
+	   
    }
+   
+   let rpage = 1;
+   let lno = 0;
+   
+function Review(){
+	
+	   $.ajax({
+	        url : '/map/review-view',
+	        type : 'get',
+	        data : {"page": rpage, "lno" : lno},
+	        success : function(result){
+	        	console.log("아직스 들어옴");
+	            let a ='';
+	            //모달
+	            let modal = "";
+	            let rmodalNum = 1;
+	            let pageBtn = '';
+	          	let revList = result.revList;
+	          	let pageMaker = result.pageMaker;
+
+	          	
+	            if(revList<1){
+	            	a +='<h2>데이터가 없습니다</h2> ';}
+	            
+	            $.each(revList, function(key, value){ 
+	 
+						
+						
+
+					a +='        <div class="block-21 mb-4 d-flex">'
+                + '<a class="blog-img mr-4" style="background-image: url(/elen/images/image_1.jpg);"></a>'
+                + '<div class="text">'
+                + '<h3 class="heading"><a href="javascript::"data-toggle="modal" data-target="#rModalNum'+rmodalNum+'" >'+value.title+'</a></h3>'
+                + '<div class="meta">'
+                + '<div><a href="#"><span class="icon-person"></span>'+value.memberVO.name+'</a></div>'
+                + '<div><a href="#"><span class="icon-chat"></span>'+value.likecnt+'</a></div>'
+               	+ '</div></div></div>';		
+	            
+	            });
+	            
+	            
+	        	//$("#modal").html(modal);
+	            $("#review").html(a);
+	            //페이징 for문, 단! startPage는 0이 아닌 1에서 시작하므로 endPage에 +1을 해준다.
+	            
+	           
+	            
+	            if(pageMaker.prev){
+		            pageBtn += '<li class="mr-1 page-item"><a href="javascript:;" class="page-link" onclick="locaMovePrev(-1);">&lt;</a></li>'
+		            }        
+		            for(var i = pageMaker.startPage; i < pageMaker.endPage+1 ; i++){
+
+		 
+		    	     if(page == i){
+		    	    	 pageBtn +=	 '<li class="active mr-1 page-item"><a class="page-link" href="javascript:;" onclick="locaMovePage('+i+');">'+i+'</a></li>'; 
+		    	     }else{
+		    	    	 pageBtn +=	 '<li class="mr-1 page-item"><a href="javascript:;" class="page-link" onclick="locaMovePage('+i+');">'+i+'</a></li>';
+		    	     }       
+		            }
+		            if(pageMaker.next){	    
+		            pageBtn += '<li class="page-item"><a  href="javascript:;" class="page-link" onclick="locaMovePrev(+1);">&gt;</a></li>'
+		        	}
+		           
+	         
+		            
+		            $("#revPagination").html(pageBtn);
+	            
+	            
+	            
+	        }
+	        /* 로딩바
+	        , beforeSend: function() {
+	        	
+	             var spinner = "";
+	             spinner += '<div class="d-flex justify-content-center"><div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div></div>';
+	             $("#spinner").html(spinner);
+	       }
+	       , complete: function() {
+	                     $("#spinner").hide();
+	       }  */
 
 
+
+	    });
+	   
+
+	   
+	   
+	   
+	   
+}
+   
+
+function locaMovePage(pageNum){
+	   page = pageNum;
+	   locationView();
+	   $('html').scrollTop(0);
+}
+
+function locaMovePrev(pageNum){
+	   page = page + pageNum;
+	   locationView();
+}
 
 
 function locationInput(){
 	resort = document.getElementById("resort").options[document.getElementById("resort").selectedIndex].value;
 	categori = document.getElementById("categori").options[document.getElementById("categori").selectedIndex].value;
-
 	page = 1;
 	locationView();
 }
@@ -174,7 +305,7 @@ function locationInput(){
 	      <div class="container">
 	        <div class="row d-flex mb-5 contact-info">
 	          <div class="col-md-12 mb-4">
-	            <h2 class="h4 font-weight-bold">Map</h2>
+	            <h2 class="h4 font-weight-bold">Tasty & Rental #</h2>
 	          </div>
 	          <div class="w-100"></div>
 	          	          <div class="col-md-3">
@@ -188,9 +319,9 @@ function locationInput(){
 	          </div>
 	          <div class="col-md-3">
 	              <div class="form-group">
-	<select class="form-control" id="resort" onchange="locationInput(); cateChange();">
+	<select class="form-control" id="resort" onchange="cateChange(); locationInput(); ">
   <option value="휘닉스">휘닉스</option>
-  <option value="용평">용평</option>
+  <option value="용평">용평/알펜시아</option>
   <option value="비발디">비발디</option>
   <option selected value="지산">지산</option>
   <option value="곤지암">곤지암</option>
@@ -200,7 +331,6 @@ function locationInput(){
   <option value="엘리시안">엘리시안</option>
   <option value="오크밸리">오크밸리</option>
   <option value="무주">무주</option>
-  <option value="알펜시아">알펜시아</option>
   <option value="에덴밸리">에덴밸리</option>
   <option value="오투">오투</option>
 	</select>	              
@@ -214,8 +344,9 @@ function locationInput(){
 	          </div>
 	        </div>
 	        <div class="row block-9">
-	          <div class="col-md-6 order-md-last pr-md-5">
-	         <div class="sidebar-box ftco-animate" style="height:600px; overflow: auto" id="locationView">
+	          
+	          <div class="col-md-6 order-md-last pr-md-5">     
+	         <div class="sidebar-box ftco-animate" style="height:510px; overflow: auto" id="locationView">
 	              <div class="block-21 mb-4 d-flex">
 	                <a class="blog-img mr-4" style="background-image: url(/elen/images/image_1.jpg);"></a>
 	                <div class="text">
@@ -229,17 +360,26 @@ function locationInput(){
 	                  </div>
 	                </div>
 	              </div>
-	  
-	              
+
 	            </div>
 
+
+			  		<div class="row mt-5">
+			          <div class="col">
+			            <div class="block-27 ">
+							<ul  class="pagination justify-content-end" id="pagination"> </ul>
+			            </div>
+			          </div>
+			        </div>
+	          	
 	          
 	          </div>
 
 	          <div class="col-md-6">
 	       <div id="map" style="width:100%;height:600px;"></div>
-	       
+	    
 	       <script type="text/javascript">
+       
 	       var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 	       var options = { //지도를 생성할 때 필요한 기본 옵션
 	       	center: new kakao.maps.LatLng(37.215224, 127.350404), //지도의 중심좌표.
@@ -248,20 +388,24 @@ function locationInput(){
 
 	       var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
     	   var positions = [];
-    	   
+    		var markerss = [];
+    		var infoWindos = [];
+	       
+	       
 	       function markers(locaList){
-	    	
+	    		markerss=[];
+	    		positions=[];
+	    		
 	    	   $.each(locaList, function(key, value){
-	    		   var markerInfo = {};
+	    		   var markerInfo = {};  
 	    	  markerInfo.title = value.lname;
 	    	  markerInfo.latlng = new kakao.maps.LatLng(value.y, value.x);
 	    	  positions.push(markerInfo);
 	    	});
 	    	   
-	    	   console.log(positions);
 	    	   
 		       var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
-		       
+		       var modalNum = 1;
 		       for (var i = 0; i < positions.length; i ++) {
 		           
 		           // 마커 이미지의 이미지 크기 입니다
@@ -269,7 +413,6 @@ function locationInput(){
 		           
 		           // 마커 이미지를 생성합니다    
 		           var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
-		           console.log("옴?"+positions[i].latlng);
 		           // 마커를 생성합니다
 		           var marker = new kakao.maps.Marker({
 		               map: map, // 마커를 표시할 지도
@@ -277,30 +420,153 @@ function locationInput(){
 		               title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 		               image : markerImage // 마커 이미지 
 		           });
+		       		
+		           markerss.push(marker);
+		  
+		           
+		           var infowindow = new kakao.maps.InfoWindow({
+		               content:'<div style="padding:3px; font-size:5px">'+positions[i].title+' <br><a  href="https://map.kakao.com/link/map/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">리뷰보기</a> <a href="javascript::"  data-toggle="modal" data-target="#ModalNum'+modalNum+'" style="color:blue" target="_blank">상세보기</a></div>' // 인포윈도우에 표시할 내용
+		               ,removable : true
+		      
+		           });
+		           
+		           kakao.maps.event.addListener(marker, 'click', makeOverListener(positions[i].latlng,map));
+	
+		           infoWindos.push(infowindow);
+		           infowindow.open(map, marker); 
+		           modalNum ++;
 		       }
-	    	  
+	      
+		 	console.log(markerss);
 	    	  
 	       }
 
+	       function hideMarkers() {
+	    	    for (var i = 0; i < markerss.length; i++) {
+	    	        markerss[i].setMap(null);
+	    	    }            
+	    	}
 	       
+	       function infoClose() {
+	    	    for (var i = 0; i < infoWindos.length; i++) {
+	    	    	infoWindos[i].close();
+	    	    }          
+	    	}
 	       
+	       function makeOverListener(latlng, map) {
+	    	    return function() {
+	    	    	map.panTo(latlng);
+	    	    };
+	    	}
 	       
 	       function cateChange(){
 	    		let resort = document.getElementById("resort").options[document.getElementById("resort").selectedIndex].value;
 	    		
-	    	    var moveLatLon = new kakao.maps.LatLng(37.215224, 127.350404);
+
+	    		if(resort == '용평'){
+	    	    var moveLatLon = new kakao.maps.LatLng(37.671241 , 128.713077 );
+	    		}
+	    		if(resort == '휘닉스'){
+		    	 var moveLatLon = new kakao.maps.LatLng(37.587543338434344, 128.32193699450474 );
+		    	}
+	    		if(resort == '비발디'){
+	    	    var moveLatLon = new kakao.maps.LatLng(37.644659 , 127.689011 );
+	    		}
+	    		if(resort == '지산'){
+		    	var moveLatLon = new kakao.maps.LatLng(37.215224, 127.350404);
+		    	}
+	    		if(resort == '곤지암'){
+	    	    var moveLatLon = new kakao.maps.LatLng(37.336837,127.325000 );
+	    		}
+	    		if(resort == '웰리힐리'){
+	    	    var moveLatLon = new kakao.maps.LatLng(37.500448,128.238084 );
+	    		}
+	    		if(resort == '하이원'){
+	    	    var moveLatLon = new kakao.maps.LatLng(37.211730 ,128.838219 );
+	    		}
+	    		if(resort == '베어스타운'){
+	    	    var moveLatLon = new kakao.maps.LatLng(37.792821, 127.233242);
+	    		}
+	    		if(resort == '엘리시안'){
+	    	    var moveLatLon = new kakao.maps.LatLng(37.830740 ,127.591698 );
+	    		}
+	    		if(resort == '무주'){
+	    	    var moveLatLon = new kakao.maps.LatLng(35.909206 ,127.761066 );
+	    		}
+	    		if(resort == '오크밸리'){
+	    	    var moveLatLon = new kakao.maps.LatLng(37.407509 ,127.842328 );
+	    		}
+	    		if(resort == '에덴밸리'){
+	    	    var moveLatLon = new kakao.maps.LatLng(35.365567 ,129.042539 );
+	    		}
+	    		if(resort == '오투'){
+	    	    var moveLatLon = new kakao.maps.LatLng(37.171667 ,128.992475 );
+	    		}
+	    
+	    		
+	    	    // 지도 중심을 부드럽게 이동시킵니다
+	    	    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+	    	    map.panTo(moveLatLon); 
+	    	    hideMarkers();
+	    	    infoClose();
+
+	    	}
+	       
+	       function panTo(x , y) {
+	    	   
+	    	    // 이동할 위도 경도 위치를 생성합니다 
+	    
+	    	    var moveLatLon = new kakao.maps.LatLng(y, x);
 	    	    
 	    	    // 지도 중심을 부드럽게 이동시킵니다
 	    	    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
-	    	    map.panTo(moveLatLon);     
-	    	}
+	    	    map.panTo(moveLatLon);       
+	    	    
+	    	}  ;      
 	       
 	      // function markers(locaList){}
-	    	   
+
+
 	       
 	       </script>
-	          </div>
+	          </div>    
 	        </div>
+	        <hr/>
+	        
+    <div class="col-md-12 order-md-last pr-md-5"> 
+    <h2>Reviews 뉴욕앤커피</h2>    
+	         <div class="sidebar-box ftco-animate" style="height:510px; overflow: auto" id="review">
+	              <div class="block-21 mb-4 d-flex">
+	                <a class="blog-img mr-4" style="background-image: url(/elen/images/image_1.jpg);"></a>
+	                <div class="text">
+	                  <h3 class="heading"><a href="#">이집 진짜 맛집인듯요</a></h3>
+	                  <div class="meta">
+	                    <div><a href="#"><span class="icon-person"></span> 리뷰작성자</a></div>
+	                    <div><a href="#"><span class="icon-heart"></span> 19</a></div>
+	                    
+	                  </div>
+	                </div>
+	              </div>
+	              
+	              
+	              	              <div class="block-21 mb-4 d-flex">
+	                <a class="blog-img mr-4" style="background-image: url(/elen/images/image_1.jpg);"></a>
+	                <div class="text">
+	                  <h3 class="heading"><a href="#">이집 진짜 맛집인듯요</a></h3>
+	                  <div class="meta">
+	                    <div><a href="#"><span class="icon-person"></span> 리뷰작성자</a></div>
+	                    <div><a href="#"><span class="icon-heart"></span> 19</a></div>
+	                    
+	                  </div>
+	                </div>
+	              </div>
+
+	            </div>
+	          	
+	          
+	          </div>
+	          
+	          
 	      </div>
 	    </section>
 

@@ -50,4 +50,39 @@ where 1=1
 	<result column="name" property="name" />
 	<result column="img" property="img" />
 	</resultMap>
+	
+	
+	
+	<select id="reviewContent" parameterType="cs.projects.whiterecord.util.ReviewCriteria" resultMap="ReviewVO">
+	select a.rno , a.mno , a.lno ,a.title, a.content , a.regdate , a.viewcnt , a.likecnt ,a.rimg , b.mno , b.name , b.id , b.img
+	from 
+	(select rno , mno , lno, title, content, regdate , viewcnt, likecnt, rimg , ROW_NUMBER() OVER (order by rno desc) AS RNUM 
+	from review
+    <if test="lno != 0 ">where lno = #{lno}</if>
+    )a left join member b on a.mno = b.mno
+    where RNUM between #{rowStart} AND #{rowEnd}
+	order by a.rno desc
+    
+	
+	</select>
+	
+	<select id="reviewCount" parameterType="cs.projects.whiterecord.util.ReviewCriteria" resultType="int">
+	select count(*) from (select * from review
+	<if test="lno != 0 ">where lno = #{lno}</if>
+	)where <![CDATA[ RNO > 0 ]]> 
+	</select>
+	
+	<resultMap type="cs.projects.whiterecord.vo.ReviewVO" id="ReviewVO">
+	<result column="lno" property="lno" />
+	<result column="mno" property="mno" />
+	<result column="rno" property="rno" />
+	<result column="title" property="title" />
+	<result column="content" property="content" />
+	<result column="regdate" property="regdate" />
+	<result column="viewcnt" property="viewcnt" />
+	<result column="likecnt" property="likecnt" />
+	<result column="rimg" property="rimg" />
+	<collection property="memberVO" resultMap="MemberVO"></collection>
+
+	</resultMap>
 </mapper>

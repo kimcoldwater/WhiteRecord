@@ -13,7 +13,9 @@ import cs.projects.whiterecord.model.Review;
 import cs.projects.whiterecord.repository.LocationRepository;
 import cs.projects.whiterecord.repository.ReviewRepository;
 import cs.projects.whiterecord.util.MapCriteria;
+import cs.projects.whiterecord.util.ReviewCriteria;
 import cs.projects.whiterecord.vo.LocationVO;
+import cs.projects.whiterecord.vo.ReviewVO;
 
 @Service
 public class MapServiceImpl implements MapService {
@@ -53,6 +55,14 @@ public class MapServiceImpl implements MapService {
 	
 	public List<LocationVO> locationView(MapCriteria mapCriteria)throws Exception{
 		return mapMapper.locationView(mapCriteria);
+	}
+	
+	public List<ReviewVO> reviewContent(ReviewCriteria reviewCriteria)throws Exception{
+		return mapMapper.reviewContent(reviewCriteria);
+	}
+	
+	public int reviewCount(ReviewCriteria reviewCriteria)throws Exception{
+		return mapMapper.reviewCount(reviewCriteria);
 	}
 	
 }

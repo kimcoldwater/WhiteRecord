@@ -21,7 +21,10 @@ import cs.projects.whiterecord.model.Review;
 import cs.projects.whiterecord.service.MapService;
 import cs.projects.whiterecord.util.MapCriteria;
 import cs.projects.whiterecord.util.MapPageMaker;
+import cs.projects.whiterecord.util.ReviewCriteria;
+import cs.projects.whiterecord.util.ReviewPageMaker;
 import cs.projects.whiterecord.vo.LocationVO;
+import cs.projects.whiterecord.vo.ReviewVO;
 
 
 @RestController
@@ -57,6 +60,18 @@ public class MapController {
 	pageMaker.setTotalCount(mapService.locationCount(mapCriteria));
 	result.put("pageMaker", pageMaker);
 	result.put("locaList", locaList);
+	return result;
+	}
+	
+	@GetMapping("/review-view")
+	public Map<String, Object> review(ReviewCriteria reviewCriteria)throws Exception{
+	Map<String,Object> result = new HashMap<String,Object>();
+	List<ReviewVO> revList = mapService.reviewContent(reviewCriteria);
+	ReviewPageMaker pageMaker = new ReviewPageMaker();
+	pageMaker.setCri(reviewCriteria);
+	pageMaker.setTotalCount(mapService.reviewCount(reviewCriteria));
+	result.put("pageMaker", pageMaker);
+	result.put("revList", revList);
 	return result;
 	}
 	
