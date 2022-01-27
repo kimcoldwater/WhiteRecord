@@ -25,6 +25,10 @@ where 1=1
 )where <![CDATA[ LNO > 0 ]]> 
 </select>
 
+<update id="locationImg">
+update location set img = #{imgScr} where lno = #{lno}
+</update>
+
 <resultMap type="cs.projects.whiterecord.vo.LocationVO" id="LocationVO">
 	<result column="lno" property="lno" />
 	<result column="mno" property="mno" />
@@ -38,6 +42,7 @@ where 1=1
 	<result column="y" property="y" />
 	<result column="categori" property="categori" />
 	<result column="regdate" property="regdate" />
+	<result column="img" property="img" />
 	<result column="reviewcnt" property="reviewcnt" />	
 	<result column="likecnt" property="likecnt" />	
 	<collection property="memberVO" resultMap="MemberVO"></collection>
@@ -54,11 +59,13 @@ where 1=1
 	
 	
 	<select id="reviewContent" parameterType="cs.projects.whiterecord.util.ReviewCriteria" resultMap="ReviewVO">
-	select a.rno , a.mno , a.lno ,a.title, a.content , a.regdate , a.viewcnt , a.likecnt ,a.rimg , b.mno , b.name , b.id , b.img
+	select a.rno , a.mno , a.lno ,a.title, a.content , a.regdate , a.viewcnt , a.likecnt ,a.rimg ,a.resort,a.categori, b.mno , b.name , b.id , b.img
 	from 
-	(select rno , mno , lno, title, content, regdate , viewcnt, likecnt, rimg , ROW_NUMBER() OVER (order by rno desc) AS RNUM 
+	(select rno , mno , lno, title, content, regdate , viewcnt, likecnt, rimg ,resort,categori, ROW_NUMBER() OVER (order by rno desc) AS RNUM 
 	from review
-    <if test="lno != 0 ">where lno = #{lno}</if>
+	where
+	categori = #{categori} AND resort = #{resort}
+    <if test="lno != 0 ">AND lno = #{lno}</if>
     )a left join member b on a.mno = b.mno
     where RNUM between #{rowStart} AND #{rowEnd}
 	order by a.rno desc
@@ -68,7 +75,9 @@ where 1=1
 	
 	<select id="reviewCount" parameterType="cs.projects.whiterecord.util.ReviewCriteria" resultType="int">
 	select count(*) from (select * from review
-	<if test="lno != 0 ">where lno = #{lno}</if>
+	where
+	categori = #{categori} AND resort = #{resort}
+	<if test="lno != 0 ">AND lno = #{lno}</if>
 	)where <![CDATA[ RNO > 0 ]]> 
 	</select>
 	
@@ -81,8 +90,26 @@ where 1=1
 	<result column="regdate" property="regdate" />
 	<result column="viewcnt" property="viewcnt" />
 	<result column="likecnt" property="likecnt" />
+	<result column="resort" property="resort" />
+	<result column="categori" property="categori" />
 	<result column="rimg" property="rimg" />
 	<collection property="memberVO" resultMap="MemberVO"></collection>
 
 	</resultMap>
+	
+	<update id="reviewCnt">
+	update location set reviewcnt = reviewcnt + 1 where lno = #{lno}
+	</update>
+	
+	<update id="reviewCntDown">
+	update location set reviewcnt = reviewcnt - 1 where lno = #{lno}
+	</update>	
+	
+	<update id="reviewEdit">
+	update review set title = #{title} , content = #{content} , resort = #{resort} , categori = #{categori} where rno = #{rno}
+	</update>
+
+	<update id="reviewImgEdit">
+	update review set rimg = #{rimg} where rno = #{rno}
+	</update>
 </mapper>

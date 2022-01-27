@@ -7,4 +7,5 @@ import cs.projects.whiterecord.model.Review;
 
 @Transactional(readOnly = true)
 public interface ReviewRepository extends JpaRepository<Review , Long>{
+	Review findByRno(Long rno);
 }

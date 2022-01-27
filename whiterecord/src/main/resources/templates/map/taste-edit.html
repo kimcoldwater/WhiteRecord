@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="includes/header :: head('map')">
+   
+  </head>
+   <style>
+.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
+.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
+.map_wrap {position:relative;width:100%;height:500px;}
+#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
+.bg_white {background:#fff;}
+#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
+#menu_wrap .option{text-align: center;}
+#menu_wrap .option p {margin:10px 0;}  
+#menu_wrap .option button {margin-left:5px;}
+#placesList li {list-style: none;}
+#placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
+#placesList .item span {display: block;margin-top:4px;}
+#placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+#placesList .item .info{padding:10px 0 10px 55px;}
+#placesList .info .gray {color:#8a8a8a;}
+#placesList .info .jibun {padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
+#placesList .info .tel {color:#009900;}
+#placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
+#placesList .item .marker_1 {background-position: 0 -10px;}
+#placesList .item .marker_2 {background-position: 0 -56px;}
+#placesList .item .marker_3 {background-position: 0 -102px}
+#placesList .item .marker_4 {background-position: 0 -148px;}
+#placesList .item .marker_5 {background-position: 0 -194px;}
+#placesList .item .marker_6 {background-position: 0 -240px;}
+#placesList .item .marker_7 {background-position: 0 -286px;}
+#placesList .item .marker_8 {background-position: 0 -332px;}
+#placesList .item .marker_9 {background-position: 0 -378px;}
+#placesList .item .marker_10 {background-position: 0 -423px;}
+#placesList .item .marker_11 {background-position: 0 -470px;}
+#placesList .item .marker_12 {background-position: 0 -516px;}
+#placesList .item .marker_13 {background-position: 0 -562px;}
+#placesList .item .marker_14 {background-position: 0 -608px;}
+#placesList .item .marker_15 {background-position: 0 -654px;}
+#pagination {margin:10px auto;text-align: center;}
+#pagination a {display:inline-block;margin-right:10px;}
+#pagination .on {font-weight: bold; cursor: default;color:#777;}
+</style>
+  <style>
+ .ck-editor__editable
+ {
+    min-height: 300px !important;
+ }
+</style>
+<script src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js"></script>
+	
+<script type="text/javascript">
+
+
+
+$(document).ready(function(){
+
+      /*  toastr.options.preventDuplicates = true;
+    	toastr.warning(result); */
+	
+
+});
+
+function reviewEdit(){
+	let resort = document.getElementById("resort").options[document.getElementById("resort").selectedIndex].value;
+	let categori = document.getElementById("categori").options[document.getElementById("categori").selectedIndex].value;
+	let title = document.getElementById("title").value;
+	let rno = document.getElementById("rno").value;
+	let content = editor.getData();
+		
+
+	   $.ajax({
+	        url : '/map/taste-edit',
+	        type : 'put',   
+	       	data : {"resort" : resort , "categori" : categori, "title" : title , "content" : content, "rno":rno},
+	        success : function(result){
+	        	
+	    	 location.href='/map/taste';
+
+	        },
+	        error : function(result){
+		        toastr.options.preventDuplicates = true;
+		    	toastr.success("글수정 실패");
+	        }
+	        
+	   })
+	
+	
+}
+
+function writeBtn(){
+
+	let content = editor.getData();
+	
+	
+	if ($("#categori").val() == null || $("#categori").val() == "") {
+		toastr.options.preventDuplicates = true;
+		toastr.warning("카테고리를 선택해주세요");
+		$("#categori").focus();
+
+		return false;
+	}
+	
+	
+	if ($("#resort").val() == null || $("#resort").val() == "") {
+		toastr.options.preventDuplicates = true;
+		toastr.warning("스키장을 선택해주세요");
+		$("#resort").focus();
+
+		return false;
+	}
+	
+	
+	if ($("#title").val() == null || $("#title").val() == "") {
+		toastr.options.preventDuplicates = true;
+		toastr.warning("제목을 입력해주세요");
+		$("#title").focus();
+
+		return false;
+	}
+
+	
+	if (content == null || content == "") {
+		toastr.options.preventDuplicates = true;
+		toastr.warning("내용을 입력해주세요");
+		$("#content").focus();
+
+		return false;
+	}
+
+	
+	
+	mapWrite();
+	
+	}
+
+
+  </script>
+   <body th:inline="text">
+	<input type="hidden" th:value="${result}" id="result">
+	<input type="hidden" th:value="${revList.rno}" id="rno">
+	<div id="colorlib-page">
+		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+		<aside th:replace="includes/sidebar :: sidebar('map')">
+		</aside> <!-- END COLORLIB-ASIDE -->
+		
+		
+		<div id="colorlib-main">
+				<section class="ftco-section contact-section">
+	      <div class="container">
+
+	        	         	<div class="col-md-8 mt-5"  style="float: none; margin:0 auto;">
+	         	              <div class="form-group">
+	              
+	              <select class="custom-select" id="categori" >
+  <option selected value="[[${revList.categori}]]">현재 / [[${revList.categori}]]</option>
+  <option value="맛집">맛집</option>
+  <option value="렌탈샵">렌탈샵</option>
+	</select>
+	              </div>
+<div class="form-group">
+<select class="custom-select" id="resort">
+  <option selected value="[[${revList.resort}]]">현재 / [[${revList.resort}]]</option>
+  <option value="휘닉스">휘닉스</option>
+  <option value="용평">용평</option>
+  <option value="비발디">비발디</option>
+  <option value="지산">지산</option>
+  <option value="곤지암">곤지암</option>
+  <option value="웰리힐리">웰리힐리</option>
+  <option value="하이원">하이원</option>
+  <option value="베어스">베어스</option>
+  <option value="엘리시안">엘리시안</option>
+  <option value="오크밸리">오크밸리</option>
+  <option value="무주">무주</option>
+  <option value="알펜시아">알펜시아</option>
+  <option value="에덴밸리">에덴밸리</option>
+  <option value="오투">오투</option>
+	</select>	           
+	  </div>
+	                     <div class="form-group">
+	                <input type="text" class="form-control" placeholder="제목을 입력하세요" id="title" th:value="${revList.title}">
+	              </div>
+ 
+	              
+	              	              	              
+							<div class="form-group">
+								        	         	<span >** 첫번째 사진이 썸네일로 지정됩니다 **</span>
+										<form>
+						<textarea class="editor" placeholder="내용을 입력하세요" id="content" th:text="${revList.content}"></textarea>
+										</form>
+									</div>
+	              <div class="form-group">
+
+	                <button class="btn btn-outline-danger btn-lg float-right"  onclick="reviewEdit(); return false;" >작성</button>
+	              </div>
+									<script>
+									
+									
+   									 ClassicEditor
+       								.create( document.querySelector( '#content' ) ,{
+       									ckfinder: {
+       										uploadUrl: '/social/uploadImg',
+       									}
+       								})
+       								
+       								.catch( error => {
+           								console.error( error );
+     										   } )
+   								    .then( newEditor => {
+   								        editor = newEditor;
+   								    } )
+   									 ;
+   								
+
+
+										</script>	
+	         
+	          </div>
+	      </div>
+	    </section>
+
+
+			
+  <footer th:replace="includes/footer :: footer('메인')">
+     
+    </footer>
+		</div><!-- END COLORLIB-MAIN -->
+	</div><!-- END COLORLIB-PAGE -->
+
+
+
+  <!-- loader -->
+	<div th:include="includes/loader"></div>
+
+    
+  </body>
+</html>

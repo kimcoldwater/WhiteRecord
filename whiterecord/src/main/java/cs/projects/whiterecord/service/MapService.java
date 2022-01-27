@@ -30,4 +30,10 @@ public interface MapService {
 	
 	public int reviewCount(ReviewCriteria reviewCriteria)throws Exception;
 	
+	public Review editView(Long rno)throws Exception;
+	
+	public void reviewEdit(Review review)throws Exception;
+	
+	public void reviewDelete(Review review)throws Exception;
+	
 }

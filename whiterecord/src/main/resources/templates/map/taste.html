@@ -8,11 +8,17 @@
  {
     min-height: 300px !important;
  }
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+ 
 </style>
 <script src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a93d53786aafd1fb5581b067083c2348"></script>
 	
-<script type="text/javascript" >
+<script type="text/javascript" th:inline="javascript" >
 
 
 
@@ -34,7 +40,7 @@ $(document).ready(function(){
 let categori = '맛집';
 let resort = '지산';
 let page = 1;
-
+let session = [[ ${session.member} ]]; 
 function locationView(){
 
 	   $.ajax({
@@ -63,16 +69,14 @@ function locationView(){
 
 	            	
 							a +='        <div class="block-21 mb-4 d-flex">'
-		                + '<a class="blog-img mr-4" style="background-image: url(/elen/images/image_1.jpg);"></a>'
+		                + '<a class="blog-img mr-4" style="background-image: url('+value.img+');"></a>'
 		                + '<div class="text">'
-		                + '<h3 class="heading"><a href="javascript::" onclick="panTo('+x+','+y+');">'+value.lname+'</a></h3>'
+		                + '<h3 class="heading"><a href="javascript::" onclick="panTo('+x+','+y+'); reviewChange('+value.lno+'); reviewHead(\''+value.lname+'\');">'+value.lname+'</a></h3>'
 		                + '<div class="meta">'
 		                + '<div><a href="#"><span class="icon icon-phone"></span>'+value.tel+'</a></div>'
-		                + '<div><a href="#"><span class="icon-person"></span>'+value.memberVO.name+'</a></div>'
-		                + '<div><a href="#"><span class="icon-chat"></span> 19</a></div>'
-		                + '<div><a href="#"><span class="icon-chat"></span> 카페, 디저트</a></div>'
-		                + '<div><a href="javascript::" data-toggle="modal" data-target="#ModalNum'+modalNum+'"><span class="icon-chat"></span> 상세보기</a></div>'
-		               	+ '</div></div></div>';
+		                + '<div><a href="#"><span class="icon-chat"></span>'+value.reviewcnt+'</a></div>'
+		                + '<div><a href="javascript::" data-toggle="modal" data-target="#ModalNum'+modalNum+'" style="color:red;"><span class="icon-chat"></span> 상세보기</a></div>'
+		               	+ '</div></div></div><hr/>';
 						
 						
 				             modal += '<div class="modal fade" id="ModalNum'+modalNum+'"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">' 
@@ -89,7 +93,7 @@ function locationView(){
 			     	          	+	'			          	<span class="category mb-1 d-block"><a href="#" style="font-size:15px;">'+value.categori+'</a> <p style="font-size:18px;">'+value.resort+'</p></span>'
 			     	          +		'		              <h3 class="mb-4"><a href="#">'+value.lname+'</a></h3> <hr/>' 
 			     	          	+	'		              <p class="mb-4" style="color:black;"></p>'
-			     	          	+	'		       <a href="#" class="img img-2" style="background-image: url(/elen/images/image_4.jpg);"></a> <br/>'
+			     	          	+	'		       <a href="#" class="img img-2" style="background-image: url('+value.img+');"></a> <br/>'
 			     	          
 			     	          	+	'		           <p class="mb-4" style="color:black; font-size:18px;"><span class="icon icon-phone"></span> '+value.tel+' </p>'	     	         
 			     	          	+	'		           <p class="mb-4 " style="color:black; font-size:18px;">주소  <br>'+value.address+' </p>'	     	         
@@ -115,10 +119,10 @@ function locationView(){
 			     	          			
 
 			     	            +  '</div>  <div class="modal-footer">';
-
+								if(session != null && session.mno == 22){
 			     	            modal +=  '    <button type="button" class="btn btn-outline-danger float-left" onclick="socialDelete()">삭제</button>';
 			     	            modal +=  '    <button type="button" class="btn btn-outline-success float-left" onclick="socialUpdate()">수정</button>';
-			     	            
+								}
 			     	            modal +=  '    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>'
 			     	            +   ' </div></div></div></div>';
 			     	              modalNum++ ;
@@ -188,7 +192,7 @@ function Review(){
 	   $.ajax({
 	        url : '/map/review-view',
 	        type : 'get',
-	        data : {"page": rpage, "lno" : lno},
+	        data : {"page": rpage, "lno" : lno, "resort":resort, "categori":categori},
 	        success : function(result){
 	        	console.log("아직스 들어옴");
 	            let a ='';
@@ -209,37 +213,79 @@ function Review(){
 						
 
 					a +='        <div class="block-21 mb-4 d-flex">'
-                + '<a class="blog-img mr-4" style="background-image: url(/elen/images/image_1.jpg);"></a>'
+                + '<a href="javascript::" data-toggle="modal" data-target="#rModalNum'+rmodalNum+'" class="blog-img mr-4" style="background-image: url('+value.rimg+');"></a>'
                 + '<div class="text">'
-                + '<h3 class="heading"><a href="javascript::"data-toggle="modal" data-target="#rModalNum'+rmodalNum+'" >'+value.title+'</a></h3>'
+                + '<h3 class="heading"><a href="javascript::" data-toggle="modal" data-target="#rModalNum'+rmodalNum+'" >'+value.title+'</a></h3>'
                 + '<div class="meta">'
-                + '<div><a href="#"><span class="icon-person"></span>'+value.memberVO.name+'</a></div>'
-                + '<div><a href="#"><span class="icon-chat"></span>'+value.likecnt+'</a></div>'
-               	+ '</div></div></div>';		
+                + '<div><a><span class="icon-person"></span>'+value.memberVO.name+'</a></div>'
+                + '<div><a><span class="icon-chat"></span>'+value.likecnt+'</a></div>'
+               	+ '</div></div></div><hr/>';		
+               	
+               	
+               	
+	                modal += '<div class="modal fade" id="rModalNum'+rmodalNum+'"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">' 
+	     	           + '<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">'
+	     	           + '  <div class="modal-content">'
+	     	              
+	     	           +  '   <div class="modal-body"> '
+	     	           +   '   <button type="button" class="close" data-dismiss="modal" aria-label="Close">'
+	     	           +   '      <span aria-hidden="true">&times;</span>'
+	     	           +    '   </button>'
+	     	           +     ' 	<div class="col-md-12">'
+	     	          +	    '						<div class="blog-entry ">'
+	     	          +	    '							<div class="text pt-2 mt-3">'
+	     	          	+	'			          	<span class="category mb-1 d-block"><a href="javascript::" style="font-size:15px;">'+value.categori+' Review</a> <p style="font-size:18px;">'+value.resort+'</p></span>'
+	     	          +		'		              <h3 class="mb-4"><a href="#">'+value.title+'</a></h3><hr/>'
+	     	          	+	'		              <p class="mb-4" style="color:black;" >'+value.content+'</p> <hr/>'
+	     	          	+	'		              <div class="author mb-4 d-flex align-items-center" style="text-align:right;">'
+	     	          	+	'		            		<a href="#" class="img" style="background-image: url(/elen/images/person_1.jpg);"></a>'
+	     	          	+	'		            		<div class="ml-3 info">'
+	     	          	+	'		            			<span>Written by</span>'
+	     	          	+	'		            			<h3 ><a href="#">'+value.memberVO.name+'</a> <p style="font-size:12px;">'+value.regdate+'</p></h3>'
+	     	          	+	'		            		</div>'
+	     	          	+	'		            	</div>'
+	     	          	+	'		              <div class="meta-wrap d-md-flex align-items-center">'
+	     	          	+	'		              	<div class="half ">'
+	     	          	+	'			              	<p class="meta">'
+	     	          	+	'			              		<span><i class="icon-heart"></i>'+value.likecnt+'</span>'
+	     	          		+'			              		<span><i class="icon-eye"></i>'+value.viewcnt+'</span>'
+	     	          				              		
+	     	          	+		'		              	</p>'
+	     	          	+		'	              	</div></div></div></div></div>'
+	     	          			
+
+	     	            +  '</div>  <div class="modal-footer">';
+	     	           if(session != null && session.mno == value.mno){
+	     	            modal +=  '    <button type="button" class="btn btn-outline-danger float-left" onclick="reviewDelete('+value.rno+','+value.lno+','+rmodalNum+')">삭제</button>';
+	     	            modal +=  '    <button type="button" class="btn btn-outline-success float-left" onclick="reviewEdit('+value.rno+')">수정</button>';
+	     	            }
+	     	            modal +=  '    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>'
+	     	            +   ' </div></div></div></div>';
+	     	              rmodalNum++ ;
 	            
 	            });
 	            
 	            
-	        	//$("#modal").html(modal);
+	        	$("#rmodal").html(modal);
 	            $("#review").html(a);
 	            //페이징 for문, 단! startPage는 0이 아닌 1에서 시작하므로 endPage에 +1을 해준다.
 	            
 	           
 	            
 	            if(pageMaker.prev){
-		            pageBtn += '<li class="mr-1 page-item"><a href="javascript:;" class="page-link" onclick="locaMovePrev(-1);">&lt;</a></li>'
+		            pageBtn += '<li class="mr-1 page-item"><a href="javascript:;" class="page-link" onclick="revMovePrev(-1);">&lt;</a></li>'
 		            }        
 		            for(var i = pageMaker.startPage; i < pageMaker.endPage+1 ; i++){
 
 		 
-		    	     if(page == i){
-		    	    	 pageBtn +=	 '<li class="active mr-1 page-item"><a class="page-link" href="javascript:;" onclick="locaMovePage('+i+');">'+i+'</a></li>'; 
+		    	     if(rpage == i){
+		    	    	 pageBtn +=	 '<li class="active mr-1 page-item"><a class="page-link" href="javascript:;" onclick="revMovePage('+i+');">'+i+'</a></li>'; 
 		    	     }else{
-		    	    	 pageBtn +=	 '<li class="mr-1 page-item"><a href="javascript:;" class="page-link" onclick="locaMovePage('+i+');">'+i+'</a></li>';
+		    	    	 pageBtn +=	 '<li class="mr-1 page-item"><a href="javascript:;" class="page-link" onclick="revMovePage('+i+');">'+i+'</a></li>';
 		    	     }       
 		            }
 		            if(pageMaker.next){	    
-		            pageBtn += '<li class="page-item"><a  href="javascript:;" class="page-link" onclick="locaMovePrev(+1);">&gt;</a></li>'
+		            pageBtn += '<li class="page-item"><a  href="javascript:;" class="page-link" onclick="revMovePrev(+1);">&gt;</a></li>'
 		        	}
 		           
 	         
@@ -270,6 +316,16 @@ function Review(){
 	   
 	   
 }
+
+function reviewChange(inlno){
+	lno = inlno;
+	Review();
+
+}
+
+function reviewHead(lname){
+	$("#revHead").html(lname);
+}
    
 
 function locaMovePage(pageNum){
@@ -283,12 +339,58 @@ function locaMovePrev(pageNum){
 	   locationView();
 }
 
+function revMovePage(pageNum){
+	   rpage = pageNum;
+	   Review();
+}
+
+function revMovePrev(pageNum){
+	  rpage = page + pageNum;
+	   Review();
+}
+
 
 function locationInput(){
 	resort = document.getElementById("resort").options[document.getElementById("resort").selectedIndex].value;
 	categori = document.getElementById("categori").options[document.getElementById("categori").selectedIndex].value;
 	page = 1;
+	rpage = 1;
 	locationView();
+	Review();
+}
+
+function reviewEdit(rno){
+
+	   if(confirm("수정하겠습니까?") == true){
+	   location.href = '/map/taste-edit?rno='+rno
+	   }
+}
+
+function reviewDelete(rno, lno, modalNum){
+	console.log('#rModalNum'+modalNum);
+	   if(confirm("삭제하겠습니까?") == true){
+		   $(".modal-backdrop").remove();
+	    	$('#rModalNum'+modalNum).modal('hide');
+		   $.ajax({
+		        url : '/map/taste',
+		        type : 'delete',
+		        data : {"rno":rno, "lno" : lno,},
+		        success : function(result){
+		            toastr.options.preventDuplicates = true;
+			    	toastr.success("삭제완료");
+			    	Review();
+		
+		        }
+
+
+
+		    });
+		   
+	
+
+		   
+		  }
+	
 }
 
   </script>
@@ -303,9 +405,9 @@ function locationInput(){
 		<div id="colorlib-main">
 				<section class="ftco-section contact-section">
 	      <div class="container">
-	        <div class="row d-flex mb-5 contact-info">
+	        <div class="row d-flex mb-5 contact-info ">
 	          <div class="col-md-12 mb-4">
-	            <h2 class="h4 font-weight-bold">Tasty & Rental #</h2>
+	           <h2>Tasty <span style="font-size:15px"> & </span> Rental</h2>     
 	          </div>
 	          <div class="w-100"></div>
 	          	          <div class="col-md-3">
@@ -336,13 +438,16 @@ function locationInput(){
 	</select>	              
 	</div>	          
 	          </div>
-	          <div class="col-md-3">
-	            <p><span>//</span> <a href="mailto:info@yoursite.com">//</a></p>
+	          <div class="col-md-3" style="text-align:center;">
+	            <p>*리뷰</p><span  style="text-decoration: underline; text-underline-position:under;">제목 및 리뷰보기 클릭</span>
 	          </div>
-	          <div class="col-md-3">
-	            <p><span>//</span> <a href="#">//</a></p>
+	          <div class="col-md-3" style="text-align:center">
+	            <p>*업체정보</p><span  style="text-decoration: underline; text-underline-position:under;">상세보기 클릭</span>
 	          </div>
+	          
 	        </div>
+	        
+	        
 	        <div class="row block-9">
 	          
 	          <div class="col-md-6 order-md-last pr-md-5">     
@@ -398,6 +503,7 @@ function locationInput(){
 	    		
 	    	   $.each(locaList, function(key, value){
 	    		   var markerInfo = {};  
+			  markerInfo.lno = value.lno;	    	
 	    	  markerInfo.title = value.lname;
 	    	  markerInfo.latlng = new kakao.maps.LatLng(value.y, value.x);
 	    	  positions.push(markerInfo);
@@ -425,7 +531,7 @@ function locationInput(){
 		  
 		           
 		           var infowindow = new kakao.maps.InfoWindow({
-		               content:'<div style="padding:3px; font-size:5px">'+positions[i].title+' <br><a  href="https://map.kakao.com/link/map/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">리뷰보기</a> <a href="javascript::"  data-toggle="modal" data-target="#ModalNum'+modalNum+'" style="color:blue" target="_blank">상세보기</a></div>' // 인포윈도우에 표시할 내용
+		               content:'<div style="padding:3px; font-size:5px">'+positions[i].title+' <br><a  href="javascript::" style="color:blue" onclick="reviewChange('+positions[i].lno+'); reviewHead(\''+positions[i].title+'\')">리뷰보기</a> <a href="javascript::"  data-toggle="modal" data-target="#ModalNum'+modalNum+'" style="color:red" target="_blank">상세보기</a></div>' // 인포윈도우에 표시할 내용
 		               ,removable : true
 		      
 		           });
@@ -533,8 +639,8 @@ function locationInput(){
 	        </div>
 	        <hr/>
 	        
-    <div class="col-md-12 order-md-last pr-md-5"> 
-    <h2>Reviews 뉴욕앤커피</h2>    
+    <div class="col-md-10 order-md-last pr-md-5 card " style="float: none; margin:0 auto; "> 
+    <h5>Reviews By <span style="font-size:30px" id="revHead"> All </span></h5>    
 	         <div class="sidebar-box ftco-animate" style="height:510px; overflow: auto" id="review">
 	              <div class="block-21 mb-4 d-flex">
 	                <a class="blog-img mr-4" style="background-image: url(/elen/images/image_1.jpg);"></a>
@@ -562,7 +668,13 @@ function locationInput(){
 	              </div>
 
 	            </div>
-	          	
+	          				  		<div class="row mt-5">
+			          <div class="col">
+			            <div class="block-27 ">
+							<ul  class="pagination justify-content-end" id="revPagination"> </ul>
+			            </div>
+			          </div>
+			        </div>
 	          
 	          </div>
 	          
@@ -572,6 +684,9 @@ function locationInput(){
 
 <!-- Modal -->
 <div id="modal">
+ 
+</div>
+<div id="rmodal">
  
 </div>
 			

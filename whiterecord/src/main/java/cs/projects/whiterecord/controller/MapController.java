@@ -9,8 +9,10 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -96,7 +98,6 @@ public class MapController {
 	@PostMapping("/taste-write")
 	public String tasteWrite(Location location,Review review,HttpSession session) throws Exception{
 		
-		logger.info("?"+location+review);
 		Member member = (Member) session.getAttribute("member");
 		if(member == null) {
 			result = "로그인이 필요합니다.";
@@ -114,6 +115,38 @@ public class MapController {
 		return result;
 	}
 	
+	@GetMapping("/taste-edit")
+	public ModelAndView tasteEditView(HttpSession session,Long rno)throws Exception{
+		Review review = mapService.editView(rno);
+		Member member = (Member) session.getAttribute("member");
+		ModelAndView modelAndView = new ModelAndView();
+
+		if(member == null || review.getMno() != member.getMno() ) {
+			result = "본인 리뷰만 수정이 가능합니다.";
+			modelAndView.setViewName("/map/taste");
+			modelAndView.addObject("result", result);
+			result="";
+			return modelAndView;	
+		}
+
+		modelAndView.setViewName("/map/taste-edit");
+		modelAndView.addObject("revList", review);
+		return modelAndView;
+		
+	}
+	
+	@PutMapping("/taste-edit")
+	public String tasteEdit(Review review)throws Exception{
+		mapService.reviewEdit(review);
+		result = "리뷰 수정 완료";
+		return result;
+	}
+	
+	@DeleteMapping("/taste")
+	public void tasteDelete(Review review)throws Exception{
+		mapService.reviewDelete(review);
+
+	}
 	
 	
 	

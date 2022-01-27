@@ -40,6 +40,8 @@ public class Location {
 	private String foodtype;
 	private int reviewcnt;
 	private int likecnt;
+	private String img;
+
 
     @DateTimeFormat(pattern = "yy-MM-dd hh:mm")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yy-MM-dd hh:mm", timezone = "Asia/Seoul")

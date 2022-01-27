@@ -10,6 +10,8 @@ public class ReviewCriteria {
 	private int rowStart;
 	private int rowEnd;
 	private Long lno;
+	private String categori = "";
+	private String resort = "";
 	
 	
 	
@@ -17,6 +19,22 @@ public class ReviewCriteria {
 	
 
 
+
+	public String getCategori() {
+		return categori;
+	}
+
+	public void setCategori(String categori) {
+		this.categori = categori;
+	}
+
+	public String getResort() {
+		return resort;
+	}
+
+	public void setResort(String resort) {
+		this.resort = resort;
+	}
 
 	public Long getLno() {
 		return lno;
@@ -28,7 +46,7 @@ public class ReviewCriteria {
 
 	public ReviewCriteria() {
 		this.page = 1;
-		this.perPageNum = 20;
+		this.perPageNum = 10;
 	}
 	
 	public void setPage(int page) {
@@ -41,7 +59,7 @@ public class ReviewCriteria {
 	
 	public void setPerPageNum(int perPageNum) {
 		if (perPageNum <= 0 || perPageNum > 100) {
-			this.perPageNum = 20;
+			this.perPageNum = 10;
 			return;
 		}
 		this.perPageNum = perPageNum;

@@ -21,6 +21,8 @@ public class ReviewVO {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yy-MM-dd hh:mm", timezone = "Asia/Seoul")
 	private Date regdate;
     private String rimg;
+    private String resort;
+    private String categori;
 
     private MemberVO memberVO;
 }

@@ -24,6 +24,7 @@ public class LocationVO {
 	private String foodtype;
 	private int reviewcnt;
 	private int likecnt;
+	private String img;
 
 
     @DateTimeFormat(pattern = "yy-MM-dd hh:mm")
