@@ -4,10 +4,8 @@
    
   </head>
     
-    	  <script src="https://cdn.jsdelivr.net/npm/@videojs/http-streaming@2.12.0/dist/videojs-http-streaming.js"></script>
-	  <link href="https://vjs.zencdn.net/7.15.4/video-js.css" rel="stylesheet" />
+	  <div th:include="includes/webcamHead"></div>
 
-	  <script src="https://vjs.zencdn.net/7.15.4/video.min.js"></script>
 
   <body>
 
@@ -31,200 +29,107 @@
 	            <img src="/elen/picture/pheonixMap.PNG"  width="100%" height="500">
 	    		
 	            </div>
+	                 <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger" href="#slide1">스패로우&호크</a> 
+				  </div>	  
+			  		</div>
+	                 <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger" href="#slide2">펭귄</a> 
+				  </div>	  
+			  		</div>
+	                 <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger" href="#slide3">베이스</a> 
+				  </div>	  
+			  		</div>
+	                 <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger" href="#slide4">도도</a> 
+				  </div>	  
+			  		</div>
+	                 <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger" href="#slide5">스노우빌리지</a> 
+				  </div>	  
+			  		</div>
+	                 <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger" href="#slide6">몽블랑광장</a> 
+				  </div>	  
+			  		</div>
 	            </div>
-	            <div class="col-md-12 mb-4 ">
-	            		<table class="table table-borderless " >
-		<tr style="font-size:30px;">
-		<td> <button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal">스패로우&호크</button></td>
-		<td> <button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal2">펭귄</button></td>
-		<td><button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal3">베이스</button></td>
-		<td><button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal4">도도</button></td>
-		<td><button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal5">스노우빌리지</button></td>
-		<td><button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal6">몽블랑광장</button></td>
-		</tr>
-		</table>
-		</div>
+	
 	          </div>
 	          <div class="w-100"></div>
 
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header" >
-        <h5 class="modal-title" id="exampleModalLabel" >스패로우&호크</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo1" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+	 <div class="owl-carousel owl-theme" id="owl-carousel" style="text-align:center;">
+    <div class="item-video " data-merge="3" data-hash="slide1"> 
+    <video-js id="myvideo1" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="https://streaming.phoenixhnr.co.kr/hls/yh_01.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<script>
-//모달창 시간제한 setTimeout(function() {$('#exampleModal').modal('hide');}, 10000);
-</script>
-
-
-<!--  -->
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">펭귄</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo2" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+	  <span ></span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide2"> 
+    <video-js id="myvideo2" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="https://streaming.phoenixhnr.co.kr/hls/bc_01.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->		
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">베이스</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo3" class="vjs-default-skin " data-setup='{"fluid": true}' controls muted preload="auto"  >
+	  <span ></span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide3"> 
+    <video-js id="myvideo3" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="https://streaming.phoenixhnr.co.kr/hls/bc_02.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">도도</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo4" class="vjs-default-skin " data-setup='{"fluid": true}' controls muted preload="auto"  >
+	  <span ></span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide4"> 
+    <video-js id="myvideo4" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="https://streaming.phoenixhnr.co.kr/hls/ht_01.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">스노우빌리지</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo5" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+	  <span ></span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide5"> 
+    <video-js id="myvideo5" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="https://streaming.phoenixhnr.co.kr/hls/yh_02.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-            </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-    
-    
-    <!-- Modal -->
-<div class="modal fade" id="exampleModal6" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">몽블랑광장</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo6" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+	  <span ></span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide6"> 
+    <video-js id="myvideo6" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="https://streaming.phoenixhnr.co.kr/hls/mb_03.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-            </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
+	  <span ></span>
+	  </div>
+
+
 </div>
-<!--  -->	
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+	    $('.owl-carousel').owlCarousel({
+	        items:1,
+	        loop:false,
+	        center:true,
+	        video:true,
+	        margin:10,
+	        URLhashListener:true,
+	        autoplayHoverPause:true,
+	        startPosition: 'URLHash',
+	        lazyLoad:true,
+	        responsive:{
+	            480:{
+	                items:2
+	            },
+	            600:{
+	                items:4
+	            }
+	        }
+	    });
+		});
+</script>
 
 		
 		
@@ -301,7 +206,7 @@
 	 
 		var video = $("video").get(6);
 		video.load();
-		video.play();
+	video.play();
 		if (video.paused) {
 		  location.reload(true);
 		}
@@ -322,6 +227,7 @@
   <!-- loader -->
 	<div th:include="includes/loader"></div>
 
+          <script src="https://vjs.zencdn.net/7.17.0/video.min.js"></script>
     
   </body>
 </html>

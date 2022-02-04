@@ -70,4 +70,11 @@ where 1=1
 
 
 
+<update id="socialCompelete">
+update social set complete = 'Y' where sno = #{sno}
+</update>
+
+<update id="socialSchedul">
+<![CDATA[update social set complete = 'Y' where offerdate < TO_DATE(SYSDATE, 'YY-MM-DD') OR ENDDATE < TO_DATE(SYSDATE, 'YY-MM-DD')]]>
+</update>
 </mapper>

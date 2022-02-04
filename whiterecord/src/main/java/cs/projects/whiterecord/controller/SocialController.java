@@ -140,5 +140,10 @@ public class SocialController {
 	    return mapp;
 	}
 	
+	@PutMapping("social-complete")
+	public void socialComplete(Social social)throws Exception{
+	 socialService.socialComplete(social);
+	}
+	
 	
 }

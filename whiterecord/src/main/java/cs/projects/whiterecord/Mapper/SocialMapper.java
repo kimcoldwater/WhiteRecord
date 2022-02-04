@@ -17,4 +17,8 @@ public interface SocialMapper {
 		public List<SocialVO> socialContent(Criteria cri);
 		
 		public int socialCount(Criteria cri);
+		
+		public void socialCompelete(Social social);
+	
+		public void socialSchedul();
 }

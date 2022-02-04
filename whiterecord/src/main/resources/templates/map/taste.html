@@ -16,7 +16,7 @@ img {
  
 </style>
 <script src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a93d53786aafd1fb5581b067083c2348"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a93d53786aafd1fb5581b067083c2348&libraries=services"></script>
 	
 <script type="text/javascript" th:inline="javascript" >
 
@@ -42,7 +42,6 @@ let resort = '지산';
 let page = 1;
 let session = [[ ${session.member} ]]; 
 function locationView(){
-
 	   $.ajax({
 	        url : '/map/location-view',
 	        type : 'get',
@@ -73,8 +72,8 @@ function locationView(){
 		                + '<div class="text">'
 		                + '<h3 class="heading"><a href="javascript::" onclick="panTo('+x+','+y+'); reviewChange('+value.lno+'); reviewHead(\''+value.lname+'\');">'+value.lname+'</a></h3>'
 		                + '<div class="meta">'
-		                + '<div><a href="#"><span class="icon icon-phone"></span>'+value.tel+'</a></div>'
-		                + '<div><a href="#"><span class="icon-chat"></span>'+value.reviewcnt+'</a></div>'
+		                + '<div><a href="#"><span class="icon icon-phone"></span> '+value.tel+'</a></div>'
+		                + '<div><a href="#"><span class="icon-chat"></span> '+value.reviewcnt+'</a></div>'
 		                + '<div><a href="javascript::" data-toggle="modal" data-target="#ModalNum'+modalNum+'" style="color:red;"><span class="icon-chat"></span> 상세보기</a></div>'
 		               	+ '</div></div></div><hr/>';
 						
@@ -111,8 +110,8 @@ function locationView(){
 			     	          	+	'		              <div class="meta-wrap d-md-flex align-items-center">'
 			     	          	+	'		              	<div class="half ">'
 			     	          	+	'			              	<p class="meta">'
-			     	          	+	'			              		<span><i class="icon-heart"></i>'+value.likecnt+'</span>'
-			     	          		+'			              		<span><i class="icon-chat"></i>'+value.reviewcnt+'</span>'
+			     	          	+	'			              		<span><i class="icon-heart"></i> '+value.likecnt+'</span>'
+			     	          		+'			              		<span><i class="icon-chat"></i> '+value.reviewcnt+'</span>'
 			     	          				              		
 			     	          	+		'		              	</p>'
 			     	          	+		'	              	</div></div></div></div></div>'
@@ -174,13 +173,13 @@ function locationView(){
 	       }  */
 
 
-
 	    });
 	   
 
 	   
 	   
-	   
+	   console.log("locationView");
+
 	   
    }
    
@@ -218,7 +217,7 @@ function Review(){
                 + '<h3 class="heading"><a href="javascript::" data-toggle="modal" data-target="#rModalNum'+rmodalNum+'" >'+value.title+'</a></h3>'
                 + '<div class="meta">'
                 + '<div><a><span class="icon-person"></span>'+value.memberVO.name+'</a></div>'
-                + '<div><a><span class="icon-chat"></span>'+value.likecnt+'</a></div>'
+                + '<div><a><span class="icon-heart"></span> '+value.likecnt+'</a></div>'
                	+ '</div></div></div><hr/>';		
                	
                	
@@ -238,7 +237,7 @@ function Review(){
 	     	          +		'		              <h3 class="mb-4"><a href="#">'+value.title+'</a></h3><hr/>'
 	     	          	+	'		              <p class="mb-4" style="color:black;" >'+value.content+'</p> <hr/>'
 	     	          	+	'		              <div class="author mb-4 d-flex align-items-center" style="text-align:right;">'
-	     	          	+	'		            		<a href="#" class="img" style="background-image: url(/elen/images/person_1.jpg);"></a>'
+	     	          	+	'		            		<a href="#" class="img" style="background-image: url('+value.memberVO.img+');"></a>'
 	     	          	+	'		            		<div class="ml-3 info">'
 	     	          	+	'		            			<span>Written by</span>'
 	     	          	+	'		            			<h3 ><a href="#">'+value.memberVO.name+'</a> <p style="font-size:12px;">'+value.regdate+'</p></h3>'
@@ -292,7 +291,8 @@ function Review(){
 		            
 		            $("#revPagination").html(pageBtn);
 	            
-	            
+		            console.log("Review");
+
 	            
 	        }
 	        /* 로딩바
@@ -350,14 +350,7 @@ function revMovePrev(pageNum){
 }
 
 
-function locationInput(){
-	resort = document.getElementById("resort").options[document.getElementById("resort").selectedIndex].value;
-	categori = document.getElementById("categori").options[document.getElementById("categori").selectedIndex].value;
-	page = 1;
-	rpage = 1;
-	locationView();
-	Review();
-}
+
 
 function reviewEdit(rno){
 
@@ -407,21 +400,21 @@ function reviewDelete(rno, lno, modalNum){
 	      <div class="container">
 	        <div class="row d-flex mb-5 contact-info ">
 	          <div class="col-md-12 mb-4">
-	           <h2>Tasty <span style="font-size:15px"> & </span> Rental</h2>     
+	          <!--  <h2>Tasty <span style="font-size:15px"> & </span> Rental</h2> -->     
 	          </div>
 	          <div class="w-100"></div>
-	          	          <div class="col-md-3">
+	          	          <div class="col-md-4">
 	              <div class="form-group">
-	<select class="form-control" id="categori" onchange="locationInput();">
+	<select class="form-control" id="categori" onchange="locationInput(); ">
   <option selected value="맛집">맛집</option>
   <option value="렌탈샵">렌탈샵</option>
 
 	</select>	              
 	</div>	          
 	          </div>
-	          <div class="col-md-3">
+	          <div class="col-md-4">
 	              <div class="form-group">
-	<select class="form-control" id="resort" onchange="cateChange(); locationInput(); ">
+	<select class="form-control" id="resort" onchange=" locationInput(); ">
   <option value="휘닉스">휘닉스</option>
   <option value="용평">용평/알펜시아</option>
   <option value="비발디">비발디</option>
@@ -438,13 +431,13 @@ function reviewDelete(rno, lno, modalNum){
 	</select>	              
 	</div>	          
 	          </div>
-	          <div class="col-md-3" style="text-align:center;">
-	            <p>*리뷰</p><span  style="text-decoration: underline; text-underline-position:under;">제목 및 리뷰보기 클릭</span>
-	          </div>
-	          <div class="col-md-3" style="text-align:center">
-	            <p>*업체정보</p><span  style="text-decoration: underline; text-underline-position:under;">상세보기 클릭</span>
-	          </div>
-	          
+	
+	          <div class="col-md-4" style="text-align:center">
+	              <div class="form-group">
+				<button class="btn btn-outline-info btn-lg" type="button" onclick="location.href='/map/taste-write'">리뷰작성</button>
+				  </div>	  
+			</div>
+		          
 	        </div>
 	        
 	        
@@ -491,13 +484,16 @@ function reviewDelete(rno, lno, modalNum){
 	       	level: 5 //지도의 레벨(확대, 축소 정도)
 	       };
 
-	       var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+	       let map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
     	   var positions = [];
     		var markerss = [];
     		var infoWindos = [];
 	       
 	       
 	       function markers(locaList){
+	    	    hideMarkers();
+	    	    infoClose();
+	    	    
 	    		markerss=[];
 	    		positions=[];
 	    		
@@ -544,6 +540,53 @@ function reviewDelete(rno, lno, modalNum){
 		       }
 	      
 		 	console.log(markerss);
+		 	
+		 	
+		 	
+    		let resort = document.getElementById("resort").options[document.getElementById("resort").selectedIndex].value;
+    		
+
+    		if(resort == '용평'){
+    	    var moveLatLo = new kakao.maps.LatLng(37.671241 , 128.713077 );
+    		}
+    		if(resort == '휘닉스'){
+	    	 var moveLatLo = new kakao.maps.LatLng(37.587543338434344, 128.32193699450474 );
+	    	}
+    		if(resort == '비발디'){
+    	    var moveLatLo = new kakao.maps.LatLng(37.644659 , 127.689011 );
+    		}
+    		if(resort == '지산'){
+	    	var moveLatLo = new kakao.maps.LatLng(37.215225, 127.350405);
+	    	}
+    		if(resort == '곤지암'){
+    	    var moveLatLo = new kakao.maps.LatLng(37.336837,127.325000 );
+    		}
+    		if(resort == '웰리힐리'){
+    	    var moveLatLo = new kakao.maps.LatLng(37.500448,128.238084 );
+    		}
+    		if(resort == '하이원'){
+    	    var moveLatLo = new kakao.maps.LatLng(37.211730 ,128.838219 );
+    		}
+    		if(resort == '베어스'){
+    	    var moveLatLo = new kakao.maps.LatLng(37.792821, 127.233242);
+    		}
+    		if(resort == '엘리시안'){
+    	    var moveLatLo = new kakao.maps.LatLng(37.830740 ,127.591698 );
+    		}
+    		if(resort == '무주'){
+    	    var moveLatLo = new kakao.maps.LatLng(35.909206 ,127.761066 );
+    		}
+    		if(resort == '오크밸리'){
+    	    var moveLatLo = new kakao.maps.LatLng(37.407509 ,127.842328 );
+    		}
+    		if(resort == '에덴밸리'){
+    	    var moveLatLo = new kakao.maps.LatLng(35.365567 ,129.042539 );
+    		}
+    		if(resort == '오투'){
+    	    var moveLatLo = new kakao.maps.LatLng(37.171667 ,128.992475 );
+    		}
+    		
+    		map.panTo(moveLatLo);
 	    	  
 	       }
 
@@ -565,73 +608,79 @@ function reviewDelete(rno, lno, modalNum){
 	    	    };
 	    	}
 	       
-	       function cateChange(){
+	       function cateChange(map){
 	    		let resort = document.getElementById("resort").options[document.getElementById("resort").selectedIndex].value;
 	    		
 
 	    		if(resort == '용평'){
-	    	    var moveLatLon = new kakao.maps.LatLng(37.671241 , 128.713077 );
+	    	    var moveLatLo = new kakao.maps.LatLng(37.671241 , 128.713077 );
 	    		}
 	    		if(resort == '휘닉스'){
-		    	 var moveLatLon = new kakao.maps.LatLng(37.587543338434344, 128.32193699450474 );
+		    	 var moveLatLo = new kakao.maps.LatLng(37.587543338434344, 128.32193699450474 );
 		    	}
 	    		if(resort == '비발디'){
-	    	    var moveLatLon = new kakao.maps.LatLng(37.644659 , 127.689011 );
+	    	    var moveLatLo = new kakao.maps.LatLng(37.644659 , 127.689011 );
 	    		}
 	    		if(resort == '지산'){
-		    	var moveLatLon = new kakao.maps.LatLng(37.215224, 127.350404);
+		    	var moveLatLo = new kakao.maps.LatLng(37.215225, 127.350405);
 		    	}
 	    		if(resort == '곤지암'){
-	    	    var moveLatLon = new kakao.maps.LatLng(37.336837,127.325000 );
+	    	    var moveLatLo = new kakao.maps.LatLng(37.336837,127.325000 );
 	    		}
 	    		if(resort == '웰리힐리'){
-	    	    var moveLatLon = new kakao.maps.LatLng(37.500448,128.238084 );
+	    	    var moveLatLo = new kakao.maps.LatLng(37.500448,128.238084 );
 	    		}
 	    		if(resort == '하이원'){
-	    	    var moveLatLon = new kakao.maps.LatLng(37.211730 ,128.838219 );
+	    	    var moveLatLo = new kakao.maps.LatLng(37.211730 ,128.838219 );
 	    		}
-	    		if(resort == '베어스타운'){
-	    	    var moveLatLon = new kakao.maps.LatLng(37.792821, 127.233242);
+	    		if(resort == '베어스'){
+	    	    var moveLatLo = new kakao.maps.LatLng(37.792821, 127.233242);
 	    		}
 	    		if(resort == '엘리시안'){
-	    	    var moveLatLon = new kakao.maps.LatLng(37.830740 ,127.591698 );
+	    	    var moveLatLo = new kakao.maps.LatLng(37.830740 ,127.591698 );
 	    		}
 	    		if(resort == '무주'){
-	    	    var moveLatLon = new kakao.maps.LatLng(35.909206 ,127.761066 );
+	    	    var moveLatLo = new kakao.maps.LatLng(35.909206 ,127.761066 );
 	    		}
 	    		if(resort == '오크밸리'){
-	    	    var moveLatLon = new kakao.maps.LatLng(37.407509 ,127.842328 );
+	    	    var moveLatLo = new kakao.maps.LatLng(37.407509 ,127.842328 );
 	    		}
 	    		if(resort == '에덴밸리'){
-	    	    var moveLatLon = new kakao.maps.LatLng(35.365567 ,129.042539 );
+	    	    var moveLatLo = new kakao.maps.LatLng(35.365567 ,129.042539 );
 	    		}
 	    		if(resort == '오투'){
-	    	    var moveLatLon = new kakao.maps.LatLng(37.171667 ,128.992475 );
+	    	    var moveLatLo = new kakao.maps.LatLng(37.171667 ,128.992475 );
 	    		}
-	    
 	    		
 	    	    // 지도 중심을 부드럽게 이동시킵니다
 	    	    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
-	    	    map.panTo(moveLatLon); 
-	    	    hideMarkers();
-	    	    infoClose();
+	    	    panTo(moveLatLo); 
+
 
 	    	}
 	       
-	       function panTo(x , y) {
-	    	   
+	       function panTo(x,y) {
 	    	    // 이동할 위도 경도 위치를 생성합니다 
 	    
-	    	    var moveLatLon = new kakao.maps.LatLng(y, x);
+	     var moveLatLo = new kakao.maps.LatLng(y , x );
 	    	    
 	    	    // 지도 중심을 부드럽게 이동시킵니다
 	    	    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
-	    	    map.panTo(moveLatLon);       
-	    	    
+	    	    map.panTo(moveLatLo);  	   
+
 	    	}  ;      
 	       
 	      // function markers(locaList){}
+function locationInput(){
+	console.log("locationInput");
+	resort = document.getElementById("resort").options[document.getElementById("resort").selectedIndex].value;
+	categori = document.getElementById("categori").options[document.getElementById("categori").selectedIndex].value;
+	page = 1;
+	rpage = 1;
 
+	locationView();
+	Review();
+}
 
 	       
 	       </script>

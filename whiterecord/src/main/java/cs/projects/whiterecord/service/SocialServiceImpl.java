@@ -80,4 +80,13 @@ public class SocialServiceImpl implements SocialService{
 		socialRepository.deleteById(sno);
 	}
 
+	public void socialComplete(Social social)throws Exception{
+		socialMapper.socialCompelete(social);
+	}
+	
+	public void socialSchedul()throws Exception{
+		socialMapper.socialSchedul();
+	}
+
+
 }

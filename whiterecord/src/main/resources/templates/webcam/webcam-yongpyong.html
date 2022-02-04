@@ -4,10 +4,8 @@
    
   </head>
     
-    	  <script src="https://cdn.jsdelivr.net/npm/@videojs/http-streaming@2.12.0/dist/videojs-http-streaming.js"></script>
-	  <link href="https://vjs.zencdn.net/7.15.4/video-js.css" rel="stylesheet" />
+	<div th:include="includes/webcamHead"></div>
 
-	  <script src="https://vjs.zencdn.net/7.15.4/video.min.js"></script>
 
   <body>
 
@@ -30,352 +28,178 @@
 	            <img src="/elen/picture/yongpyongMap.PNG"  width="100%" height="500">
 	    
 	            </div>
+	          <div class="col-md-3" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger btn-sm" href="#slide1" onclick="move();">01.발왕산 스카이워크</a> 
+				  </div>	  
+			  </div>
+	          <div class="col-md-3" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger btn-sm" href="#slide2">02.베이스 전경</a>
+				  </div>	  
+			  </div>
+	          <div class="col-md-3" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger btn-sm" href="#slide3">03.옐로우 슬로프</a>
+				  </div>	  
+			  </div>
+	          <div class="col-md-3" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger btn-sm" href="#slide4">04.핑크 슬로프</a>
+				  </div>	  
+			  </div>
+	          <div class="col-md-3" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger btn-sm" href="#slide5">05.메가그린 슬로프</a>
+				  </div>	  
+			  </div>
+	          <div class="col-md-3" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger btn-sm" href="#slide6">06.골드슬로프 전경</a>
+				  </div>	  
+			  </div>
+	          <div class="col-md-3" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger btn-sm" href="#slide7">07.골드슬로프 정상</a>
+				  </div>	  
+			  </div>
+	          <div class="col-md-3" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger btn-sm" href="#slide8">08.레드 슬로프</a>
+				  </div>	  
+			  </div>
+	          <div class="col-md-3" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger btn-sm" href="#slide9">09.레인보우 전경</a>
+				  </div>	  
+			  </div>
+	          <div class="col-md-3" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger btn-sm" href="#slide10">10.레인보우 정상</a>
+				  </div>	  
+			  </div>
+	          <div class="col-md-3" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger btn-sm" href="#slide11">11.용평 진입로</a>
+				  </div>	  
+			  </div>
+	
+
+			
+			
+			
 	            </div>
-	      
-	    <table class="table table-borderless col-md-10 mb-4 ">
-		<tr style="font-size:15px;">
-		<td> <button type="button" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#exampleModal">01.발왕산 스카이워크</button></td>
-		<td> <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal2">02.베이스 전경</button></td>
-		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal3">03.옐로우 슬로프</button></td>
-		<td><button type="button" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#exampleModal4">04.핑크 슬로프</button></td>
-
-		</tr>
-		<tr style="font-size:15px;">
-		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal5">05.메가그린 슬로프</button></td>
-		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal6">06.골드슬로프 전경</button></td>
-		<td> <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal7">07.골드슬로프 정상</button></td>
-		<td> <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal8">08.레드 슬로프</button></td>		
-		</tr>
-		<tr style="font-size:15px;">
-
-		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal9">09.레인보우 전경</button></td>
-		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal10">10.레인보우 정상</button></td>
-		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal11">11.용평 진입로</button></td>
-		</tr>
-		</table>
-		
 	          </div>
 	          <div class="w-100"></div>
 
+<!--  -->
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header" >
-        <h5 class="modal-title" id="exampleModalLabel" >01 발왕산 스카이워크</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo1" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+
+	 <div class="owl-carousel owl-theme" id="owl-carousel" style="text-align:center;">
+    <div class="item-video " data-merge="3" data-hash="slide1"> 
+    <video-js id="myvideo1" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="https://live.yongpyong.co.kr/Ycam1/cam14.stream/playlist.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
+	  <span >01.발왕산 스카이워크</span>
+	  </div>
+    <div class="item-video"data-merge="3"  data-hash="slide2">  <video-js id="myvideo2" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+		<source src="https://live.yongpyong.co.kr/Ycam1/cam02.stream/playlist.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  <span>02.베이스 전경</span>	  
+	 
+	  </div>
+	   <div class="item-video"data-merge="3"  data-hash="slide3">  
+	   <video-js id="myvideo3" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+		<source src="https://live.yongpyong.co.kr/Ycam1/cam03.stream/playlist.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  <span>03.옐로우 슬로프</span>
+	  </div>
+	   <div class="item-video"data-merge="3"  data-hash="slide4">  
+	   <video-js id="myvideo4" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+		<source src="https://live.yongpyong.co.kr/Ycam1/cam07.stream/playlist.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  <span>04.핑크 슬로프</span>  
+	  </div>
+	   <div class="item-video"data-merge="3"  data-hash="slide5">  
+	   <video-js id="myvideo5" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+		<source src="https://live.yongpyong.co.kr/Ycam1/cam01.stream/playlist.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  <span>05.메가그린 슬로프</span>
+	  </div>
+	   <div class="item-video"data-merge="3"  data-hash="slide6">  
+	   <video-js id="myvideo6" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+		<source src="https://live.yongpyong.co.kr/Ycam1/cam06.stream/playlist.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  <span>06.골드슬로프 전경</span>
+	  </div>
+	   <div class="item-video"data-merge="3"  data-hash="slide7">  
+	   <video-js id="myvideo7" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+		<source src="https://live.yongpyong.co.kr/Ycam1/cam04.stream/playlist.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  <span>07.골드슬로프 정상</span>
+	  </div>
+	   <div class="item-video"data-merge="3"  data-hash="slide8">  
+	   <video-js id="myvideo8" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+		<source src="https://live.yongpyong.co.kr/Ycam1/cam10.stream/playlist.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  <span>08.레드 슬로프</span>
+	  </div>
+	   <div class="item-video"data-merge="3"  data-hash="slide9">  
+	   <video-js id="myvideo9" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+		<source src="https://live.yongpyong.co.kr/Ycam1/cam08.stream/playlist.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  <span>09.레인보우 전경</span>
+	  </div>
+	   <div class="item-video"data-merge="3"  data-hash="slide10">  
+	   <video-js id="myvideo10" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+		<source src="https://live.yongpyong.co.kr/Ycam1/cam09.stream/playlist.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  <span>10.레인보우 정상</span>
+	  </div>
+	   <div class="item-video"data-merge="3"  data-hash="slide11">  
+	   <video-js id="myvideo11" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+		<source src="https://live.yongpyong.co.kr/Ycam1/cam05.stream/playlist.m3u8" type="application/x-mpegURL">
+	  </video-js>
+	  <span>11.용평 진입로</span>
+	  </div>
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
+
 </div>
-</div>
-<script>
-//모달창 시간제한 setTimeout(function() {$('#exampleModal').modal('hide');}, 10000);
+<!--  -->
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+    $('.owl-carousel').owlCarousel({
+        items:1,
+        loop:false,
+        center:true,
+        video:true,
+        margin:10,
+        URLhashListener:true,
+        autoplayHoverPause:true,
+        startPosition: 'URLHash',
+        lazyLoad:true,
+        responsive:{
+            480:{
+                items:2
+            },
+            600:{
+                items:4
+            }
+        }
+    });
+	});
+	
+	function move(){
+		 document.getElementById("owl-carousel").focus();
+	}
+	
 </script>
 
 
-<!--  -->
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">02 베이스 전경</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo2" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
-		<source src="https://live.yongpyong.co.kr/Ycam1/cam02.stream/playlist.m3u8" type="application/x-mpegURL">
-	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->		
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">03 옐로우 슬로프</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo3" class="vjs-default-skin " data-setup='{"fluid": true}' controls muted preload="auto"  >
-		<source src="https://live.yongpyong.co.kr/Ycam1/cam03.stream/playlist.m3u8" type="application/x-mpegURL">
-	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">04 핑크슬로프</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo4" class="vjs-default-skin " data-setup='{"fluid": true}' controls muted preload="auto"  >
-		<source src="https://live.yongpyong.co.kr/Ycam1/cam07.stream/playlist.m3u8" type="application/x-mpegURL">
-	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">05 메가그린 슬로프</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo5" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
-		<source src="https://live.yongpyong.co.kr/Ycam1/cam01.stream/playlist.m3u8" type="application/x-mpegURL">
-	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-            </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-    
-    
-    <!-- Modal -->
-<div class="modal fade" id="exampleModal6" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">06 골드슬로프 전경</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo6" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
-		<source src="https://live.yongpyong.co.kr/Ycam1/cam06.stream/playlist.m3u8" type="application/x-mpegURL">
-	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-            </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-
-    <!-- Modal -->
-<div class="modal fade" id="exampleModal7" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">07 골드슬로프 정상</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo7" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
-		<source src="https://live.yongpyong.co.kr/Ycam1/cam04.stream/playlist.m3u8" type="application/x-mpegURL">
-	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-            </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-
-    <!-- Modal -->
-<div class="modal fade" id="exampleModal8" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">08 레드슬로프 </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo8" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
-		<source src="https://live.yongpyong.co.kr/Ycam1/cam10.stream/playlist.m3u8" type="application/x-mpegURL">
-	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-            </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-
-    <!-- Modal -->
-<div class="modal fade" id="exampleModal9" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">09 레인보우 전경</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo9" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
-		<source src="https://live.yongpyong.co.kr/Ycam1/cam08.stream/playlist.m3u8" type="application/x-mpegURL">
-	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-            </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-
-    <!-- Modal -->
-<div class="modal fade" id="exampleModal10" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">10 레인보우 정상</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo10" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
-		<source src="https://live.yongpyong.co.kr/Ycam1/cam09.stream/playlist.m3u8" type="application/x-mpegURL">
-	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-            </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-
-    <!-- Modal -->
-<div class="modal fade" id="exampleModal11" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">11 용평진입로</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo11" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
-		<source src="https://live.yongpyong.co.kr/Ycam1/cam05.stream/playlist.m3u8" type="application/x-mpegURL">
-	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-            </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
 
 		
 		
@@ -403,6 +227,24 @@
 	 		    player.play();
 	 		  });
 	 		}); */
+	 		let options = {
+	                sources: [
+	                    {src: "https://live.yongpyong.co.kr/Ycam1/cam14.stream/playlist.m3u8", type: "application/x-mpegURL"}
+	                ],
+	                playbackRates: [.5, .75, 1, 1.25, 1.5],
+	                poster: "[이미지 주소 등록]",
+	                controls: true,
+	                preload: "auto",
+	                width: 540,
+	                height: 320,
+	                controlBar: {
+	                    playToggle: false,
+	                    pictureInPictureToggle: false,
+	                    remainingTimeDisplay: true,
+	                    progressControl: false,
+	                    qualitySelector: true,
+	                }
+	            };
 			var player = videojs('myvideo1',{liveui:true},{autoplay: false});
 			var player2 = videojs('myvideo2',{liveui:true},{autoplay: false});
 			var player3 = videojs('myvideo3',{liveui:true},{autoplay: false});
@@ -455,9 +297,17 @@
 		  }, 100);
 		});
 	 
+	 player6.ready(function() {
+		  setTimeout(function() {
+			player6.autoplay('muted');
+			player6.fluid(true);
+			
+		  }, 100);
+		});
+	 
 
 	  </script>
-	 
+
 
 		</div>
 	      </div>
@@ -473,6 +323,7 @@
   <!-- loader -->
 	<div th:include="includes/loader"></div>
 
+      <script src="https://vjs.zencdn.net/7.17.0/video.min.js"></script>
     
   </body>
 </html>

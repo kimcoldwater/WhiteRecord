@@ -9,7 +9,7 @@
 					<li th:classappend="${title} == '웹캠' ? 'colorlib-active'"><a th:href="@{/webcam/webcam-resort}">Webcam</a></li>
 					<li th:classappend="${title} == 'social' ? 'colorlib-active'"><a th:href="@{/social/social-view}">Wanted</a></li>
 					<li  th:classappend="${title} == 'map' ? 'colorlib-active'"><a th:href="@{/map/taste}">Map</a></li>
-					<li><a href="about.html">About</a></li>
+					<li  th:classappend="${title} == 'density' ? 'colorlib-active'"><a th:href="@{/density/density-view}">Congestion</a></li>
 					<li><a href="contact.html">Contact</a></li>
 				</ul>
 			</nav>

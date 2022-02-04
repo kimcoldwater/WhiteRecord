@@ -4,10 +4,9 @@
    
   </head>
     
-    	  <script src="https://cdn.jsdelivr.net/npm/@videojs/http-streaming@2.12.0/dist/videojs-http-streaming.js"></script>
-	  <link href="https://vjs.zencdn.net/7.15.4/video-js.css" rel="stylesheet" />
+	  <div th:include="includes/webcamHead"></div>
 
-	  <script src="https://vjs.zencdn.net/7.15.4/video.min.js"></script>
+
 
   <body>
 
@@ -21,209 +20,92 @@
 			<section class="ftco-section contact-section">
 	      <div class="container">
 	        <div class="row d-flex mb-5 contact-danger">
-	          <div class="col-md-12 mb-4 ">
+	          <div class="col-md-12 mb-4 " >
 	            <h2 class="h4 font-weight-bold">오크밸리</h2>
 	            <hr/>
 	            <br/>
 	            <div class="row">
-	              <div class="col-md-12 mb-4 ">
+	              <div class="col-md-12 mb-4"style="text-align : center;" >
 	            <img src="/elen/picture/oakvalleyMap.jpg"  width="80%" height="500">
 	    
 	            </div>
+	                 <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger" href="#slide1">스키장전경</a> 
+				  </div>	  
+			  		</div>
+	                 <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger" href="#slide2">버드휴게소</a> 
+				  </div>	  
+			  		</div>
+	                 <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger" href="#slide3">플라워휴게소</a> 
+				  </div>	  
+			  		</div>
+	                 <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger" href="#slide4">I슬로프</a> 
+				  </div>	  
+			  		</div>
+	                 <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger" href="#slide5">F슬로프</a> 
+				  </div>	  
+			  		</div>
+	                 <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger" href="#slide6">G슬로프</a> 
+				  </div>	  
+			  		</div>
+	    
 	            </div>
-	            <div class="col-md-10 mb-4 ">
-	            		<table class="table table-borderless " >
-		<tr style="font-size:30px;">
-		<td> <button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal">스키장전경</button></td>
-		<td> <button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal2">버드휴게소</button></td>
-		<td><button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal3">플라워휴게소</button></td>
-		<td><button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal4">I슬로프</button></td>
-		<td><button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal5">F슬로프</button></td>
-		<td><button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal6">G슬로프</button></td>
-		</tr>
-		</table>
-		</div>
+
 	          </div>
 	          <div class="w-100"></div>
 
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header" >
-        <h5 class="modal-title" id="exampleModalLabel" >스키장전경</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo1" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+	 <div class="owl-carousel owl-theme" id="owl-carousel" style="text-align:center;">
+    <div class="item-video " data-merge="3" data-hash="slide1"> 
+    <video-js id="myvideo1" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="http://oak5.ktcdn.co.kr/cctv6/_definst_/ch2.stream/playlist.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<script>
-//모달창 시간제한 setTimeout(function() {$('#exampleModal').modal('hide');}, 10000);
-</script>
-
-
-<!--  -->
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">버드휴게소</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo2" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+	  <span >스키장전경</span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide2"> 
+    <video-js id="myvideo2" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="http://oak5.ktcdn.co.kr/cctv6/_definst_/ch4.stream/playlist.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->		
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">플라워휴게소</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo3" class="vjs-default-skin " data-setup='{"fluid": true}' controls muted preload="auto"  >
+	  <span >버드휴게소</span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide3"> 
+    <video-js id="myvideo3" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="http://oak5.ktcdn.co.kr/cctv6/_definst_/ch5.stream/playlist.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">I슬로프</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo4" class="vjs-default-skin " data-setup='{"fluid": true}' controls muted preload="auto"  >
+	  <span >플라워휴게소</span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide4"> 
+    <video-js id="myvideo4" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="http://oak5.ktcdn.co.kr/cctv6/_definst_/ch9.stream/playlist.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">F슬로프</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo5" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+	  <span >I슬로프</span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide5"> 
+    <video-js id="myvideo5" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="http://oak5.ktcdn.co.kr/cctv6/_definst_/ch6.stream/playlist.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-            </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-    
-    
-    <!-- Modal -->
-<div class="modal fade" id="exampleModal6" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">G슬로프</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo6" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+	  <span >G슬로프</span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide6"> 
+    <video-js id="myvideo6" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="http://oak5.ktcdn.co.kr/cctv6/_definst_/ch7.stream/playlist.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-            </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
+	  <span >F슬로프</span>
+	  </div>
+ 
+
 </div>
-<!--  -->	
+
 
 		
 		
@@ -234,7 +116,27 @@
 
 	 		  
 	 		  <script>
-	 		 
+	 		 $(document).ready(function(){
+		 		    $('.owl-carousel').owlCarousel({
+		 		        items:1,
+		 		        loop:false,
+		 		        center:true,
+		 		        video:true,
+		 		        margin:10,
+		 		        URLhashListener:true,
+		 		        autoplayHoverPause:true,
+		 		        startPosition: 'URLHash',
+		 		        lazyLoad:true,
+		 		        responsive:{
+		 		            480:{
+		 		                items:2
+		 		            },
+		 		            600:{
+		 		                items:4
+		 		            }
+		 		        }
+		 		    });
+		 			});
 	 		  
 	 		  
 
@@ -321,6 +223,7 @@
   <!-- loader -->
 	<div th:include="includes/loader"></div>
 
+          <script src="https://vjs.zencdn.net/7.17.0/video.min.js"></script>
     
   </body>
 </html>

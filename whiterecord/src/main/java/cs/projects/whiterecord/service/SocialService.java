@@ -27,5 +27,9 @@ public interface SocialService {
 	
 	public void socialDelete(Social social)throws Exception;
 	
+	public void socialComplete(Social social)throws Exception;
+	
+	public void socialSchedul()throws Exception;
+	
 	
 }

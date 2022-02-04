@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="includes/header :: head('웹캠')">
+   
+  </head>
+<script type="text/javascript">
+
+
+ $(document).ready(function(){
+	 makeday();
+    densityInput();
+	});
+ 
+ /*
+function density(){
+	let filterDate ;
+	let zipCd;
+
+	   $.ajax({
+	        url : 'https://apis.openapi.sk.com/safecaster/v1/search/safetyindex/zip/day/hour',
+	        type : 'get',   
+	        async : false,
+	       	data : {"zipCd" : "17390" , "baseYmd" : "20220208"},
+	        beforeSend : function(xhr){
+	            xhr.setRequestHeader("appKey", "l7xxd2da36f3719b4b7aa4718a84ea8724f8");
+	        },
+	        success : function(data){
+	        	console.log(data)
+	     
+
+	        },
+	        error : function(data){
+		        toastr.options.preventDuplicates = true;
+		    	toastr.success("실패");
+	        }
+	        
+	   })
+	
+	   
+	   
+	
+}*/
+
+let resort ; 
+let regdate ;
+let dataList = [];
+let min = 4;
+let max = 30;
+
+function densityInput(){
+	  
+	resort = document.getElementById("resort").options[document.getElementById("resort").selectedIndex].value;
+	regdate = document.getElementById("regdate").value;
+	dataList = [];
+	densityList();
+}
+
+
+function getFormatDate(date){
+    var year = date.getFullYear();              //yyyy
+    var month = (1 + date.getMonth());          //M
+    month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
+    var day = date.getDate();                   //d
+    day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
+    return  year + '-' + month + '-' + day;       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
+}
+
+function makeday(){
+	let date = new Date();
+	let now = getFormatDate(date);
+	console.log(now);
+	$('#regdate').val(now);
+	
+}
+
+
+</script>
+  <body>
+
+	<div id="colorlib-page">
+		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+		<aside th:replace="includes/sidebar :: sidebar('density')">
+		</aside> <!-- END COLORLIB-ASIDE -->
+		
+		
+		<div id="colorlib-main">
+				<section class="ftco-section contact-section">
+	      <div class="container">
+	        <div class="row d-flex mb-5 contact-info text-center">
+	          <div class="col-md-12 mb-4 	">
+	          <!--    <h2 class="h4 font-weight-bold">Wanted Write</h2>-->
+	          </div>
+	          <div class="w-100"></div>
+
+	  	          <div class="col-md-4">
+	              <div class="form-group">
+	<select class="form-control" id="resort" onchange="densityInput();">
+  <option value="휘닉스">휘닉스</option>
+  <option value="용평">용평/알펜시아</option>
+  <option value="비발디">비발디</option>
+  <option selected value="지산">지산</option>
+  <option value="곤지암">곤지암</option>
+  <option value="웰리힐리">웰리힐리</option>
+  <option value="하이원">하이원</option>
+  <option value="베어스">베어스</option>
+  <option value="엘리시안">엘리시안</option>
+  <option value="오크밸리">오크밸리</option>
+  <option value="무주">무주</option>
+  <option value="에덴밸리">에덴밸리</option>
+  <option value="오투">오투</option>
+	</select>	              
+	</div>	
+
+</div>
+         <div class="col-md-4">
+	              <div class="form-group">
+
+           <input class="form-control" type="date" id="regdate" onchange="densityInput();">
+           
+           	</div>	
+
+</div>
+
+        <div class="col-md-4">
+	            <span> 그래프 상단 선 설명을 눌러 on/off가 가능합니다 </span>
+	          </div>
+
+	        </div>
+	  
+	  
+  
+	  
+	  
+	  	<div class="col-md-12 mb-4">
+  		<canvas id="myChart"></canvas>
+		</div>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js" integrity="sha512-TW5s0IT/IppJtu76UbysrBH9Hy/5X41OTAbQuffZFU6lQ1rdcLHzpU5BzVvr/YFykoiMYZVWlr/PX1mDcfM9Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	  <script>
+	  
+	  
+		
+
+	  function densityList(){
+
+		  
+	  	   $.ajax({
+	  	        url : '/density/density-list',
+	  	        type : 'get',   
+	  	      async:false,
+	  	       	data : {"resort" : resort , "regdate" : regdate},
+	  	        success : function(data){
+	  	     		let densityList = data.densityList;
+	  	     		console.log(densityList);
+	  	     		
+	  	             $.each(densityList, function(key, value){ 
+					let list = {};
+					 if(value == null){
+					     toastr.options.preventDuplicates = true;
+			  		    	toastr.warning("선택한 날짜에 데이터가 없습니다");
+  	            	 }
+	  						list.T00 = value.t00;
+	  						list.T03 = value.t03;
+	  						list.T09 = value.t09;
+	  						list.T12 = value.t12;
+	  						list.T15 = value.t15;
+	  						list.T18 = value.t18;
+	  						list.T21 = value.t21;
+	  	            	 dataList.push(list);
+	  	            
+	  	          })
+	  	          
+	  	        
+				min = Math.ceil(dataList[0].T03 -4);
+				max = Math.round(dataList[0].T12 +4);
+				console.log("max="+max);
+	  	           chart();
+	  		  	
+	  	        },
+	  	        error : function(data){
+	  		        toastr.options.preventDuplicates = true;
+	  		    	toastr.warning("실패");
+	  	        }
+	  	        
+	  	   })
+	  	   
+	  	
+	  }
+  
+        
+
+
+
+	  function chart() {
+		  let chartStatus = Chart.getChart("myChart"); // <canvas> id
+		  if (chartStatus != undefined) {
+		    chartStatus.destroy();
+		  }
+		  
+		  const  labels = [
+  
+  ];
+
+  
+  const  data = {
+    labels: labels,
+    datasets: [{
+      label: '선택일',
+      backgroundColor: 'rgb(255, 99, 132)',
+      borderColor: 'rgb(255, 99, 132)',
+      data: dataList[0] ,
+    },
+    {
+        label: '1주 전',
+        backgroundColor: 'rgb(051, 255, 153)',
+        borderColor: 'rgb(051, 255, 153)',
+        data:  dataList[1],
+      },
+      {
+          label: '2주 전',
+          backgroundColor: 'rgb(204, 204, 204)',
+          borderColor: 'rgb(204, 204, 204)',
+          data: dataList[2],
+        }
+    ]
+  };
+
+  const  config = {
+		  type: 'line',
+		  data: data,
+		  options: {
+		    responsive: true,
+		    plugins: {
+		      legend: {
+		        position: 'top',
+		      },
+		      title: {
+		        display: true,
+		        text: '시간별 스키장 혼잡도'
+		      }
+		    },
+		    scales: {
+		        y: {
+		          min: min,
+		          max: max,
+		          ticks: {
+		              // forces step size to be 50 units
+		              stepSize: 2
+		            }
+		        }
+		      }
+		  },
+		};
+  
+  const  myChart = new Chart(
+		    document.getElementById('myChart'),
+		    config
+		  );
+
+
+  console.log(myChart);
+
+	  }
+</script>
+<br/>
+<br/>
+<br/>
+	 	        <div class="row d-flex mt-5 contact-info text-center">
+	 
+	  	          <div class="col-md-4 card">
+	            <span><p style="font-size:18px">데이터 수집</p>특정지역을 기준으로 기기당 모바일데이터 접속 수를 기준으로 유동인구 절대 지수를 측정합니다.</span>
+	          </div>
+	          <div class="col-md-4 card">
+	            <span><p style="font-size:18px">예측 데이터 </p>빅데이터 기반으로, 수집 된 정보를 통해 스키장 혼잡도를 예측합니다.예측 된 수치는 해당 날짜가 지나면 수집 된 수치로 변경됩니다.</span>
+	          </div>
+	          <div class="col-md-4 card">
+	            <span><p style="font-size:18px">당부사항</p> 특정일 특정시간의 리프트 대기시간을 제보해주시면 수치에 따른 대기시간 작성에 큰 도움이 됩니다 . (작성중) 수치는 오차가 발생할 수 있습니다.</span>
+	          </div>
+	  </div>
+	  
+	      </div>
+	    </section>
+			
+  <footer th:replace="includes/footer :: footer('메인')">
+     
+    </footer>
+		</div><!-- END COLORLIB-MAIN -->
+	</div><!-- END COLORLIB-PAGE -->
+
+	
+  <!-- loader -->
+	<div th:include="includes/loader"></div>
+
+    
+  </body>
+</html>

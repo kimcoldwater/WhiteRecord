@@ -4,28 +4,9 @@
    
   </head>
     
-    	  <script src="https://cdn.jsdelivr.net/npm/@videojs/http-streaming@2.12.0/dist/videojs-http-streaming.js"></script>
-	  <link href="https://vjs.zencdn.net/7.15.4/video-js.css" rel="stylesheet" />
+	  <div th:include="includes/webcamHead"></div>
 
-	  <script src="https://vjs.zencdn.net/7.15.4/video.min.js"></script>
-<script type="text/javascript">
 
-	$(document).ready(function() {
-				$("#jisanCam1").on("click",function() {
-					console.log("클릭");
-					$("#webcamView")
-					.append(
-								"<div align='center'> "
-							+ "<video id='myvideo1' class='vjs-default-skin'  controls preload='auto' >"
-							+ "<source src='https://stream.camtour.net/hls/jisan1.m3u8' type='application/x-mpegURL'>"
-						  	+ "</video> </div> "
-
-					);
-										})
-					})
-  
-					
-  </script>
   <body>
 
 	<div id="colorlib-page">
@@ -50,171 +31,80 @@
 	            <img src="/elen/picture/지산스키장 슬로프맵.jpg"  width="100%" height="340">
 	    
 	            </div>
+	         
+	            
+	            	 <div class="col-md-2" style="text-align:center">
+	             	 <div class="form-group">
+				     <a class="btn btn-outline-danger" href="#slide1">1. 레몬/오렌지</a> 
+					 </div>	  
+			 		 </div>
+	            	 <div class="col-md-2" style="text-align:center">
+	             	 <div class="form-group">
+				     <a class="btn btn-outline-danger" href="#slide2">2. 뉴오렌지</a> 
+					 </div>	  
+			 		 </div>
+	            	 <div class="col-md-2" style="text-align:center">
+	             	 <div class="form-group">
+				     <a class="btn btn-outline-danger" href="#slide3">3. 5/6번 슬로프</a> 
+					 </div>	  
+			 		 </div>
+	            	 <div class="col-md-2" style="text-align:center">
+	             	 <div class="form-group">
+				     <a class="btn btn-outline-danger" href="#slide4">4. 블루탑승장</a> 
+					 </div>	  
+			 		 </div>
+	            	 <div class="col-md-2" style="text-align:center">
+	             	 <div class="form-group">
+				     <a class="btn btn-outline-danger" href="#slide5">5. 실버탑승장</a> 
+					 </div>	  
+			 		 </div>
 	            </div>
-	            <div>
-	            		<table class="table table-borderless col-md-10 mb-4 ">
-		<tr style="font-size:30px;">
-		<td> <button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal">1. 레몬/오렌지</button></td>
-		<td> <button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal2">2. 뉴오렌지</button></td>
-		<td><button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal3">3. 5/6번 슬로프</button></td>
-		<td><button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal4">4. 블루탑승장</button></td>
-		<td><button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal5">5. 실버탑승장</button></td>
-		</tr>
-		</table>
-		</div>
+	          
+		   </div>
+		
 	          </div>
 	          <div class="w-100"></div>
 
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header" >
-        <h5 class="modal-title" id="exampleModalLabel" >레몬/오렌지 탑승장</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo1" class="vjs-default-skin " data-setup='{"fluid": true}' controls muted preload="auto" >
+	 <div class="owl-carousel owl-theme" id="owl-carousel" style="text-align:center;">
+    <div class="item-video " data-merge="3" data-hash="slide1"> 
+    <video-js id="myvideo1" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="https://stream.camtour.net/hls/jisan1.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<script>
-//모달창 시간제한 setTimeout(function() {$('#exampleModal').modal('hide');}, 10000);
-</script>
-
-
-<!--  -->
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">뉴오렌지 탑승장</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo2" class="vjs-default-skin " data-setup='{"fluid": true}' controls muted preload="auto"  >
+	  <span >1. 레몬/오렌지</span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide2"> 
+    <video-js id="myvideo2" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="https://stream.camtour.net/hls/jisan2.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->		
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">5/6번 슬로프</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo3" class="vjs-default-skin " data-setup='{"fluid": true}' controls muted preload="auto"  >
+	  <span >2. 뉴오렌지</span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide3"> 
+    <video-js id="myvideo3" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="https://stream.camtour.net/hls/jisan3.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">블루탑승장</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo4" class="vjs-default-skin " data-setup='{"fluid": true}' controls muted preload="auto"  >
+	  <span >3. 5/6번 슬로프</span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide4"> 
+    <video-js id="myvideo4" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="https://stream.camtour.net/hls/jisan4.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">실버탑승장</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo5" class="vjs-default-skin " data-setup='{"fluid": true}' controls muted preload="auto"  >
+	  <span >4. 블루탑승장</span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide5"> 
+    <video-js id="myvideo5" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="https://stream.camtour.net/hls/jisan5.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
+	  <span >5. 실버탑승장</span>
+	  </div>
+  
+  
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
 </div>
-<!--  -->	
+
+
+
+
+
 
 		
 		
@@ -227,7 +117,29 @@
 	 		  <script>
 	 		 
 	 		  
-	 		  
+	 		 
+		 		 $(document).ready(function(){
+		 		    $('.owl-carousel').owlCarousel({
+		 		        items:1,
+		 		        loop:false,
+		 		        center:true,
+		 		        video:true,
+		 		        margin:10,
+		 		        URLhashListener:true,
+		 		        autoplayHoverPause:true,
+		 		        startPosition: 'URLHash',
+		 		        lazyLoad:true,
+		 		        responsive:{
+		 		            480:{
+		 		                items:2
+		 		            },
+		 		            600:{
+		 		                items:4
+		 		            }
+		 		        }
+		 		    });
+		 			});
+		 		  
 
 		/* 정지 시 모달창 띄우기
  		player.on('pause', function() {
@@ -310,6 +222,7 @@
 	
   <!-- loader -->
 	<div th:include="includes/loader"></div>
+      <script src="https://vjs.zencdn.net/7.17.0/video.min.js"></script>
 
     
   </body>

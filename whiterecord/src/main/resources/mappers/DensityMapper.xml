@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cs.projects.whiterecord.Mapper.DensityMapper">
+<update id="densityUpdate">
+<![CDATA[update density set T00 = #{t00} , T03 = #{t03} , T09 = #{t09} , T12 = #{t12} , T15 = #{t15} , T18 = #{t18} , T21 = #{t21}
+, newdate = TO_DATE(SYSDATE, 'YY-MM-DD')
+where regdate = TO_DATE(SYSDATE-1, 'YY-MM-DD') AND resort = #{resort} ]]>
+
+</update>
+
+<select id="densityList" resultType="cs.projects.whiterecord.vo.DensityVO">
+select * from density 
+where TO_DATE(regdate , 'YY/MM/DD') = TO_DATE(#{regdate} - #{inputDate} , 'YY/MM/DD') AND resort = #{resort}
+</select>
+</mapper>

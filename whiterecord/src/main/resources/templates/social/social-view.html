@@ -63,7 +63,7 @@ img {
 		            a += '<div class="col-md-3 card mr-5 ml-1 mt-5 border-primary" data-toggle="modal" data-target="#ModalNum'+modalNum+'">';	
 	         		}
     				a += '<div class="text text-2 pt-2 mt-3">';
-    				a += '<span class="category  d-block "><a href="javascript::">'+value.categori+' ||'+value.sno+'  </a><p style="font-size:15px;color:black;">'+value.resort+'<br>';
+    				a += '<span class="category  d-block "><a href="javascript::">'+value.categori+' | '+value.sno+'  </a><p style="font-size:15px;color:black;">'+value.resort+'<br>';
     				if(value.offerdate == null){
     				a += 'close '+value.enddate+'</p></span>';
     				}else{
@@ -73,7 +73,7 @@ img {
     				a += '<h3 class="mb-4" style="font-size:20px" ><a href="#" data-toggle="modal" data-target="#ModalNum'+modalNum+'">'+value.title+' </a></h3>';
     				a += '<div class=" text-truncate d-inline-block" style="height:200px; max-width:150px;" ><p class="mb-4">'+value.content+'</p></div>';
 	                a += '<div class="author mb-4 d-flex align-items-center">';
-	                a += '<a href="javascript::"  class="img" style="background-image: url(/elen/images/person_2.jpg);"></a>';
+	                a += '<a href="javascript::"  class="img" style="background-image: url('+value.memberVO.img+');"></a>';
 	                a += '<div class="ml-3 info" >';
 	                a += '<span>Written by</span>';
 	                a += '<h3><a href="javascript::">'+value.memberVO.name+'</a> <p style="font-size:13px;">'+value.regdate+'</p></h3>';
@@ -107,7 +107,7 @@ img {
   		
 	     	          	
 	     	          	+	'		              <div class="author mb-4 d-flex align-items-center" style="text-align:right;">'
-	     	          	+	'		            		<a href="#" class="img" style="background-image: url(/elen/images/person_1.jpg);"></a>'
+	     	          	+	'		            		<a href="#" class="img" style="background-image: url('+value.memberVO.img+');"></a>'
 	     	          	+	'		            		<div class="ml-3 info">'
 	     	          	+	'		            			<span>Written by</span>'
 	     	          	+	'		            			<h3 ><a href="#">'+value.memberVO.name+'</a>, <span style="font-size:12px;">'+value.regdate+'</span></h3>'
@@ -126,7 +126,8 @@ img {
 	     	            +  '</div>  <div class="modal-footer">';
 	     	            if(session != null && session.mno == value.mno){
 	     	            modal +=  '    <button type="button" class="btn btn-outline-danger float-left" onclick="socialDelete('+value.sno+')">삭제</button>';
-	     	            modal +=  '    <button type="button" class="btn btn-outline-success float-left" onclick="socialUpdate('+value.sno+')">수정</button>';
+	     	            modal +=  '    <button type="button" class="btn btn-outline-warning float-left" onclick="socialUpdate('+value.sno+')">수정</button>';
+	     	            modal +=  '    <button type="button" class="btn btn-outline-success float-left" onclick="socialCompleteChange('+value.sno+','+modalNum+')">마감</button>';
 	     	            }
 	     	            modal +=  '    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>'
 	     	            +   ' </div></div></div></div>';
@@ -142,19 +143,19 @@ img {
 
 	            
 	            if(pageMaker.prev){
-	            pageBtn += '<li class="mr-1"><a href="javascript:;" onclick="socialMovePrev(-1);">&lt;</a></li>'
+	            pageBtn += '<li class="mr-1 page-item"><a class="page-link" href="javascript:;" onclick="socialMovePrev(-1);">&lt;</a></li>'
 	            }        
 	            for(var i = pageMaker.startPage; i < pageMaker.endPage+1 ; i++){
 
 	 
 	    	     if(page == i){
-	    	    	 pageBtn +=	 '<li class="active mr-1"><a  href="javascript:;" onclick="socialMovePage('+i+');">'+i+'</a></li>'; 
+	    	    	 pageBtn +=	 '<li class="active mr-1 page-item"><a class="page-link" href="javascript:;" onclick="socialMovePage('+i+');">'+i+'</a></li>'; 
 	    	     }else{
-	    	    	 pageBtn +=	 '<li class="mr-1"><a href="javascript:;" onclick="socialMovePage('+i+');">'+i+'</a></li>';
+	    	    	 pageBtn +=	 '<li class="mr-1 page-item"><a class="page-link" href="javascript:;" onclick="socialMovePage('+i+');">'+i+'</a></li>';
 	    	     }       
 	            }
 	            if(pageMaker.next){	    
-	            pageBtn += '<li><a  href="javascript:;" onclick="socialMovePrev(+1);">&gt;</a></li>'
+	            pageBtn += '<li class="page-item"><a class="page-link" href="javascript:;" onclick="socialMovePrev(+1);">&gt;</a></li>'
 	        	}
 	           
          
@@ -241,7 +242,6 @@ img {
 			$('#daten').hide();
 			offerdate = null;
 			offerdateEnd = null;
-			console.log(offerdate);
 		}else{
 			$('#offerdate').show();
 			$('#offerdateEnd').show();
@@ -266,6 +266,29 @@ img {
    function socialComplete(tf){
 	   completeCheck = tf;
 	   socialContent();
+   }
+   
+   function socialCompleteChange(sno, modalNum){
+	   if(confirm("마감하시겠습니까?") == true){
+		   $(".modal-backdrop").remove();
+	    	$('#modalNum'+modalNum).modal('hide');
+	   $.ajax({
+	        url : '/social/social-complete',
+	        type : 'put',   
+	       	data : {"sno":sno},
+	        success : function(result){
+	            toastr.options.preventDuplicates = true;
+		    	toastr.success("마감완료");
+		    	socialContent();
+
+	        },
+	        error : function(result){
+		        toastr.options.preventDuplicates = true;
+		    	toastr.warning("글삭제 실패");
+	        }
+	        
+	   })
+	   }
    }
   </script>   
   <body>
@@ -369,12 +392,12 @@ img {
 	    		<div class="row mt-5">
 			          <div class="col">
 			            <div class="block-27">
-							<ul  id="pagination"> </ul>
+							<ul class="pagination " id="pagination"> </ul>
 			            </div>
 			          </div>
 			        </div>
 			        <div class="mt-2">
-			        <button class="btn btn-outline-danger btn-lg" onclick="location.href='/social/social-create'">글작성 </button>
+			        <button class="btn btn-outline-info btn-lg" onclick="location.href='/social/social-create'">글작성 </button>
 			        </div>
 	    	
 			    		</div>

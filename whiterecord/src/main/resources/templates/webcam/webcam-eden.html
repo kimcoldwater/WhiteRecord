@@ -4,10 +4,7 @@
    
   </head>
     
-    	  <script src="https://cdn.jsdelivr.net/npm/@videojs/http-streaming@2.12.0/dist/videojs-http-streaming.js"></script>
-	  <link href="https://vjs.zencdn.net/7.15.4/video-js.css" rel="stylesheet" />
-
-	  <script src="https://vjs.zencdn.net/7.15.4/video.min.js"></script>
+    	<div th:include="includes/webcamHead"></div>
 
   <body>
 
@@ -26,177 +23,78 @@
 	            <hr/>
 	            <br/>
 	            <div class="row">
-	         	<div class="col-md-12 mb-4">
-	            <img src="/elen/picture/edenMap.PNG"  width="60%" height="500" >
+	         	<div class="col-md-12 mb-4" style="text-align:center;">
+	            <img src="/elen/picture/edenMap.PNG"  width="70%" height="500" >
 	            </div>
 	 
+	    <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger" href="#slide1">슬로프 광장</a> 
+				  </div>	  
+			  </div>
+	            <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger" href="#slide2">베이직 슬로프</a> 
+				  </div>	  
+			  </div>
+	            <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger" href="#slide3">우라노프 슬로프</a> 
+				  </div>	  
+			  </div>
+	            <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger" href="#slide4">루지트랙(1)</a> 
+				  </div>	  
+			  </div>
+	            <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger" href="#slide5">루지트랙(2)</a> 
+				  </div>	  
+			  </div>
+	 
 	            </div>
-	            <div>
-	            		<table class="table table-borderless col-md-10 mb-4 ">
-		<tr style="font-size:30px;">
-		<td> <button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal">슬로프 광장</button></td>
-		<td> <button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal2">베이직 슬로프</button></td>
-		<td><button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal3">우라누스 슬로프</button></td>
-		<td><button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal4">루지트랙(1)</button></td>
-		<td><button type="button" class="btn btn-danger " data-toggle="modal" data-target="#exampleModal5">루지트랙(2)</button></td>
-		</tr>
-		</table>
-		</div>
+
 	          </div>
 	          <div class="w-100"></div>
 
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header" >
-        <h5 class="modal-title" id="exampleModalLabel" >슬로프 광장</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo1" class="vjs-default-skin " data-setup='{"fluid": true}' controls muted preload="auto" >
+ <div class="owl-carousel owl-theme" id="owl-carousel" style="text-align:center;">
+    <div class="item-video " data-merge="3" data-hash="slide1"> 
+    <video-js id="myvideo1" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="https://sn.rtsp.me/-DBZDEY3UwXl8Oi-yOW3zQ/1641369731/hls/iHZ3ytS5.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<script>
-//모달창 시간제한 setTimeout(function() {$('#exampleModal').modal('hide');}, 10000);
-</script>
-
-
-<!--  -->
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">베이직 슬로프</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo2" class="vjs-default-skin " data-setup='{"fluid": true}' controls muted preload="auto"  >
+	  <span >슬로프광장</span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide2"> 
+    <video-js id="myvideo2" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="https://frn.rtsp.me/BP5crZTK4vuuBfUE_nrjrA/1641369807/hls/rSQit6fr.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->		
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">우라누스 슬로프</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo3" class="vjs-default-skin " data-setup='{"fluid": true}' controls muted preload="auto"  >
+	  <span >베이직 슬로프</span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide3"> 
+    <video-js id="myvideo3" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="https://sn.rtsp.me/-lKHsLNDkEVJ0oazMW9OzA/1641369825/hls/h8EBG6Gk.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">루지트랙 (1)</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo4" class="vjs-default-skin " data-setup='{"fluid": true}' controls muted preload="auto"  >
+	  <span >우라누스 슬로프</span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide4"> 
+    <video-js id="myvideo4" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="https://sn.rtsp.me/u9Yu4t3iBgu8m0Fs4hjUFA/1641369853/hls/TtEtEAfF.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">루지트랙(2)</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo5" class="vjs-default-skin " data-setup='{"fluid": true}' controls muted preload="auto"  >
+	  <span >루지트랙 (1)</span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide5"> 
+    <video-js id="myvideo5" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="https://sn.rtsp.me/MaNMCBrlBGlX75GZnPrAIA/1641369875/hls/TtEtEAfF.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
+	  <span >루지트랙 (2)</span>
+	  </div>
+ 
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
 </div>
-<!--  -->	
 
-		
+
+
 		
 		
 		<div class="col-md-11">
@@ -205,7 +103,28 @@
 
 	 		  
 	 		  <script>
-	 		 
+	  		 $(document).ready(function(){
+		 		    $('.owl-carousel').owlCarousel({
+		 		        items:1,
+		 		        loop:false,
+		 		        center:true,
+		 		        video:true,
+		 		        margin:10,
+		 		        URLhashListener:true,
+		 		        autoplayHoverPause:true,
+		 		        startPosition: 'URLHash',
+		 		        lazyLoad:true,
+		 		        responsive:{
+		 		            480:{
+		 		                items:2
+		 		            },
+		 		            600:{
+		 		                items:4
+		 		            }
+		 		        }
+		 		    });
+		 			});
+		 		  
 	 		  
 	 		  
 
@@ -291,6 +210,7 @@
   <!-- loader -->
 	<div th:include="includes/loader"></div>
 
+    	  <script src="https://vjs.zencdn.net/7.15.4/video.min.js"></script>
     
   </body>
 </html>

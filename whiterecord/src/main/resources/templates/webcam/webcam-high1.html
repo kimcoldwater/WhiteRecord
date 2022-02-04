@@ -4,10 +4,9 @@
    
   </head>
     
-    	  <script src="https://cdn.jsdelivr.net/npm/@videojs/http-streaming@2.12.0/dist/videojs-http-streaming.js"></script>
-	  <link href="https://vjs.zencdn.net/7.15.4/video-js.css" rel="stylesheet" />
+	  <div th:include="includes/webcamHead"></div>
 
-	  <script src="https://vjs.zencdn.net/7.15.4/video.min.js"></script>
+
 
   <body>
 
@@ -22,570 +21,230 @@
 	      <div class="container">
 	        <div class="row d-flex mb-5 contact-danger">
 	          <div class="col-md-12 mb-4 ">
-	            <h2 class="h4 font-weight-bold">용평리조트</h2>
+	            <h2 class="h4 font-weight-bold">하이원 리조트</h2>
 	           <hr/>
 	            <br/>
 	            <div class="row">
-	              <div class="col-md-12 mb-4 ">
-	            <img src="/elen/picture/high1Map.PNG"  width="70%" height="500">
+	              <div class="col-md-12 mb-4 " style="text-align:center;">
+	            <img src="/elen/picture/high1Map.PNG"  width="80%" height="500">
 	    
 	            </div>
+	            
+	           <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger btn-sm" href="#slide1">01.제우스 2번</a> 
+				  </div>	  
+			  </div>
+	           <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger btn-sm" href="#slide2">02.헤라 2번</a> 
+				  </div>	  
+			  </div>
+	           <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger btn-sm" href="#slide3">03.하이원 탑</a> 
+				  </div>	  
+			  </div>
+	           <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger btn-sm" href="#slide4">04.헤라 1번</a> 
+				  </div>	  
+			  </div>
+	           <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger btn-sm" href="#slide5">05.마운틴허브 베이스</a> 
+				  </div>	  
+			  </div>
+	           <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger btn-sm" href="#slide6">06.아테나 2번</a> 
+				  </div>	  
+			  </div>
+	           <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger btn-sm" href="#slide7">07.마운틴 베이스</a> 
+				  </div>	  
+			  </div>
+	           <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger btn-sm" href="#slide8">08.아테나 2번 하단</a> 
+				  </div>	  
+			  </div>
+	           <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger btn-sm" href="#slide9">09.빅토리아 상단</a> 
+				  </div>	  
+			  </div>
+	           <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger btn-sm" href="#slide10">10.제우스 2번 중단</a> 
+				  </div>	  
+			  </div>
+	           <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger btn-sm" href="#slide11">11.밸리 허브 베이스</a> 
+				  </div>	  
+			  </div>
+	           <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger btn-sm" href="#slide12">12.빅토리아 1번</a> 
+				  </div>	  
+			  </div>
+	           <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger btn-sm" href="#slide13">13.제우스 3번</a> 
+				  </div>	  
+			  </div>
+	           <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger btn-sm" href="#slide14">14.제우스 2번 중단</a> 
+				  </div>	  
+			  </div>
+	           <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger btn-sm" href="#slide15">15.아폴로 4번 중단</a> 
+				  </div>	  
+			  </div>
+	           <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger btn-sm" href="#slide16">16.아폴로 베이스</a> 
+				  </div>	  
+			  </div>
+	           <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger btn-sm" href="#slide17">17.제우스 3번 하단</a> 
+				  </div>	  
+			  </div>
+	           <div class="col-md-2" style="text-align:center">
+	              <div class="form-group">
+				     <a class="btn btn-outline-danger btn-sm" href="#slide18">18.밸리 베이스</a> 
+				  </div>	  
+			  </div>
+
+	      
+	            
 	            </div>
 	      
-	    <table class="table table-borderless col-md-8 mb-4 ">
-		<tr style="font-size:15px;">
-		<td> <button type="button" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#exampleModal">01.제우스 2번</button></td>
-		<td> <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal2">02.헤라 2번</button></td>
-		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal3">03.하이원 탑</button></td>
-		<td><button type="button" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#exampleModal4">04.헤라 1번</button></td>
-
-		</tr>
-		<tr style="font-size:15px;">
-		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal5">05.마운틴허브 베이스</button></td>
-		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal6">06.아테나 2번</button></td>
-		<td> <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal7">07.마운틴 베이스</button></td>
-		<td> <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal8">08.아테나 2번 하단</button></td>		
-		</tr>
-		<tr style="font-size:15px;">
-
-		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal9">09.빅토리아 상단</button></td>
-		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal10">10.제우스 2번 중단</button></td>
-		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal11">11.밸리 허브 베이스</button></td>
-		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal12">12.빅토리아 1번</button></td>
-		</tr>
-		<tr style="font-size:15px;">
-
-		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal13">13.제우스 3번</button></td>
-		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal14">14.제우스 2번 중단</button></td>
-		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal15">15.아폴로 4번 중단</button></td>
-		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal16">16.아폴로 베이스</button></td>
-		</tr>
-		<tr style="font-size:15px;">
-		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal17">17.제우스 3번 하단</button></td>
-		<td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal18">18.밸리 베이스</button></td>
-
-		</tr>
-
-		</table>
 		
 	          </div>
 	          <div class="w-100"></div>
 
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header" >
-        <h5 class="modal-title" id="exampleModalLabel" >01 제우스 2번 슬로프 입구</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo1" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+ <div class="owl-carousel owl-theme" id="owl-carousel" style="text-align:center;">
+    <div class="item-video " data-merge="3" data-hash="slide1"> 
+    <video-js id="myvideo1" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="http://211.50.118.30:1935/live/ch1.stream/playlist.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-<script>
-//모달창 시간제한 setTimeout(function() {$('#exampleModal').modal('hide');}, 10000);
-</script>
-
-
-<!--  -->
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">02 헤라 2번 슬로프 입구</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo2" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+	  <span >01.제우스 2번</span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide2"> 
+    <video-js id="myvideo2" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="http://211.50.118.30:1935/live/ch2.stream/playlist.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->		
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">03 하이원 탑</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo3" class="vjs-default-skin " data-setup='{"fluid": true}' controls muted preload="auto"  >
+	  <span >02.헤라 2번</span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide3"> 
+    <video-js id="myvideo3" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="http://211.50.118.30:1935/live/ch3.stream/playlist.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">04 아테나 1번 슬로프</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo4" class="vjs-default-skin " data-setup='{"fluid": true}' controls muted preload="auto"  >
+	  <span >03.하이원 탑</span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide4"> 
+    <video-js id="myvideo4" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="http://211.50.118.30:1935/live/ch4.stream/playlist.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">05 마운틴 허브 베이스</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo5" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+	  <span >04.헤라 1번</span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide5"> 
+    <video-js id="myvideo5" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="http://211.50.118.30:1935/live/ch5.stream/playlist.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-            </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-    
-    
-    <!-- Modal -->
-<div class="modal fade" id="exampleModal6" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">06 아테나 2번 슬로프</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo6" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+	  <span >05.마운틴허브 베이스</span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide6"> 
+    <video-js id="myvideo6" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="http://211.50.118.30:1935/live/ch6.stream/playlist.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-            </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-
-    <!-- Modal -->
-<div class="modal fade" id="exampleModal7" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">07 마운틴 베이스</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo7" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+	  <span >06.아테나 2번</span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide7"> 
+    <video-js id="myvideo7" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="http://211.50.118.30:1935/live/ch7.stream/playlist.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-            </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-
-    <!-- Modal -->
-<div class="modal fade" id="exampleModal8" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">08 아테나 2번 슬로프 하단 </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo8" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+	  <span >07.마운틴 베이스</span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide8"> 
+    <video-js id="myvideo8" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="http://211.50.118.30:1935/live/ch8.stream/playlist.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-            </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-
-    <!-- Modal -->
-<div class="modal fade" id="exampleModal9" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">09 빅토리아 상단</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo9" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+	  <span >08.아테나 2번 하단</span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide9"> 
+    <video-js id="myvideo9" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="http://211.50.118.30:1935/live/ch9.stream/playlist.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-            </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-
-    <!-- Modal -->
-<div class="modal fade" id="exampleModal10" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">10 제우스 2번 중단</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo10" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+	  <span >09.빅토리아 상단</span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide10"> 
+    <video-js id="myvideo10" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="http://211.50.118.30:1935/live/ch10.stream/playlist.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-            </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-
-    <!-- Modal -->
-<div class="modal fade" id="exampleModal11" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">11 밸리 허브 베이스</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo11" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+	  <span >10.제우스 2번 중단</span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide11"> 
+    <video-js id="myvideo11" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="http://211.50.118.30:1935/live/ch11.stream/playlist.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-            </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-
-    <!-- Modal -->
-<div class="modal fade" id="exampleModal12" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">12 빅토리아 1번 슬로프</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo12" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+	  <span >11.밸리 허브 베이스</span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide12"> 
+    <video-js id="myvideo12" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="http://211.50.118.30:1935/live/ch12.stream/playlist.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-            </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-
-    <!-- Modal -->
-<div class="modal fade" id="exampleModal13" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">13 제우스 3번 슬로프</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo13" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+	  <span >12.빅토리아 1번</span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide13"> 
+    <video-js id="myvideo13" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="http://211.50.118.30:1935/live/ch13.stream/playlist.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-            </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-
-    <!-- Modal -->
-<div class="modal fade" id="exampleModal14" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">14 제우스 3번 중단부</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo14" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+	  <span >13.제우스 3번</span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide14"> 
+    <video-js id="myvideo14" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="http://211.50.118.30:1935/live/ch14.stream/playlist.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-            </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-
-    <!-- Modal -->
-<div class="modal fade" id="exampleModal15" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">15 아폴로 4번 중단부</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo15" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+	  <span >14.제우스 2번 중단</span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide15"> 
+    <video-js id="myvideo15" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="http://211.50.118.30:1935/live/ch15.stream/playlist.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-            </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-
-    <!-- Modal -->
-<div class="modal fade" id="exampleModal16" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">16 아폴로 베이스</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo16" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+	  <span >15.아폴로 4번 중단</span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide16"> 
+    <video-js id="myvideo16" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="http://211.50.118.30:1935/live/ch16.stream/playlist.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-            </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-
-    <!-- Modal -->
-<div class="modal fade" id="exampleModal17" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">17 제우스 3번 하단</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo17" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+	  <span >16.아폴로 베이스</span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide17"> 
+    <video-js id="myvideo17" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="http://211.50.118.30:1935/live/ch17.stream/playlist.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-            </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--  -->	
-
-    <!-- Modal -->
-<div class="modal fade" id="exampleModal18" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 70%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">18 밸리 베이스</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<div align="center" id="webcamView">
-	  <video-js id="myvideo18" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
+	  <span >17.제우스 3번 하단</span>
+	  </div>
+    <div class="item-video " data-merge="3" data-hash="slide18"> 
+    <video-js id="myvideo18" class="vjs-default-skin " data-setup='{"fluid": true}'  controls muted preload="auto"  >
 		<source src="http://211.50.118.30:1935/live/ch18.stream/playlist.m3u8" type="application/x-mpegURL">
 	  </video-js>
-	  
-	  
-	 </div> 
-      <!-- 영상 -->
-            </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
+	  <span >18.밸리 베이스</span>
+	  </div>
+ 
+
 </div>
-<!--  -->	
+
+
+
 
 		
 		
@@ -598,7 +257,29 @@
 	 		  <script>
 	 		 
 	 		  
-	 		  
+	 		 
+		 		 $(document).ready(function(){
+		 		    $('.owl-carousel').owlCarousel({
+		 		        items:1,
+		 		        loop:false,
+		 		        center:true,
+		 		        video:true,
+		 		        margin:10,
+		 		        URLhashListener:true,
+		 		        autoplayHoverPause:true,
+		 		        startPosition: 'URLHash',
+		 		        lazyLoad:true,
+		 		        responsive:{
+		 		            480:{
+		 		                items:2
+		 		            },
+		 		            600:{
+		 		                items:4
+		 		            }
+		 		        }
+		 		    });
+		 			});
+		 		  
 
 		/* 정지 시 모달창 띄우기
  		player.on('pause', function() {
@@ -690,6 +371,7 @@
   <!-- loader -->
 	<div th:include="includes/loader"></div>
 
+          <script src="https://vjs.zencdn.net/7.17.0/video.min.js"></script>
     
   </body>
 </html>

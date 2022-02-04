@@ -4,10 +4,9 @@
    
   </head>
     
-    	  <script src="https://cdn.jsdelivr.net/npm/@videojs/http-streaming@2.12.0/dist/videojs-http-streaming.js"></script>
-	  <link href="https://vjs.zencdn.net/7.15.4/video-js.css" rel="stylesheet" />
+	  <div th:include="includes/webcamHead"></div>
 
-	  <script src="https://vjs.zencdn.net/7.15.4/video.min.js"></script>
+
 
   <body>
 
@@ -63,6 +62,7 @@
 	
   <!-- loader -->
 	<div th:include="includes/loader"></div>
+      <script src="https://vjs.zencdn.net/7.17.0/video.min.js"></script>
 
     
   </body>
