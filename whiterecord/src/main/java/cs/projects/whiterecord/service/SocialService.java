@@ -31,5 +31,6 @@ public interface SocialService {
 	
 	public void socialSchedul()throws Exception;
 	
-	
+	public void socialViewCnt(Social social)throws Exception;
+
 }

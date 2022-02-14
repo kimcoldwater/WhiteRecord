@@ -36,4 +36,6 @@ public interface MapService {
 	
 	public void reviewDelete(Review review)throws Exception;
 	
+	public void reviewViewCnt(Long rno)throws Exception;
+
 }

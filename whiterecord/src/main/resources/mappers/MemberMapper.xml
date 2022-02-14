@@ -2,4 +2,59 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cs.projects.whiterecord.Mapper.MemberMapper">
 
+<update id="editId">
+update member set id = #{id} where mno = #{mno}
+</update>
+<update id="editName">
+update member set name = #{name} where mno = #{mno}
+</update>
+<update id="editEmail">
+update member set email = #{email} where mno = #{mno}
+</update>
+
+<update id="editImg">
+update member set img = #{img} where mno = #{mno}
+</update>
+
+<select id="mypageSocial" resultType="cs.projects.whiterecord.vo.SocialVO"
+parameterType="cs.projects.whiterecord.util.Criteria">
+select  * 
+from ( 
+select sno , resort, title, content,contact, mno ,area, categori, viewcnt,complete, regdate,offerdate,enddate,bookmarkcnt, 
+ROW_NUMBER() OVER(order by complete, sno desc) AS SNUM
+from social
+where mno = #{mno}
+) 
+where SNUM between #{rowStart} AND #{rowEnd}
+order by complete , sno desc 
+</select>
+
+<select id="mypageSocialCount" resultType="int" parameterType="cs.projects.whiterecord.util.MypageCriteria">
+SELECT COUNT(*) FROM (SELECT * FROM social 
+where mno = #{mno}
+) WHERE <![CDATA[ SNO > 0 ]]> 
+</select>
+
+	
+	<select id="mypageReview" parameterType="cs.projects.whiterecord.util.MypageCriteria" resultType="cs.projects.whiterecord.vo.ReviewVO">
+	select * from 
+	(select rno , mno , lno, title, content, regdate , viewcnt, likecnt, rimg ,resort,categori, ROW_NUMBER() OVER (order by rno desc) AS RNUM 
+	from review
+	where
+	mno = #{mno}
+    )
+    where RNUM between #{rowStart} AND #{rowEnd}
+	order by rno desc
+    
+	
+	</select>
+	
+	<select id="mypageReviewCount" parameterType="cs.projects.whiterecord.util.MypageCriteria" resultType="int">
+	select count(*) from (select * from review
+	where
+	mno = #{mno}
+	)where <![CDATA[ RNO > 0 ]]> 
+	</select>
+
+
 </mapper>

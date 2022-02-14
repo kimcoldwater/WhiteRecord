@@ -59,7 +59,8 @@ update location set img = #{imgScr} where lno = #{lno}
 	
 	
 	<select id="reviewContent" parameterType="cs.projects.whiterecord.util.ReviewCriteria" resultMap="ReviewVO">
-	select a.rno , a.mno , a.lno ,a.title, a.content , a.regdate , a.viewcnt , a.likecnt ,a.rimg ,a.resort,a.categori, b.mno , b.name , b.id , b.img
+	select a.rno , a.mno , a.lno ,a.title, a.content , a.regdate , a.viewcnt , a.likecnt ,a.rimg ,a.resort,a.categori, b.mno , b.name , 
+	b.id , b.img
 	from 
 	(select rno , mno , lno, title, content, regdate , viewcnt, likecnt, rimg ,resort,categori, ROW_NUMBER() OVER (order by rno desc) AS RNUM 
 	from review
@@ -106,10 +107,14 @@ update location set img = #{imgScr} where lno = #{lno}
 	</update>	
 	
 	<update id="reviewEdit">
-	update review set title = #{title} , content = #{content} , resort = #{resort} , categori = #{categori} where rno = #{rno}
+	update review set title = #{title} , content = #{content} , resort = #{resort} , categori = #{categori} , rimg = #{rimg} where rno = #{rno}
 	</update>
 
 	<update id="reviewImgEdit">
 	update review set rimg = #{rimg} where rno = #{rno}
+	</update>
+	
+	<update id="reviewViewCnt">
+	update review set viewcnt = viewcnt+1 where rno = #{rno}
 	</update>
 </mapper>

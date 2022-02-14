@@ -24,27 +24,24 @@ public class DensityController {
 	@Autowired
 	private DensityService densityService;
 	
-	@GetMapping("/density-view")
+	@GetMapping("density-view")
 	public ModelAndView densityView() throws Exception{
 		
 		
-		
-		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("/density/density-view");
+		modelAndView.setViewName("density/density-view");
 		
 		
 		return modelAndView;
 	}
 	
-	@GetMapping("/density-list")
+	@GetMapping("density-list")
 	public Map<String,Object> densityList(Density density) throws Exception{
 
 		Map<String,Object> result = new HashMap<>();
 		result.put("densityList", densityService.densityList(density));
 		
 
-		
 		return result;
 	}
 

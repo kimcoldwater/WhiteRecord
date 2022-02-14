@@ -190,25 +190,27 @@ function loginBtn(){
 					<div class="col-md-8 text text-center  d-flex align-items-center justify-content-center  ">
 							
 						<div class="desc">
-													<h1 class="mb-4 ">Welcome To Login</h1>
+													<h1 class="mb-4 ">로그인.</h1>
 						
 		
              				  <div class="form-group">
-							<input type="text" class="form-control text-center" placeholder="아이디를 입력하세요" id="id">
+							<input type="text" class="form-control text-center" placeholder="아이디를 입력하세요" id="id" data-toggle="tooltip" data-placement="right" title="아이디 입력">
 	            			  </div>	
              				  <div class="form-group">
-							<input type="password" class="form-control text-center" placeholder="비밀번호를 입력하세요" id="pw">
+							<input type="password" class="form-control text-center" placeholder="비밀번호를 입력하세요" id="pw" data-toggle="tooltip" data-placement="right" title="비밀번호 입력">
 	            			  </div>							            			
              				  <div class="form-group">
 							<button type="button" class="btn btn-outline-danger btn-lg" onclick="loginBtn();">로그인</button>								
 	            			  </div>	  
-	            			  							<ul class="ftco-social mt-3">
-                <li class="ftco-animate"><a href="#" onclick="open('/member/naver-login','hi','width=430,height=500,location=no,status=no,scrollbars=yes');"><span class="icon-google"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-              </ul>  
+             				  <div class="form-group">	            			  						
+              <a href="https://kauth.kakao.com/oauth/authorize?client_id=ac37f9d7520c09a7ebac6b58d274743f&redirect_uri=http://13.125.0.44:8080/member/naver&response_type=code" data-toggle="tooltip" data-placement="right" title="추천">
+                <img src="/elen/picture/kakao_login_medium_narrow.png">
+                </a>
+                </div>
+              
+              
                 <div class="form-group">
-  					<button type="button" class="btn btn-outline-danger" onclick="location.href='/member/join'">회원가입</button>			
+  					<button type="button" class="btn btn-outline-danger" onclick="location.href='/member/join'" data-toggle="tooltip" data-placement="right" title="간단한 회원가입">회원가입</button>			
               	
               	</div>
                         				  <div class="form-group">

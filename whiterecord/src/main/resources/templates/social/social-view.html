@@ -7,6 +7,7 @@
 img {
     max-width: 100%;
     max-height: 100%;
+    margin-left: auto; margin-right: auto; display: block;
 }
  
 
@@ -26,6 +27,9 @@ img {
   	    //   data : {},
   	    let result = document.getElementById("result").value;
     	socialContent();
+    	if(result == "login"){
+    		location.reload();
+    	}
   	    if(result != "" ){
 	        toastr.options.preventDuplicates = true;
 	    	toastr.success(result);
@@ -38,9 +42,9 @@ img {
  	   $.ajax({
 	        url : '/social/social-content',
 	        type : 'get',
-	        data : {"page":page, "resort": resort , "categori":categori , "searchType": searchType, "keyword":keyword, "offerdate":offerdate ,"offerdateEnd":offerdateEnd , "completeCheck":completeCheck},
+	        data : {"page":page, "resort": resort , "categori":categori , "searchType": searchType, 
+	        	"keyword":keyword, "offerdate":offerdate ,"offerdateEnd":offerdateEnd , "completeCheck":completeCheck},
 	        success : function(result){
-	        	console.log("아직스 들어옴");
 	            let a ='';
 	            //모달
 	            let modal = "";
@@ -57,10 +61,10 @@ img {
 		
 	            
 	         		if(complete == 'N'){	                
-	            	a += '<div class="col-md-3 card mr-5 ml-1 mt-5 border-success"  data-toggle="modal" data-target="#ModalNum'+modalNum+'"> ';
+	            	a += '<div class="col-md-3 card mr-5 ml-1 mt-5 border-success shadow" style="cursor:pointer;"  data-toggle="modal" data-target="#ModalNum'+modalNum+'" onclick="socialViewCnt('+value.sno+');"> ';
 	            	contact = value.contact;
 	         		}else{
-		            a += '<div class="col-md-3 card mr-5 ml-1 mt-5 border-primary" data-toggle="modal" data-target="#ModalNum'+modalNum+'">';	
+		            a += '<div class="col-md-3 card mr-5 ml-1 mt-5 border-primary shadow" style="cursor:pointer;" data-toggle="modal" data-target="#ModalNum'+modalNum+'">';	
 	         		}
     				a += '<div class="text text-2 pt-2 mt-3">';
     				a += '<span class="category  d-block "><a href="javascript::">'+value.categori+' | '+value.sno+'  </a><p style="font-size:15px;color:black;">'+value.resort+'<br>';
@@ -71,7 +75,7 @@ img {
     				}
     				a += '<hr/>';
     				a += '<h3 class="mb-4" style="font-size:20px" ><a href="#" data-toggle="modal" data-target="#ModalNum'+modalNum+'">'+value.title+' </a></h3>';
-    				a += '<div class=" text-truncate d-inline-block" style="height:200px; max-width:150px;" ><p class="mb-4">'+value.content+'</p></div>';
+    				a += '<div class=" text-truncate d-inline-block" style="height:200px; max-width:150px; " ><p class="mb-4">'+value.content+'</p></div> <hr/>';
 	                a += '<div class="author mb-4 d-flex align-items-center">';
 	                a += '<a href="javascript::"  class="img" style="background-image: url('+value.memberVO.img+');"></a>';
 	                a += '<div class="ml-3 info" >';
@@ -99,11 +103,11 @@ img {
 	     	           +     ' 	<div class="col-md-12">'
 	     	          +	    '						<div class="blog-entry ">'
 	     	          +	    '							<div class="text pt-2 mt-3">'
-	     	          	+	'			          	<span class="category mb-1 d-block"><a href="#" style="font-size:15px;">'+value.categori+'</a> <p style="font-size:18px;">'+value.resort+' / '+value.offerdate+'</p></span>'
-	     	          +		'		              <h3 class="mb-4"><a href="#">'+value.title+' / '+value.sno+'</a></h3>'
-	     	          	+	'		              <p class="mb-4" style="color:black;" >'+value.content+'</p>'
+	     	          	+	'			          	<span class="category mb-1 d-block"><a href="javascript::" style="font-size:15px;">'+value.categori+' | '+value.sno+'</a> <p style="font-size:18px;">'+value.resort+' / '+value.offerdate+'</p></span>'
+	     	          +		'		              <h3 class="mb-4"><a href="#">'+value.title+' </a></h3><hr/>'
+	     	          	+	'		              <div style="color:black; font-size:18px;"><p class="mb-4" style="color:black;" >'+value.content+'</p></div>'
 	     	          
-	     	          	+	'		              <hr> <p class="mb-4" style="color:black; font-size:18px;">연락처  <br/>'+contact+' </p>'	     	         
+	     	          	+	'		              <hr> <span class="mb-4 category" style=" font-size:18px;"><a href="javascript::">연락처  </a></span><p style="color:black; font-size:15px;">'+contact+'</p><hr>'	     	         
   		
 	     	          	
 	     	          	+	'		              <div class="author mb-4 d-flex align-items-center" style="text-align:right;">'
@@ -219,7 +223,7 @@ img {
 	   })
 	   
    }
-   
+ 
    function socialUpdate(sno){
 
 	   if(confirm("수정하겠습니까?") == true){
@@ -290,6 +294,26 @@ img {
 	   })
 	   }
    }
+   
+   function socialViewCnt(sno){
+
+	
+	   $.ajax({
+	        url : '/social/social-viewcnt',
+	        type : 'put',   
+	       	data : {"sno":sno},
+	        success : function(result){
+
+	        },
+	        error : function(result){
+		        toastr.options.preventDuplicates = true;
+		    	toastr.warning("조회수증가 실패");
+	        }
+	        
+	   })
+	   
+   }
+   
   </script>   
   <body>
 <input type="hidden" id="result" th:value="${result}">
@@ -305,19 +329,19 @@ img {
 	    	
 	    			<div class="col-lg-12">
 	    				    <form>
-	    		<div class="col-md-11  card row ">
+	    		<div class="col-md-12 card row shadow-sm ">
 	    		
 	    		
 	<ul class="nav mt-2 mb-2 ">
 	<li class="nav-item mr-3  mb-2">	
-	<select class="form-control" id="categori" onchange="socialInput();">
+	<select class="form-control" id="categori" onchange="socialInput();" data-toggle="tooltip" data-placement="top" title="카테고리">
   <option selected value="">카테고리All</option>
   <option value="출격부">출격부</option>
   <option value="카풀제공">카풀제공</option>
   <option value="카풀요청">카풀요청</option>
   <option value="동호회">동호회/시즌방/단톡</option>
   <option value="숙소제공">숙소제공</option>
-  <option value="숙소요청">숙소요청</option>
+  <option value="숙소요청">숙소요청</option> 
   <option value="강습제공">강습제공</option>
   <option value="강습요청">강습요청</option>
   <option value="쉐어모집">쉐어모집</option>
@@ -325,7 +349,7 @@ img {
 	</select></li>
 	
 	<li class="nav-item mr-3  mb-2">
-	<select class="form-control" id="resort" onchange="socialInput();">
+	<select class="form-control" id="resort" onchange="socialInput();" data-toggle="tooltip" data-placement="top" title="스키장">
   <option selected value="">스키장All</option>
   <option value="휘닉스">휘닉스</option>
   <option value="용평">용평</option>
@@ -344,8 +368,8 @@ img {
 	</select>
 	</li>
 	<li class="nav-item mb-2 mr-3"><div class="input-group" >
-            <input class="form-control" type="date" id="offerdate" onchange="socialInput();" > <h2 id="daten">&nbsp;~&nbsp;</h2>
-           <input class="form-control" type="date" id="offerdateEnd" onchange="socialInput();" ></div>
+            <input class="form-control" type="date" id="offerdate" onchange="socialInput();" data-toggle="tooltip" data-placement="top" title="시작일" > <h2 id="daten">&nbsp;~&nbsp;</h2>
+           <input class="form-control" type="date" id="offerdateEnd" onchange="socialInput();" data-toggle="tooltip" data-placement="top" title="종료일" ></div>
 	</li>
 	<li class="nav-item mb-2 mt-2 mr-3">
 
@@ -368,7 +392,7 @@ img {
     <option value="tc">제목/내용</option>
     <option value="id">아이디</option>
   </select>
-	<input type="text" class="form-control" id="keyword" onkeyup="socialInput();" placeholder="타입 지정 후 검색어 입력">
+	<input type="text" class="form-control" id="keyword" onkeyup="socialInput();" placeholder="타입 지정 후 검색어 입력" data-toggle="tooltip" data-placement="right" title="검색타입을 지정해주세요">
 </div>
 	</li>
 	
@@ -380,14 +404,14 @@ img {
 	    		
 	    			</div>
 	    			</form>
-	    		
-	    			<div class="col-md-12" >
+	    			
+	    			<div class="col-md-12 "  >
 	    				
-	    				<div class="row blog-entry ftco-animate"  id="content" >
+	    				<div class="row blog-entry ftco-animate" style="float: none; margin:0 auto;"  id="content" >
 	    				
 	    						
 	    			</div>
-	    			
+	    		
 	    		
 	    		<div class="row mt-5">
 			          <div class="col">

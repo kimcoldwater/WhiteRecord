@@ -9,7 +9,10 @@ public class ImgConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/img/**")
-                .addResourceLocations("file:///c:/mp/whiteRecordImg/"); //리눅스 root에서 시작하는 폴더 경로
+        registry.addResourceHandler("img/**")
+                .addResourceLocations("file:///c:/mp/tempImg/"); //리눅스 root에서 시작하는 폴더 경로
+
+        registry.addResourceHandler("image/**")
+        .addResourceLocations("file:///c:/mp/whiteRecordImg/"); //리눅스 root에서 시작하는 폴더 경로
     }
 }

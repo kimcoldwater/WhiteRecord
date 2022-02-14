@@ -16,6 +16,7 @@ import cs.projects.whiterecord.model.Location;
 import cs.projects.whiterecord.model.Review;
 import cs.projects.whiterecord.repository.LocationRepository;
 import cs.projects.whiterecord.repository.ReviewRepository;
+import cs.projects.whiterecord.util.FileUtils;
 import cs.projects.whiterecord.util.MapCriteria;
 import cs.projects.whiterecord.util.ReviewCriteria;
 import cs.projects.whiterecord.vo.LocationVO;
@@ -35,15 +36,20 @@ public class MapServiceImpl implements MapService {
 	@Autowired 
 	private MapMapper mapMapper;
 	
+	@Autowired
+	private FileUtils fileUtils;
+	
+	
+	public Location locationInsert(Location location) throws Exception{
+
+		return locationRepository.saveAndFlush(location);
+	}
+	
 	public int locationCheck(Location location)throws Exception{
 		int check = locationRepository.countByLnameAndAddress(location.getLname(), location.getAddress());
 		return check;
 	}
 
-	public Location locationInsert(Location location) throws Exception{
-
-		return locationRepository.saveAndFlush(location);
-	}
 	
 	public Review reviewInsert(Review review, Location location)throws Exception{
 		Location locationLno = locationRepository.findByLnameAndAddress(location.getLname(), location.getAddress());
@@ -55,6 +61,7 @@ public class MapServiceImpl implements MapService {
 		review.setRimg(imgSrc);
 		//업데이트 시 최신리뷰 썸네일로 location 사진을 변경
 		mapMapper.locationImg(locationLno.getLno(),imgSrc);
+		review.setContent(fileUtils.moveImg(review.getContent()));
 		}
 		//location에 리뷰카운트 +1
 		mapMapper.reviewCnt(locationLno.getLno());
@@ -70,6 +77,8 @@ public class MapServiceImpl implements MapService {
 			  		Matcher matcher = nonValidPattern.matcher(content);
 			  		while (matcher.find()) {
 			  			img = matcher.group(1);
+			  			img = img.replace("/img", "/image");
+			  		
 			  			imgCnt++;
 			  			if(imgCnt == 1){
 			  		        break;                                  
@@ -103,15 +112,16 @@ public class MapServiceImpl implements MapService {
 	public void reviewEdit(Review review)throws Exception{
 	String imgSrc = getImgSrc(review.getContent());
 	if(imgSrc != "") {
-		mapMapper.reviewImgEdit(imgSrc,review.getRno());
-	//업데이트 시 최신리뷰 썸네일로 location 사진을 변경
+		review.setContent(fileUtils.moveImg(review.getContent()));
+		
 	}
 	Map<String, Object> map = new HashMap<String, Object>();
 	map.put("rno", review.getRno());
 	map.put("title",review.getTitle());
 	map.put("content",review.getContent());
 	map.put("resort",review.getResort());
-	map.put("categori",review.getCategori());
+	map.put("categori", review.getCategori());
+	map.put("rimg", imgSrc);
 	mapMapper.reviewEdit(map);
 	}
 	
@@ -119,6 +129,10 @@ public class MapServiceImpl implements MapService {
 	public void reviewDelete(Review review)throws Exception{
 		reviewRepository.deleteById(review.getRno());
 		mapMapper.reviewCntDown(review.getLno());
+	}
+
+	public void reviewViewCnt(Long rno)throws Exception{
+		mapMapper.reviewViewCnt(rno);
 	}
 
 }

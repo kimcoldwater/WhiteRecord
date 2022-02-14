@@ -1,12 +1,10 @@
 package cs.projects.whiterecord.controller;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
@@ -16,12 +14,23 @@ public class HomeController {
 
 
 	
-	@GetMapping("/index")
-	public String index() throws Exception {
-		Document doc = Jsoup.connect("https://www.naver.com/").get();
-		Elements elem = doc.select("#search_btn");
-		logger.info("되니?"+elem);
-		return "/index";
+	@GetMapping("resort/info")
+	public ModelAndView resortInfo() throws Exception {
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("resort/info");
+		
+		return modelAndView;
+	}
+	
+	@GetMapping("home")
+	public ModelAndView index() throws Exception {
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("home");
+		
+		return modelAndView;
+		
 	}
 	
 }

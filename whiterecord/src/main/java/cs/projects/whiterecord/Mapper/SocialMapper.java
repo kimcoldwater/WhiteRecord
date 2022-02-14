@@ -21,4 +21,6 @@ public interface SocialMapper {
 		public void socialCompelete(Social social);
 	
 		public void socialSchedul();
+		
+		public void socialViewCnt(Social social);
 }

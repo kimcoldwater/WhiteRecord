@@ -13,6 +13,7 @@ import cs.projects.whiterecord.model.Member;
 import cs.projects.whiterecord.model.Social;
 import cs.projects.whiterecord.repository.SocialRepository;
 import cs.projects.whiterecord.util.Criteria;
+import cs.projects.whiterecord.util.FileUtils;
 import cs.projects.whiterecord.vo.SocialVO;
 
 @Service
@@ -23,6 +24,9 @@ public class SocialServiceImpl implements SocialService{
 	
 	@Autowired 
 	private SocialMapper socialMapper;
+	
+	@Autowired
+	private FileUtils fileUtils;
 	
 	public List<SocialVO> SocialConetent(Criteria cri) throws Exception{
 		return socialMapper.socialContent(cri);
@@ -45,7 +49,10 @@ public class SocialServiceImpl implements SocialService{
 		
 		Member member = (Member) session.getAttribute("member");
 		Long mno = (Long) member.getMno();
-		social.setMno(mno); // 나중에 세션값 넣기
+		social.setMno(mno); 
+		
+		social.setContent(fileUtils.moveImg(social.getContent()));
+		
 		return socialRepository.save(social);	
 		}
 	
@@ -88,5 +95,8 @@ public class SocialServiceImpl implements SocialService{
 		socialMapper.socialSchedul();
 	}
 
+	public void socialViewCnt(Social social)throws Exception{
+		socialMapper.socialViewCnt(social);
+	}
 
 }

@@ -46,16 +46,19 @@ public class SchedulerApplication {
        socialService.socialSchedul();
     }
     
-    @Scheduled(cron = "0 0 9 * 12,1,2,3 *")
+    @Scheduled(cron = "0 0 12 * 12,1,2,3 *")
     public void insertDensity() throws Exception{
-    	logger.info("density스케쥴러 작동");
+		logger.info("density스케쥴러 작동");
     	LocalDate now = LocalDate.now(ZoneId.of("Asia/Seoul"));
-		LocalDate day6upAgo = now.plusDays(5);
-		LocalDate day1downAgo = now.minusDays(1);
+		LocalDate day6upAgo = now.plusDays(6);
+    	//당일날짜 기준 3일 후 오전 10시에 예측데이터가 기록데이터로 업데이트 됨
+		LocalDate day1downAgo = now.minusDays(4);
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 		// 포맷 적용
 		String formated6Ago = day6upAgo.format(formatter);
 		String formated1Ago = day1downAgo.format(formatter);
+		logger.info(formated6Ago);
+		logger.info(formated1Ago);
 		
 
 		
@@ -143,6 +146,7 @@ public class SchedulerApplication {
 		    //URL 연결은 입출력에 사용될 수 있다. 
 		    //URL 연결을 출력용으로 사용하려는 경우 DoOutput 플래그를 true로 설정하고, 
 		    //그렇지 않은 경우는 false로 설정해야 한다. 기본값은 false이다.
+		    // true로 설정하면 자동으로 POST로 설정된다.
 		    con.setDoOutput(false); 
 
 
@@ -151,6 +155,7 @@ public class SchedulerApplication {
 		      while ((line = br.readLine()) != null) {
 		      sb.append(line);
 		      }
+		      br.close();
 		      SafeCasterVO safeCasterVO = mapper.readValue(sb.toString(), SafeCasterVO.class);		      
 		      Density density = new Density();
 		      
@@ -164,9 +169,8 @@ public class SchedulerApplication {
 		      density.setT18(safeCasterVO.getData().get(18).getFlowDensityPercentile());
 		      density.setT21(safeCasterVO.getData().get(21).getFlowDensityPercentile());
 		      densityService.dataInsert(density);
-		      br.close();
+
 		}
-		
 		
 		//예측데이터값을 regdate날짜를 지난 후 기록데이터값으로 update 
 		for(int i = 0 ; i<resort.size(); i++) {
@@ -201,6 +205,7 @@ public class SchedulerApplication {
 		      while ((line = br.readLine()) != null) {
 		      sb.append(line);
 		      }
+		      br.close();
 		      SafeCasterVO safeCasterVO = mapper.readValue(sb.toString(), SafeCasterVO.class);		      
 		      Density densityUp = new Density();
 		      
@@ -214,7 +219,6 @@ public class SchedulerApplication {
 		      densityUp.setT18(safeCasterVO.getData().get(18).getFlowDensityPercentile());
 		      densityUp.setT21(safeCasterVO.getData().get(21).getFlowDensityPercentile());
 		      densityService.densityUpdate(densityUp);
-		      br.close();
 		}
 		
     }

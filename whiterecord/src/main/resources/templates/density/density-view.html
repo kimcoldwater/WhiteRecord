@@ -9,9 +9,10 @@
  $(document).ready(function(){
 	 makeday();
     densityInput();
+    density();
 	});
  
- /*
+ 
 function density(){
 	let filterDate ;
 	let zipCd;
@@ -20,7 +21,7 @@ function density(){
 	        url : 'https://apis.openapi.sk.com/safecaster/v1/search/safetyindex/zip/day/hour',
 	        type : 'get',   
 	        async : false,
-	       	data : {"zipCd" : "17390" , "baseYmd" : "20220208"},
+	       	data : {"zipCd" : "17390" , "baseYmd" : "20220205"},
 	        beforeSend : function(xhr){
 	            xhr.setRequestHeader("appKey", "l7xxd2da36f3719b4b7aa4718a84ea8724f8");
 	        },
@@ -39,13 +40,13 @@ function density(){
 	   
 	   
 	
-}*/
+}
 
 let resort ; 
 let regdate ;
 let dataList = [];
-let min = 4;
-let max = 30;
+let min = 0;
+let max = 5;
 
 function densityInput(){
 	  
@@ -86,15 +87,16 @@ function makeday(){
 		<div id="colorlib-main">
 				<section class="ftco-section contact-section">
 	      <div class="container">
-	        <div class="row d-flex mb-5 contact-info text-center">
-	          <div class="col-md-12 mb-4 	">
+	      <div class="shadow-sm card p-2">
+	        <div class="row d-flex  contact-info text-center ml-3 mr-2 mt-2">
+	          <div class="col-md-12 mb-4">
 	          <!--    <h2 class="h4 font-weight-bold">Wanted Write</h2>-->
 	          </div>
 	          <div class="w-100"></div>
 
 	  	          <div class="col-md-4">
 	              <div class="form-group">
-	<select class="form-control" id="resort" onchange="densityInput();">
+	<select class="form-control" id="resort" onchange="densityInput();" data-toggle="tooltip" data-placement="top" title="스키장">
   <option value="휘닉스">휘닉스</option>
   <option value="용평">용평/알펜시아</option>
   <option value="비발디">비발디</option>
@@ -115,24 +117,25 @@ function makeday(){
          <div class="col-md-4">
 	              <div class="form-group">
 
-           <input class="form-control" type="date" id="regdate" onchange="densityInput();">
+           <input class="form-control" type="date" id="regdate" onchange="densityInput();" data-toggle="tooltip" data-placement="top" title="날짜선택">
            
            	</div>	
 
 </div>
 
         <div class="col-md-4">
-	            <span> 그래프 상단 선 설명을 눌러 on/off가 가능합니다 </span>
+	            <span> 선 색상을 눌러 on/off가 가능합니다 </span>
 	          </div>
 
 	        </div>
-	  
+	  <hr/>
 	  
   
 	  
 	  
-	  	<div class="col-md-12 mb-4">
+	  	<div class="col-md-12 mb-4" data-toggle="tooltip" data-placement="top" title="색상을 눌러 on/off">
   		<canvas id="myChart"></canvas>
+		</div>
 		</div>
 	  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js" integrity="sha512-TW5s0IT/IppJtu76UbysrBH9Hy/5X41OTAbQuffZFU6lQ1rdcLHzpU5BzVvr/YFykoiMYZVWlr/PX1mDcfM9Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	  <script>
@@ -141,7 +144,8 @@ function makeday(){
 		
 
 	  function densityList(){
-
+			min = 0;
+			max = 5;
 		  
 	  	   $.ajax({
 	  	        url : '/density/density-list',
@@ -166,15 +170,17 @@ function makeday(){
 	  						list.T18 = value.t18;
 	  						list.T21 = value.t21;
 	  	            	 dataList.push(list);
-	  	            
+	  	           
+	  	          	 if(value.t12 > max){
+  	            		 max = value.t12;
+  	            	 }
 	  	          })
 	  	          
 	  	          
-	  	          
+	  	          		
 	  	        
-				min = Math.ceil(dataList[0].T03 -4);
-				max = Math.round(dataList[0].T12 +4);
-				console.log("max="+max);
+	
+				max = Math.round(max+4);
 	  	           chart();
 	  		  	
 	  	        },
@@ -266,13 +272,13 @@ function makeday(){
 <br/>
 <br/>
 <br/>
-	 	        <div class="row d-flex mt-5 contact-info text-center">
+	 	        <div class="row d-flex mt-3 contact-info text-center shadow-sm">
 	 
 	  	          <div class="col-md-4 card">
-	            <span><p style="font-size:18px">데이터 수집</p>특정지역을 기준으로 기기당 모바일데이터 접속 수를 기준으로 유동인구 절대 지수를 측정합니다.</span>
+	            <span><p style="font-size:18px">데이터 수집</p>스키장의 기기당 모바일데이터 접속 수를 기준으로 유동인구 절대 지수를 측정합니다.</span>
 	          </div>
 	          <div class="col-md-4 card">
-	            <span><p style="font-size:18px">예측 데이터 </p>빅데이터 기반으로, 수집 된 정보를 통해 스키장 혼잡도를 예측합니다.예측 된 수치는 해당 날짜가 지나면 수집 된 수치로 변경됩니다.</span>
+	            <span><p style="font-size:18px">예측 데이터 </p>빅데이터를 기반으로 스키장 혼잡도를 예측합니다. 예측 된 수치는 당일기준 3일 후 실제 수집 된 수치로 변경됩니다.</span>
 	          </div>
 	          <div class="col-md-4 card">
 	            <span><p style="font-size:18px">당부사항</p> 특정일 특정시간의 리프트 대기시간을 제보해주시면 수치에 따른 대기시간 작성에 큰 도움이 됩니다 . (작성중) 수치는 오차가 발생할 수 있습니다.</span>

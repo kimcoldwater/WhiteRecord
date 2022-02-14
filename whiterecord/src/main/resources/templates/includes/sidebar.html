@@ -2,24 +2,30 @@
 		<!DOCTYPE html>
 		<html  xmlns:th="http://www.thymeleaf.org">
 		<aside id="colorlib-aside" role="complementary" class="js-fullheight text-center" th:fragment="sidebar(title)">
-			<h1 id="colorlib-logo"><a href="index.html">WhiteRecord<span>.</span></a></h1>
+			<h1 id="colorlib-logo"><a href="javascript::" onclick="Relode();">스탐<span>.</span></a></h1>
 			<nav id="colorlib-main-menu" role="navigation">
 				<ul>
-					<li><a href="index.html">Home</a></li>
-					<li th:classappend="${title} == '웹캠' ? 'colorlib-active'"><a th:href="@{/webcam/webcam-resort}">Webcam</a></li>
-					<li th:classappend="${title} == 'social' ? 'colorlib-active'"><a th:href="@{/social/social-view}">Wanted</a></li>
-					<li  th:classappend="${title} == 'map' ? 'colorlib-active'"><a th:href="@{/map/taste}">Map</a></li>
-					<li  th:classappend="${title} == 'density' ? 'colorlib-active'"><a th:href="@{/density/density-view}">Congestion</a></li>
-					<li><a href="contact.html">Contact</a></li>
+					<li th:classappend="${title} == '소개' ? 'colorlib-active'"><a th:href="@{/home}" data-toggle="tooltip" data-placement="right" title="소개페이지">소개.</a></li>
+					<li th:classappend="${title} == '웹캠' ? 'colorlib-active'"><a th:href="@{/webcam/webcam-resort}" data-toggle="tooltip" data-placement="right" title="실시간 웹캠">웹캠.</a></li>
+					<li  th:classappend="${title} == 'density' ? 'colorlib-active'"><a th:href="@{/density/density-view}" data-toggle="tooltip" data-placement="right" title="시간별 혼잡도">혼잡도.</a></li>
+					<li th:classappend="${title} == 'social' ? 'colorlib-active'"><a th:href="@{/social/social-view}" data-toggle="tooltip" data-placement="right" title="카풀,출격부...">구인.</a></li>
+					<li  th:classappend="${title} == 'map' ? 'colorlib-active'"><a th:href="@{/map/taste}" data-toggle="tooltip" data-placement="right" title="주변 맛집">맛집.</a></li>
+					<li  th:classappend="${title} == '스키장정보' ? 'colorlib-active'"><a th:href="@{/resort/info}" data-toggle="tooltip" data-placement="right" title="요금,날씨,슬로프...">정보.</a></li>					
+					<li  th:classappend="${title} == '입문' ? 'colorlib-active'"><a th:href="@{/guide/guide-view}" data-toggle="tooltip" data-placement="right" title="초보를 위한 정보">입문.</a></li>
+					<li  th:classappend="${title} == '리스트' ? 'colorlib-active'"><a th:href="@{/list/list-view}" data-toggle="tooltip" data-placement="right" title="스키장비샵">리스트.</a></li>
+
 				</ul>
 			</nav>
 
 			<div class="colorlib-footer">
-			<div th:if="${session.member != null}  ">Welcome<span th:text="${session.member.name}"></span>
+			<div th:if="${session.member != null}  ">
 				<nav id="colorlib-main-menu" role="navigation">
 				<ul>
-					<li><a href="#" >MyPage</a></li><br>
-					<li><a href="javascript::" onclick="logout();" >Logout</a></li>
+					<li  th:classappend="${title} == '마이페이지' ? 'colorlib-active'"><a th:href="@{/member/mypage}">마이페이지.</a></li>
+					<br/>
+					<li  th:classappend="${title} == '정보변경' ? 'colorlib-active'"><a th:href="@{/member/info-edit}">정보변경.</a></li>
+				<br/>
+					<li><a href="javascript::" onclick="logout();" >로그아웃.</a></li>
 				</ul>
 			</nav>
 			</div>
@@ -27,7 +33,7 @@
 			<div th:if="${session.member == null}  ">
 			<nav id="colorlib-main-menu" role="navigation">
 				<ul>
-					<li  th:classappend="${title} == 'login' ? 'colorlib-active'"><a  href="/member/login" >Login</a></li>
+					<li  th:classappend="${title} == 'login' ? 'colorlib-active'"><a  href="/member/login" >로그인.</a></li>
 				</ul>
 			</nav>
 
@@ -36,12 +42,17 @@
 
 			</div>
 			<script type="text/javascript">
+			
+			function Relode(){
+				location.reload();
+			}
+			
 			function logout(){
 				 $.ajax({
 				        url : '/member/logout',
 				        type : 'post',   
 				        success : function(result){
-				        location.reload();
+					    	 location.href='/social/social-view';
 				        },
 					error : function(
 							request,

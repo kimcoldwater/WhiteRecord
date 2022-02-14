@@ -18,10 +18,11 @@ public interface MemberRepository extends JpaRepository<Member , Long>{
 	 List<Member> findByEmail(String email);
 	 
 	 Member findByIdAndEmail(String id, String email);
-
+	 
+	 //정보변경
+	 int countByName(String name);
 	
-	
-	
+	 Member findByMno(Long mno);
 	
 	
 }

@@ -37,10 +37,10 @@ public class SocialController {
 
 	String result = "";
 	
-	@GetMapping("/social-view")
+	@GetMapping("social-view")
 	public ModelAndView socialView() throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("/social/social-view");
+		modelAndView.setViewName("social/social-view");
 		if(result != "") {
 			modelAndView.addObject("result", result);
 			result = "";
@@ -56,9 +56,8 @@ public class SocialController {
 		return result;
 	}
 	
-	@GetMapping("/social-content")
+	@GetMapping("social-content")
 	public Map<String,Object> socialContent(Criteria cri) throws Exception{
-		logger.info("cri.offerdate"+cri.getOfferdate());
 		Map<String,Object> result = new HashMap<String,Object>();
 		List<SocialVO> socialList = socialService.SocialConetent(cri);
 		PageMaker pageMaker = new PageMaker();
@@ -69,19 +68,19 @@ public class SocialController {
 		return result;
 	}
 	
-	@GetMapping("/social-create")
+	@GetMapping("social-create")
 	public ModelAndView socialCreate(HttpSession session) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
 		if(session.getAttribute("member") == null) {
-		modelAndView.setViewName("/member/login");
+		modelAndView.setViewName("redirect:/member/login");
 		modelAndView.addObject("result", "글을 작성하시면 로그인해주세요.");
 		}else {
-		modelAndView.setViewName("/social/social-create");
+		modelAndView.setViewName("social/social-create");
 		}
 		return modelAndView;
 	}
 	
-	@PostMapping("/social-create")
+	@PostMapping("social-create")
 	public String socialWrite(Social social,HttpSession session) throws Exception{
 		if(session.getAttribute("member") == null) {
 			result = "작성실패, 로그인을 해주세요";
@@ -95,7 +94,7 @@ public class SocialController {
 	}
 	
 	//나중에 session == updateContent.mno 체크하기
-	@GetMapping("/social-update")
+	@GetMapping("social-update")
 	public ModelAndView socialUpdateView(Long sno,HttpSession session) throws Exception{
 		Social socialContent = socialService.socialUpdateContent(sno).get();
 		Member member = (Member) session.getAttribute("member");
@@ -103,11 +102,11 @@ public class SocialController {
 		ModelAndView modelAndView = new ModelAndView();
 		//작성자인지 확인
 		if(member == null ||member.getMno() != socialContent.getMno()) {
-			modelAndView.setViewName("/social/social-view");
+			modelAndView.setViewName("redirect:/social/social-view");
 			modelAndView.addObject("result", "본인만 수정 가능합니다");
 			return modelAndView;
 		}
-		modelAndView.setViewName("/social/social-update");
+		modelAndView.setViewName("social/social-update");
 		modelAndView.addObject("updateContent", socialContent);
 		return modelAndView;
 		
@@ -126,7 +125,7 @@ public class SocialController {
 	
 	
 	//나중에 파일테이블 만들어서 글 삭제시 같이 삭제되도록 하기
-	@PostMapping("/uploadImg")
+	@PostMapping("uploadImg")
 	public Map<String,Object> image( MultipartHttpServletRequest multipart) throws Exception{
 		logger.info("updateImg");
 		FileUtils fileUtils = new FileUtils();
@@ -143,6 +142,11 @@ public class SocialController {
 	@PutMapping("social-complete")
 	public void socialComplete(Social social)throws Exception{
 	 socialService.socialComplete(social);
+	}
+	
+	@PutMapping("social-viewcnt")
+	public void socialViewCnt(Social social)throws Exception{
+		socialService.socialViewCnt(social);
 	}
 	
 	

@@ -8,8 +8,10 @@ select * from social
 
 <select id="socialContent" resultMap="SocialVO"
 parameterType="cs.projects.whiterecord.util.Criteria">
-select  a.sno , a.resort, a.title, a.content,a.contact, a.mno  ,a.area, a.categori, a.viewcnt,a.complete, a.regdate,a.offerdate,a.enddate,a.bookmarkcnt,b.mno,b.id,b.name,b.img from ( 
-select sno , resort, title, content,contact, mno ,area, categori, viewcnt,complete, regdate,offerdate,enddate,bookmarkcnt, ROW_NUMBER() OVER(order by complete, sno desc) AS SNUM
+select  a.sno , a.resort, a.title, a.content,a.contact, a.mno  ,a.area, a.categori, a.viewcnt,a.complete, a.regdate,a.offerdate,a.enddate,a.bookmarkcnt,b.mno,b.id,b.name,b.img 
+from ( 
+select sno , resort, title, content,contact, mno ,area, categori, viewcnt,complete, regdate,offerdate,enddate,bookmarkcnt, 
+ROW_NUMBER() OVER(order by complete, sno desc) AS SNUM
 from social
 where 1=1
 	<if test="categori != '' ">AND CATEGORI = #{categori}</if>
@@ -76,5 +78,9 @@ update social set complete = 'Y' where sno = #{sno}
 
 <update id="socialSchedul">
 <![CDATA[update social set complete = 'Y' where offerdate < TO_DATE(SYSDATE, 'YY-MM-DD') OR ENDDATE < TO_DATE(SYSDATE, 'YY-MM-DD')]]>
+</update>
+
+<update id="socialViewCnt">
+update social set viewcnt = viewcnt+1 where sno = #{sno}
 </update>
 </mapper>

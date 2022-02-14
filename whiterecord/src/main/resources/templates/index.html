@@ -41,47 +41,7 @@
 				<div class="js-fullheight d-flex justify-content-center align-items-center">
 					<div class="col-md-8 text text-center">
 						<div class="img mb-4" style="background-image: url(elen/images/author.jpg);"></div>
-						
-	 <div align="center">
-	  <video id="myvideo1" class="vjs-default-skin "  controls preload="auto" >
-		<source src="https://stream.camtour.net/hls/jisan3.m3u8" type="application/x-mpegURL">
-	  </video>
-	 </div> 
-	  
-	  	 <div align="center">
-	  <video id="myvideo2" class="vjs-default-skin "  controls preload="auto" >
-		<source src="https://stream.camtour.net/hls/jisan2.m3u8" type="application/x-mpegURL">
-	  </video>
-	 </div> 
-	 
-	  <script>
-		var player = videojs('myvideo1',{liveui:true},);
-		var playerr = videojs('myvideo2',{liveui:true},);
-
-	 player.ready(function() {
-	  setTimeout(function() {
-		player.autoplay('muted');
-		player.fluid(true);
-		
-	  }, 100);
-	});
-	 
-	 playerr.ready(function() {
-		  setTimeout(function() {
-			playerr.autoplay('muted');
-			playerr.fluid(true);
-			
-		  }, 100);
-		});
-	 
-	var video = $("video").get(2);
-	video.load();
-	video.play();
-	if (video.paused) {
-	  location.reload(true);
-	}
-	  </script>
-	  
+				
 	  
 						<div class="desc">
 							<h2 class="subheading">Hello I'm</h2>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="includes/header :: head('로그인')">
+   
+  </head>
+  <style>
+ .ck-editor__editable
+ {
+    min-height: 300px !important;
+ }
+</style>
+<script
+	src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js"></script>
+<script type="text/javascript">
+
+
+
+$(document).ready(function(){
+
+});
+
+	
+	 $.ajax({
+	        url : '/member/editName',
+	        type : 'post',   
+	       	data : {"name": name},
+	        success : function(data){
+	        
+	   
+	        },
+		error : function(
+				request,
+				status, error) {
+			alert("code:"
+					+ request.status
+					+ "\n"
+					+ "message:"
+					+ request.responseText
+					+ "\n"
+					+ "error:"
+					+ error);
+			
+	        toastr.options.preventDuplicates = true;
+	    	toastr.warning("에러");
+
+		}
+	        
+	   })
+}
+
+
+	
+	
+
+  </script>
+  <body th:inline="text">
+	<div id="colorlib-page">
+		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+		<aside th:replace="includes/sidebar :: sidebar('리스트')">
+		</aside> <!-- END COLORLIB-ASIDE -->
+		
+		
+		<div id="colorlib-main">
+			<div class="hero-wrap js-fullheight" style="background-image: url(/elen/images/bg_1.jpg);" data-stellar-background-ratio="0.5">
+				<div class="overlay"></div>
+				
+			<section class="ftco-section">
+	    	<div class="container">
+	    		<div class="row">
+
+	    			<div class="col-md-12 row" style="text-align:center">
+	    			
+	    			<h1>2022/2023시즌 오픈예정</h1>
+					
+	    						
+	    			</div>
+	    		
+	    
+	
+	    	
+			   
+
+			    	</div>
+		
+	    		</div>
+	 
+	    </section>
+	   	</div>			
+			
+
+
+			
+  <footer th:replace="includes/footer :: footer('메인')">
+     
+    </footer>
+		</div><!-- END COLORLIB-MAIN -->
+	</div><!-- END COLORLIB-PAGE -->
+
+
+
+  <!-- loader -->
+	<div th:include="includes/loader"></div>
+
+    
+  </body>
+</html>

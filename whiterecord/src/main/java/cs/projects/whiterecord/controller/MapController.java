@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import cs.projects.whiterecord.model.Location;
 import cs.projects.whiterecord.model.Member;
 import cs.projects.whiterecord.model.Review;
+import cs.projects.whiterecord.model.Social;
 import cs.projects.whiterecord.service.MapService;
 import cs.projects.whiterecord.util.MapCriteria;
 import cs.projects.whiterecord.util.MapPageMaker;
@@ -41,10 +42,10 @@ public class MapController {
 	
 	String result = "";
 	
-	@GetMapping("/taste")
+	@GetMapping("taste")
 	public ModelAndView tasteView() throws Exception {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("/map/taste");
+		modelAndView.setViewName("map/taste");
 		if(result != "") {
 		modelAndView.addObject("result", result);
 		result="";
@@ -53,7 +54,7 @@ public class MapController {
 
 	}
 	
-	@GetMapping("/location-view")
+	@GetMapping("location-view")
 	public Map<String, Object> locationView(MapCriteria mapCriteria)throws Exception{
 	Map<String,Object> result = new HashMap<String,Object>();
 	List<LocationVO> locaList = mapService.locationView(mapCriteria);
@@ -65,7 +66,7 @@ public class MapController {
 	return result;
 	}
 	
-	@GetMapping("/review-view")
+	@GetMapping("review-view")
 	public Map<String, Object> review(ReviewCriteria reviewCriteria)throws Exception{
 	Map<String,Object> result = new HashMap<String,Object>();
 	List<ReviewVO> revList = mapService.reviewContent(reviewCriteria);
@@ -77,25 +78,25 @@ public class MapController {
 	return result;
 	}
 	
-	@GetMapping("/taste-write")
+	@GetMapping("taste-write")
 	public ModelAndView tasteWriteView(HttpSession session) throws Exception {
 		Member member = (Member) session.getAttribute("member");
 		ModelAndView modelAndView = new ModelAndView();
 
 		if(member == null) {
 			result = "로그인이 필요합니다.";
-			modelAndView.setViewName("/map/taste");
+			modelAndView.setViewName("redirect:/member/login");
 			modelAndView.addObject("result", result);
 			result="";
 			return modelAndView;	
 		}
 
-		modelAndView.setViewName("/map/taste-write");
+		modelAndView.setViewName("map/taste-write");
 
 		return modelAndView;
 	}
 	
-	@PostMapping("/taste-write")
+	@PostMapping("taste-write")
 	public String tasteWrite(Location location,Review review,HttpSession session) throws Exception{
 		
 		Member member = (Member) session.getAttribute("member");
@@ -115,7 +116,7 @@ public class MapController {
 		return result;
 	}
 	
-	@GetMapping("/taste-edit")
+	@GetMapping("taste-edit")
 	public ModelAndView tasteEditView(HttpSession session,Long rno)throws Exception{
 		Review review = mapService.editView(rno);
 		Member member = (Member) session.getAttribute("member");
@@ -123,31 +124,35 @@ public class MapController {
 
 		if(member == null || review.getMno() != member.getMno() ) {
 			result = "본인 리뷰만 수정이 가능합니다.";
-			modelAndView.setViewName("/map/taste");
+			modelAndView.setViewName("redirect:/map/taste");
 			modelAndView.addObject("result", result);
 			result="";
 			return modelAndView;	
 		}
 
-		modelAndView.setViewName("/map/taste-edit");
+		modelAndView.setViewName("map/taste-edit");
 		modelAndView.addObject("revList", review);
 		return modelAndView;
 		
 	}
 	
-	@PutMapping("/taste-edit")
+	@PutMapping("taste-edit")
 	public String tasteEdit(Review review)throws Exception{
 		mapService.reviewEdit(review);
 		result = "리뷰 수정 완료";
 		return result;
 	}
 	
-	@DeleteMapping("/taste")
+	@DeleteMapping("taste")
 	public void tasteDelete(Review review)throws Exception{
 		mapService.reviewDelete(review);
 
 	}
-	
+
+	@PutMapping("taste-viewcnt")
+	public void reviewViewCnt(Review review)throws Exception{
+		mapService.reviewViewCnt(review.getRno());
+	}
 	
 	
 }

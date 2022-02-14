@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="includes/header :: head('로그인')">
+   
+  </head>
+<style>
+img {
+    max-width: 100%;
+    max-height: 100%;
+    margin-left: auto; margin-right: auto; display: block;
+}
+ 
+
+</style>
+<script
+	src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js"></script>
+<script type="text/javascript" th:inline="javascript">
+
+
+
+$(document).ready(function(){
+	socialContent();
+
+});
+
+let page = 1;
+
+let mno = [[${session.member.mno}]];
+
+function socialContent(){
+
+	   $.ajax({
+	        url : '/member/mypage-social',
+	        type : 'get',
+	        data : {"page":page, "mno":mno},
+	        success : function(result){
+	            let a ='';
+	            //모달
+	            let modal = "";
+	            let smodalNum = 1;
+	            let pageBtn = '';
+	          	let socialList = result.socialList;
+	          	let pageMaker = result.pageMaker;
+
+	          	console.log(socialList);
+	            if(socialList<1){
+	            	a +='<h2>작성글이 없습니다</h2> ';}
+	            
+	            $.each(socialList, function(key, value){ 
+	 
+						
+				let complete = value.complete;
+            	let contact = "******";
+
+					a +='    <div class="block-21 mb-4 d-flex " style="cursor:pointer;" >'
+                + '<div class="text">'
+                + '<h3 class="heading" style="font-size:20px"><a href="javascript::" data-toggle="modal" data-target="#sModalNum'+smodalNum+'" >'+value.title+'</a></h3>';
+               if(complete == 'N'){
+                a += '<button class="btn btn-outline-success mr-2" type="button" onclick="socialCompleteChange('+value.sno+')">마감</button>';
+                contact = value.contact 
+               }
+                a += '<button class="btn btn-outline-warning mr-2" type="button" onclick="socialUpdate('+value.sno+')">수정</button>'
+                + '<button class="btn btn-outline-danger mr-2" type="button" onclick="socialDelete('+value.sno+')">삭제 </button>'
+                + '<div class="meta">'
+                + '<div><a> <span>작성 : '+value.regdate+' // </span> <span> <i class="icon-eye"></i> '+value.viewcnt+'</span>';
+                if(value.offerdate == null){
+                a += '<p>종료기한 : '+value.enddate+' </p></a> </div>';
+                }else{
+                a += '<p>마감기한 : '+value.offerdate+' </p></a> </div>';
+  	
+                }
+               	a += '</div></div></div><hr/>';		
+               	
+               	
+               	
+	                modal += '<div class="modal fade" id="sModalNum'+smodalNum+'"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">' 
+	     	           + '<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">'
+	     	           + '  <div class="modal-content">'
+	     	              
+	     	           +  '   <div class="modal-body"> '
+	     	           +   '   <button type="button" class="close" data-dismiss="modal" aria-label="Close">'
+	     	           +   '      <span aria-hidden="true">&times;</span>'
+	     	           +    '   </button>'
+	     	           +     ' 	<div class="col-md-12">'
+	     	          +	    '						<div class="blog-entry ">'
+	     	          +	    '							<div class="text pt-2 mt-3">'
+	     	          	+	'			          	<span class="category mb-1 d-block"><a href="javascript::" style="font-size:15px;">'+value.categori+' Review</a> <p style="font-size:18px;">'+value.resort+'</p></span>'
+	     	          +		'		              <h3 class="mb-4"><a href="#">'+value.title+'</a></h3><hr/>'
+	     	          	+	'		             <div style="color:black; font-size:18px;"> <p class="mb-4" >'+value.content+'</p> </div>'
+	     	          	+	'		              <hr> <span class="mb-4 category" style=" font-size:18px;"><a href="javascript::">연락처  </a></span><p style="color:black; font-size:15px;">'+contact+'</p><hr>'	     	         
+
+	     	          	+	'		              <div class="author mb-4 d-flex align-items-center" style="text-align:right;">'
+	     	          	+	'		            		<div class="ml-3 info">'
+	     	          	+	'		            			<span>Written by</span>'
+	     	          	+	'		            			<h3 > <p style="font-size:12px;">'+value.regdate+'</p></h3>'
+	     	          	+	'		            		</div>'
+	     	          	+	'		            	</div>'
+	     	          	+	'		              <div class="meta-wrap d-md-flex align-items-center">'
+	     	          	+	'		              	<div class="half ">'
+	     	          				              		
+	     	          	+		'	              	</div></div></div></div></div>'
+	     	          			
+
+	     	            +  '</div>  <div class="modal-footer">';
+	     	           //if(session != null && session.mno == value.mno){}	     	            
+	     	            modal +=  '    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>'
+	     	            +   ' </div></div></div></div>';
+	     	              smodalNum++ ;
+	            
+	            });
+	            
+	            
+	        	$("#smodal").html(modal);
+	            $("#content").html(a);
+	            //페이징 for문, 단! startPage는 0이 아닌 1에서 시작하므로 endPage에 +1을 해준다.
+	            
+	           
+	            
+	            if(pageMaker.prev){
+		            pageBtn += '<li class="mr-1 page-item"><a href="javascript:;" class="page-link" onclick="socialMovePrev(-1);">&lt;</a></li>'
+		            }        
+		            for(var i = pageMaker.startPage; i < pageMaker.endPage+1 ; i++){
+
+		 
+		    	     if(page == i){
+		    	    	 pageBtn +=	 '<li class="active mr-1 page-item"><a class="page-link" href="javascript:;" onclick="socialMovePage('+i+');">'+i+'</a></li>'; 
+		    	     }else{
+		    	    	 pageBtn +=	 '<li class="mr-1 page-item"><a href="javascript:;" class="page-link" onclick="socialMovePage('+i+');">'+i+'</a></li>';
+		    	     }       
+		            }
+		            if(pageMaker.next){	    
+		            pageBtn += '<li class="page-item"><a  href="javascript:;" class="page-link" onclick="socialMovePrev(+1);">&gt;</a></li>'
+		        	}
+		           
+	         
+		            
+		            $("#sPagination").html(pageBtn);
+	            
+	            
+	            
+	        }
+	        /* 로딩바
+	        , beforeSend: function() {
+	        	
+	             var spinner = "";
+	             spinner += '<div class="d-flex justify-content-center"><div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div></div>';
+	             $("#spinner").html(spinner);
+	       }
+	       , complete: function() {
+	                     $("#spinner").hide();
+	       }  */
+
+
+
+	    });
+   }
+   
+   
+   
+
+
+function socialMovePage(pageNum){
+	   page = pageNum;
+	   socialContent();
+	   $('html').scrollTop(0);
+}
+
+function socialMovePrev(pageNum){
+	   page = page + pageNum;
+	   socialContent();
+}
+	
+	
+function socialCompleteChange(sno){
+	   if(confirm("마감하시겠습니까?") == true){
+	   $.ajax({
+	        url : '/social/social-complete',
+	        type : 'put',   
+	       	data : {"sno":sno},
+	        success : function(result){
+	            toastr.options.preventDuplicates = true;
+		    	toastr.success("마감완료");
+		    	socialContent();
+
+	        },
+	        error : function(result){
+		        toastr.options.preventDuplicates = true;
+		    	toastr.warning("글삭제 실패");
+	        }
+	        
+	   })
+	   }
+}
+
+function socialUpdate(sno){
+
+	   if(confirm("수정하겠습니까?") == true){
+	   location.href = '/social/social-update?sno='+sno
+	   }
+}
+
+
+function socialDelete(sno){
+
+	   if(confirm("삭제하시겠습니까?") == false){
+		   return false;
+	   }
+		   
+	   
+
+	   $.ajax({
+	        url : '/social/social-view',
+	        type : 'delete',   
+	       	data : {"sno":sno},
+	        success : function(result){
+	        	
+	        toastr.options.preventDuplicates = true;
+	    	toastr.success(result);
+	    	location.reload();
+
+	        },
+	        error : function(result){
+		        toastr.options.preventDuplicates = true;
+		    	toastr.success("글삭제 실패");
+	        }
+	        
+	   })
+	   
+}
+
+
+
+// 리뷰
+let rpage = 1;
+function revContent(){
+
+	   $.ajax({
+	        url : '/member/mypage-review',
+	        type : 'get',
+	        data : {"page":rpage, "mno":mno},
+	        success : function(result){
+	            let a ='';
+	            //모달
+	            let modal = "";
+	            let modalNum = 1;
+	            let pageBtn = '';
+	          	let revList = result.revList;
+	          	let pageMaker = result.pageMaker;
+
+	          	console.log(revList);
+	            if(revList<1){
+	            	a +='<h2>작성글이 없습니다</h2> ';}
+	            
+	            $.each(revList, function(key, value){ 
+	 
+
+					a +='    <div class="block-21 mb-4 d-flex " >'
+                + '<div class="text">'
+                + '<h3 class="heading" style="font-size:20px"><a href="javascript::" data-toggle="modal" data-target="#rModalNum'+modalNum+'" >'+value.title+'</a></h3>';
+           
+                a += '<button class="btn btn-outline-warning mr-2" type="button" onclick="reviewEdit('+value.rno+')">수정</button>'
+                + '<button class="btn btn-outline-danger mr-2" type="button" onclick="reviewDelete('+value.rno+','+value.lno+')">삭제 </button>'
+                + '<div class="meta">'
+                + '<div><a> <span>작성 : '+value.regdate+' // </span> <span> <i class="icon-eye"></i> '+value.viewcnt+'</span>';
+    
+               	a += '</div></div></div></div><hr/>';		
+               	
+               	
+               	
+	                modal += '<div class="modal fade" id="rModalNum'+modalNum+'"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">' 
+	     	           + '<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">'
+	     	           + '  <div class="modal-content">'
+	     	              
+	     	           +  '   <div class="modal-body"> '
+	     	           +   '   <button type="button" class="close" data-dismiss="modal" aria-label="Close">'
+	     	           +   '      <span aria-hidden="true">&times;</span>'
+	     	           +    '   </button>'
+	     	           +     ' 	<div class="col-md-12">'
+	     	          +	    '						<div class="blog-entry ">'
+	     	          +	    '							<div class="text pt-2 mt-3">'
+	     	          	+	'			          	<span class="category mb-1 d-block"><a href="javascript::" style="font-size:15px;">'+value.categori+' Review</a> <p style="font-size:18px;">'+value.resort+'</p></span>'
+	     	          +		'		              <h3 class="mb-4"><a href="#">'+value.title+'</a></h3><hr/>'
+	     	          	+	'		             <div style="color:black; font-size:18px;"> <p class="mb-4" >'+value.content+'</p> </div>'
+
+	     	          	+	'		              <div class="author mb-4 d-flex align-items-center" style="text-align:right;">'
+	     	          	+	'		            		<div class="ml-3 info">'
+	     	          	+	'		            			<span>Written by</span>'
+	     	          	+	'		            			<h3 > <p style="font-size:12px;">'+value.regdate+'</p></h3>'
+	     	          	+	'		            		</div>'
+	     	          	+	'		            	</div>'
+	     	          	+	'		              <div class="meta-wrap d-md-flex align-items-center">'
+	     	          	+	'		              	<div class="half ">'
+	     	          				              		
+	     	          	+		'	              	</div></div></div></div></div>'
+	     	          			
+
+	     	            +  '</div>  <div class="modal-footer">';
+	     	           //if(session != null && session.mno == value.mno){}	     	            
+	     	            modal +=  '    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>'
+	     	            +   ' </div></div></div></div>';
+	     	              modalNum++ ;
+	            
+	            });
+	            
+	            
+	        	$("#rmodal").html(modal);
+	            $("#revContent").html(a);
+	            //페이징 for문, 단! startPage는 0이 아닌 1에서 시작하므로 endPage에 +1을 해준다.
+	            
+	           
+	            
+	            if(pageMaker.prev){
+		            pageBtn += '<li class="mr-1 page-item"><a href="javascript:;" class="page-link" onclick="revMovePrev(-1);">&lt;</a></li>'
+		            }        
+		            for(var i = pageMaker.startPage; i < pageMaker.endPage+1 ; i++){
+
+		 
+		    	     if(rpage == i){
+		    	    	 pageBtn +=	 '<li class="active mr-1 page-item"><a class="page-link" href="javascript:;" onclick="revMovePage('+i+');">'+i+'</a></li>'; 
+		    	     }else{
+		    	    	 pageBtn +=	 '<li class="mr-1 page-item"><a href="javascript:;" class="page-link" onclick="revMovePage('+i+');">'+i+'</a></li>';
+		    	     }       
+		            }
+		            if(pageMaker.next){	    
+		            pageBtn += '<li class="page-item"><a  href="javascript:;" class="page-link" onclick="revMovePrev(+1);">&gt;</a></li>'
+		        	}
+		           
+	         
+		            
+		            $("#rPagination").html(pageBtn);
+	            
+	            
+	            
+	        }
+	        /* 로딩바
+	        , beforeSend: function() {
+	        	
+	             var spinner = "";
+	             spinner += '<div class="d-flex justify-content-center"><div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div></div>';
+	             $("#spinner").html(spinner);
+	       }
+	       , complete: function() {
+	                     $("#spinner").hide();
+	       }  */
+
+
+
+	    });
+   }
+
+function revMovePage(pageNum){
+	   rpage = pageNum;
+	   revContent();
+}
+
+function revMovePrev(pageNum){
+	  rpage = page + pageNum;
+	  revContent();
+}
+
+function reviewEdit(rno){
+
+	   if(confirm("수정하겠습니까?") == true){
+	   location.href = '/map/taste-edit?rno='+rno
+	   }
+}
+
+function reviewDelete(rno, lno){
+	   if(confirm("삭제하겠습니까?") == true){
+		   $.ajax({
+		        url : '/map/taste',
+		        type : 'delete',
+		        data : {"rno":rno, "lno" : lno,},
+		        success : function(result){
+		            toastr.options.preventDuplicates = true;
+			    	toastr.success("삭제완료");
+			    	revContent();
+		
+		        }
+
+
+
+		    });
+		   
+	
+
+		   
+		  }
+	
+}
+  </script>
+  <body th:inline="text">
+	<input type="hidden" th:value="${result}" id="result">
+	<div id="colorlib-page">
+		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+		<aside th:replace="includes/sidebar :: sidebar('마이페이지')">
+		</aside> <!-- END COLORLIB-ASIDE -->
+		
+		
+		<div id="colorlib-main">
+				<div class="overlay"></div>
+				
+			<section class="ftco-section">
+	    	<div class="container">
+	    		<div class="row">
+
+	    			<div class="col-md-12 " >
+	    			
+	    			<!--  -->
+	    			<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">구인글</a>
+    <a class="nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false" onclick="revContent();">리뷰</a>
+    <!-- <a class="nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false"></a>-->
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+    <div class="sidebar-box ftco-animate" style="height:auto; overflow: auto" id="content" data-toggle="tooltip" data-placement="top" title="제목 클릭 시 내용 " >
+	              <div class="block-21 mb-4 d-flex">
+	                <a class="blog-img mr-4" style="background-image: url(/elen/images/image_1.jpg);"></a>
+	                <div class="text">
+	                  <h3 class="heading"><a href="#">이집 진짜 맛집인듯요</a></h3>
+	                  <div class="meta">
+	                    <div><a href="#"><span class="icon-person"></span> 리뷰작성자</a></div>
+	                    <div><a href="#"><span class="icon-heart"></span> 19</a></div>
+	                    
+	                  </div>
+	                </div>
+	              </div>
+	              </div>
+	    	    		<div class="row mt-5">
+			          <div class="col">
+			            <div class="block-27">
+							<ul class="pagination " id="sPagination"> </ul>
+			            </div>
+			          </div>
+			        </div>     
+  
+  </div>
+  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+   <div class="sidebar-box ftco-animate" style="height:auto; overflow: auto" id="revContent" data-toggle="tooltip" data-placement="top" title="제목 클릭 시 내용 " >
+	              <div class="block-21 mb-4 d-flex">
+	                <a class="blog-img mr-4" style="background-image: url(/elen/images/image_1.jpg);"></a>
+	                <div class="text">
+	                  <h3 class="heading"><a href="#">이집 진짜 맛집인듯요</a></h3>
+	                  <div class="meta">
+	                    <div><a href="#"><span class="icon-person"></span> 리뷰작성자</a></div>
+	                    <div><a href="#"><span class="icon-heart"></span> 19</a></div>
+	                    
+	                  </div>
+	                </div>
+	              </div>
+	              </div>
+	    	    		<div class="row mt-5">
+			          <div class="col">
+			            <div class="block-27">
+							<ul class="pagination " id="rPagination"> </ul>
+			            </div>
+			          </div>
+			        </div>     
+  
+  </div>
+  <!--<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>-->
+</div>
+	    			
+	    			<!--  -->
+	    			
+	
+
+<script>
+  $(function () {
+    $('#myTab li:last-child a').tab('show')
+  })
+</script>
+	    		
+					
+	    						
+	    			</div>
+	    		
+	    
+	
+	    	
+			   
+
+			    	</div>
+		
+	    		</div>
+	 
+	    </section>
+	   		
+			
+
+			
+  <footer th:replace="includes/footer :: footer('메인')">
+     
+    </footer>
+		</div><!-- END COLORLIB-MAIN -->
+	</div><!-- END COLORLIB-PAGE -->
+
+<div id="smodal">
+ 
+</div>
+
+<div id="rmodal">
+ 
+</div>
+
+  <!-- loader -->
+	<div th:include="includes/loader"></div>
+
+    
+  </body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="includes/header :: head('로그인')">
+   
+  </head>
+
+<script
+	src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js"></script>
+<script type="text/javascript">
+
+
+
+$(document).ready(function(){
+	let result = document.getElementById("result").value;
+	if(result != ''){
+        toastr.options.preventDuplicates = true;
+    	toastr.warning(result);
+	}
+
+});
+
+function editName(){
+	let name = document.getElementById("name").value;
+	
+	if ($("#name").val() == null || $("#name").val() == "") {
+		toastr.options.preventDuplicates = true;
+		toastr.warning("닉네임를 입력해주세요");
+		$("#name").focus();
+
+		return false;
+	}
+	
+	 $.ajax({
+	        url : '/member/editName',
+	        type : 'post',   
+	       	data : {"name": name},
+	        success : function(data){
+	        
+	        if(data == 0){
+	      	location.reload();
+	        }else{
+		        toastr.options.preventDuplicates = true;
+		    	toastr.warning("이미 있는 닉네임 입니다.");
+	        }
+	        },
+		error : function(
+				request,
+				status, error) {
+			alert("code:"
+					+ request.status
+					+ "\n"
+					+ "message:"
+					+ request.responseText
+					+ "\n"
+					+ "error:"
+					+ error);
+			
+	        toastr.options.preventDuplicates = true;
+	    	toastr.success("닉네임에러");
+
+		}
+	        
+	   })
+}
+
+function editImg(){
+	
+	   var form = $('#imgForm')[0];
+	    var formData = new FormData(form);
+		if ($("#mimg").val() == null || $("#mimg").val() == "") {
+			toastr.options.preventDuplicates = true;
+			toastr.warning("이미지를 등록해주세요");
+			$("#img").focus();
+
+			return false;
+		}
+
+	 $.ajax({
+	        url : '/member/editImg',
+	        type : 'post',   
+	        enctype: 'multipart/form-data',
+	       	data : formData , 
+	        contentType : false,
+	        processData : false ,
+	        success : function(result){
+	    
+	      	location.reload();
+	       
+	        },
+		error : function(
+				request,
+				status, error) {
+			alert("code:"
+					+ request.status
+					+ "\n"
+					+ "message:"
+					+ request.responseText
+					+ "\n"
+					+ "error:"
+					+ error);
+			
+	        toastr.options.preventDuplicates = true;
+	    	toastr.warning("에러");
+
+		}
+	        
+	   })
+}
+function editId(){
+	let id = document.getElementById("id").value;
+	if ($("#id").val() == null || $("#id").val() == "") {
+		toastr.options.preventDuplicates = true;
+		toastr.warning("아이디를 입력해주세요");
+		$("#id").focus();
+
+		return false;
+	}
+	 $.ajax({
+	        url : '/member/editId',
+	        type : 'post',   
+	       	data : {"id": id},
+	        success : function(result){
+	        
+	        	if(result == 0){
+	      	location.reload();
+	        }else{
+		        toastr.options.preventDuplicates = true;
+		    	toastr.warning("이미 있는 아이디 입니다.");
+	        }
+	        },
+		error : function(
+				request,
+				status, error) {
+			alert("code:"
+					+ request.status
+					+ "\n"
+					+ "message:"
+					+ request.responseText
+					+ "\n"
+					+ "error:"
+					+ error);
+			
+	        toastr.options.preventDuplicates = true;
+	    	toastr.success("닉네임에러");
+
+		}
+	        
+	   })
+}
+function editEmail(){
+	let email = document.getElementById("email").value;
+	if ($("#email").val() == null || $("#email").val() == "") {
+		toastr.options.preventDuplicates = true;
+		toastr.warning("이메일을 입력해주세요");
+		$("#email").focus();
+
+		return false;
+	}
+	 $.ajax({
+	        url : '/member/editEmail',
+	        type : 'post',   
+	       	data : {"email": email},
+	        success : function(result){
+	        
+	        	if(result == 0){
+	      	location.reload();
+	        }else{
+		        toastr.options.preventDuplicates = true;
+		    	toastr.warning("이미 있는 이메일 입니다.");
+	        }
+	        },
+		error : function(
+				request,
+				status, error) {
+			alert("code:"
+					+ request.status
+					+ "\n"
+					+ "message:"
+					+ request.responseText
+					+ "\n"
+					+ "error:"
+					+ error);
+			
+	        toastr.options.preventDuplicates = true;
+	    	toastr.success("닉네임에러");
+
+		}
+	        
+	   })
+}
+
+
+
+
+	
+	
+
+  </script>
+  <body th:inline="text">
+	<input type="hidden" th:value="${result}" id="result">
+	<div id="colorlib-page">
+		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+		<aside th:replace="includes/sidebar :: sidebar('정보변경')">
+		</aside> <!-- END COLORLIB-ASIDE -->
+		
+		
+		<div id="colorlib-main">
+			<div class="hero-wrap js-fullheight" style="background-image: url(/elen/images/bg_1.jpg);" data-stellar-background-ratio="0.5">
+				<div class="overlay"></div>
+				
+			<section class="ftco-section">
+	    	<div class="container">
+	    		<div class="row">
+
+	    			<div class="col-md-12 row" style="text-align:center">
+	    			
+	    			    			<div class="col-md-5 ml-3 mr-3 mb-5 ftco-animate">
+
+									<div class="sidebar-box subs-wrap img" style="background-image: url(images/bg_1.jpg);">
+								<div class="overlay"></div>
+								<h3 class="mb-4 sidebar-heading">닉네임 변경</h3>
+								<p class="mb-4">닉네임 : [[${session.member.name}]]</p>
+	              <form action="#" class="subscribe-form">
+	                <div class="form-group">
+	                  <input type="text" class="form-control" placeholder="닉네임을 입력해주세요." id="name" data-toggle="tooltip" data-placement="right" title="닉네임 입력">
+	                  <button type="button" class="mt-2 btn btn-white submit" onclick="editName();">변경</button>
+	                </div>
+	              </form>
+	            </div>
+				</div>
+	    		
+	    		
+	    		    			    			<div class="col-md-5 ml-3 mr-3 mb-5 ftco-animate">
+
+									<div class="sidebar-box subs-wrap img" style="background-image: url(images/bg_1.jpg);">
+								<div class="overlay"></div>
+								<h3 class="mb-4 sidebar-heading">아이디 변경</h3>
+								<p class="mb-4">아이디 : [[${session.member.id}]]</p>
+	              <form action="#" class="subscribe-form">
+	                <div class="form-group" th:if="${session.member.pw} == null">
+	                  <input type="text" class="form-control" placeholder="소셜로그인은 불가합니다">
+	                </div>
+	              	 <div class="form-group" th:if="${session.member.pw} != null">
+	                  <input type="text" class="form-control" placeholder="아이디를 입력하세요" id="id" data-toggle="tooltip" data-placement="right" title="아이디 입력">
+	                  <button type="button" class="mt-2 btn btn-white submit" onclick="editId();">변경</button>
+	                </div>
+	              </form>
+	            </div>
+				</div>
+				
+				
+				    			    			<div class="col-md-5 ml-3 mr-3 mb-5 ftco-animate">
+
+									<div class="sidebar-box subs-wrap img" style="background-image: url(images/bg_1.jpg);">
+								<div class="overlay"></div>
+								<h3 class="mb-4 sidebar-heading">이메일 변경</h3>
+								<p class="mb-4">이메일 : [[${session.member.email}]]</p>
+	              <form action="#" class="subscribe-form">
+	                <div class="form-group" th:if="${session.member.pw} == null"> 
+	                  <input type="text" class="form-control" placeholder="소셜로그인은 불가합니다">
+	                </div>
+	              	 <div class="form-group" th:if="${session.member.pw} != null">
+	                  <input type="text" class="form-control" placeholder="이메일를 입력하세요" id="email" data-toggle="tooltip" data-placement="right" title="이메일 입력">
+	                  <button type="button" class="mt-2 btn btn-white submit" onclick="editEmail();">변경</button>
+	                </div>
+	              </form>
+	            </div>
+				</div>	
+				
+							    			    			<div class="col-md-5 ml-3 mr-3 mb-5 ftco-animate">
+
+									<div class="sidebar-box subs-wrap img" style="background-image: url(images/bg_1.jpg);">
+								<div class="overlay"></div>
+								<h3 class="mb-4 sidebar-heading">프로필 이미지 변경</h3>
+								<p class="mb-4">프로필 이미지를 선택해주세요</p>
+	              <form id="imgForm" class="subscribe-form">
+	                <div class="form-group">
+	                
+	                  <input type="file" class="form-control" placeholder="프로필 이미지" id="mimg" name="mimg" accept="image/*">
+	                  <button type="button" class="mt-2 btn btn-white submit" onclick="editImg();">변경</button>
+	                </div>
+	              </form>
+	            </div>
+				</div>		
+					
+	    						
+	    			</div>
+	    		
+	    
+	
+	    	
+			   
+
+			    	</div>
+		
+	    		</div>
+	 
+	    </section>
+	   	</div>			
+			
+
+
+			
+  <footer th:replace="includes/footer :: footer('메인')">
+     
+    </footer>
+		</div><!-- END COLORLIB-MAIN -->
+	</div><!-- END COLORLIB-PAGE -->
+
+
+
+  <!-- loader -->
+	<div th:include="includes/loader"></div>
+
+    
+  </body>
+</html>

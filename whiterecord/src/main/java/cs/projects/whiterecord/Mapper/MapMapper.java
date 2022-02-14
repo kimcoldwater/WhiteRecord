@@ -33,4 +33,6 @@ public interface MapMapper {
 
 	public void reviewImgEdit(String rimg, Long rno)throws Exception;
 	
+	public void reviewViewCnt(Long rno)throws Exception;
+	
 }
