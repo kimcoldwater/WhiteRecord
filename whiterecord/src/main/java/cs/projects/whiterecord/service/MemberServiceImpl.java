@@ -34,7 +34,7 @@ public class MemberServiceImpl implements MemberService {
 
 	
 	public Member joinInsert(Member member) throws Exception{
-		if(member.getPw() != "") {
+		if(member.getPw() != null) {
 		String pw = member.getPw();
 		String inputPw = pwEncoder.encode(pw);
 		member.setPw(inputPw);

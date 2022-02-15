@@ -129,7 +129,6 @@ public class MemberController {
 			ResponseEntity<String> response = restTemplate.exchange("https://kauth.kakao.com/oauth/token"
 			, HttpMethod.POST, kakaoRequest, String.class);
 			NaverLoginVO naverVO = mapper.readValue(response.getBody(), NaverLoginVO.class);
-			
 			//사용자정보 가져오기
 			HttpHeaders headersInfo = new HttpHeaders();
 			headersInfo.add("Authorization", "Bearer " + naverVO.getAccess_token());
@@ -142,7 +141,6 @@ public class MemberController {
 			NaverInfoVO infoVO = mapper.readValue(infoResponse.getBody(), NaverInfoVO.class);
 			String nickname = String.valueOf(infoVO.getProperties().get("nickname"));
 			String id = String.valueOf(infoVO.getId());
-			
 			Member member = new Member();
 			member.setId(id);
 			if(memberService.idCheck(member) == 0) {
@@ -173,7 +171,6 @@ public class MemberController {
 			List<Member> idList = memberService.findId(member);
 			if(idList == null) {
 				result.put("idList", null);
-				logger.info("null 들옴??");
 				return result;
 			}
 			result.put("idList", idList);

@@ -28,6 +28,8 @@ public class DensityController {
 	public ModelAndView densityView() throws Exception{
 		
 		
+		
+		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("density/density-view");
 		
